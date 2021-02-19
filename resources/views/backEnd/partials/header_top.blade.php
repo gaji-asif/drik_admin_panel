@@ -16,8 +16,8 @@
 				</div>
 			</div>
 			 <a href="#" style="margin: 0 auto; font-size: 25px; font-weight: bold;">
-				EDMS
-			</a> 
+				drik admin
+			</a>
 			 <!-- <img src="{{asset('public/images/new_logo.png')}}" height="44" width="145" style="color: #FFFFFF;"> -->
 			<a class="mobile-options waves-effect waves-light">
 				<i class="ti-more"></i>
@@ -65,7 +65,7 @@
                         </li> --}}
 
 						<li class="waves-effect waves-light">
-							<a class="dropdown-item" href="{{ route('logout') }}"" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+							<a class="dropdown-item" href="{{ route('logout') }} onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
 								{{ __('Logout') }}
 							</a>
 
@@ -73,8 +73,8 @@
 								@csrf
 							</form>
 						</li>
-						
-					</ul> 
+
+					</ul>
 				</li>
 			</ul>
 		</div>
