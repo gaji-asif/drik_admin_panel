@@ -38,36 +38,36 @@
 			<li class="patient">
 				<a href="{{url('patient')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-agenda"></i><b>P</b></span>
-					<span class="pcoded-mtext">Patient</span>
+					<span class="pcoded-mtext">Upload photo</span>
 					<span class="pcoded-mcaret"></span>
 				</a>
 			</li>
 			@endcanany
-		
-			<li class="document  pcoded-trigger">
-				<a href="{{url('doc_dashboard')}}" class="waves-effect waves-dark">
-					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
-					<span class="pcoded-mtext">All Document</span>
-					<span class="pcoded-mcaret"></span>
-				</a>
-			</li>
-		
+
+{{--			<li class="document  pcoded-trigger">--}}
+{{--				<a href="{{url('doc_dashboard')}}" class="waves-effect waves-dark">--}}
+{{--					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>--}}
+{{--					<span class="pcoded-mtext">All Document</span>--}}
+{{--					<span class="pcoded-mcaret"></span>--}}
+{{--				</a>--}}
+{{--			</li>--}}
 
 
-			<li class="queue pcoded-trigger">
-				<a href="{{url('all_document_msg')}}" class="waves-effect waves-dark">
-					<span class="pcoded-micon"><i class="ti-agenda"></i><b>P</b></span>
-					<span class="pcoded-mtext">My Queue</span>
-					<span class="pcoded-mcaret"></span>
-				</a>
-			</li>
-			<li class="document  pcoded-trigger">
-				<a href="{{url('add_bulk')}}" class="waves-effect waves-dark">
-					<span class="pcoded-micon"><i class="ti-import"></i><b>a</b></span>
-					<span class="pcoded-mtext">Bulk Import</span>
-					<span class="pcoded-mcaret"></span>
-				</a>
-			</li>
+
+{{--			<li class="queue pcoded-trigger">--}}
+{{--				<a href="{{url('all_document_msg')}}" class="waves-effect waves-dark">--}}
+{{--					<span class="pcoded-micon"><i class="ti-agenda"></i><b>P</b></span>--}}
+{{--					<span class="pcoded-mtext">My Queue</span>--}}
+{{--					<span class="pcoded-mcaret"></span>--}}
+{{--				</a>--}}
+{{--			</li>--}}
+{{--			<li class="document  pcoded-trigger">--}}
+{{--				<a href="{{url('add_bulk')}}" class="waves-effect waves-dark">--}}
+{{--					<span class="pcoded-micon"><i class="ti-import"></i><b>a</b></span>--}}
+{{--					<span class="pcoded-mtext">Bulk Import</span>--}}
+{{--					<span class="pcoded-mcaret"></span>--}}
+{{--				</a>--}}
+{{--			</li>--}}
 			<li class="pcoded-hasmenu settings">
 				<a href="javascript:void(0)" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-settings"></i><b>P</b></span>
@@ -84,51 +84,51 @@
 					</li>
 					@endcan
 
-					@can('View User List')
-					<li class="user">
-						<a href="{{url('user')}}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-							<span class="pcoded-mtext">Users List</span>
-						</a>
-					</li>
-					@endcan
+{{--					@can('View User List')--}}
+{{--					<li class="user">--}}
+{{--						<a href="{{url('user')}}" class="waves-effect waves-dark">--}}
+{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
+{{--							<span class="pcoded-mtext">Users List</span>--}}
+{{--						</a>--}}
+{{--					</li>--}}
+{{--					@endcan--}}
 
-					@can('Add/Edit Role')
-					<li class="role">
-						<a href="{{url('role')}}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-							<span class="pcoded-mtext">Role</span>
-						</a>
-					</li>
-					@endcan
+{{--					@can('Add/Edit Role')--}}
+{{--					<li class="role">--}}
+{{--						<a href="{{url('role')}}" class="waves-effect waves-dark">--}}
+{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
+{{--							<span class="pcoded-mtext">Role</span>--}}
+{{--						</a>--}}
+{{--					</li>--}}
+{{--					@endcan--}}
 
-					@can('Doc Type & Code')
-					<li class="role">
-						<a href="{{url('doc_type_code')}}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-							<span class="pcoded-mtext">Doc type & Code</span>
-						</a>
-					</li>
-					@endcan
+{{--					@can('Doc Type & Code')--}}
+{{--					<li class="role">--}}
+{{--						<a href="{{url('doc_type_code')}}" class="waves-effect waves-dark">--}}
+{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
+{{--							<span class="pcoded-mtext">Doc type & Code</span>--}}
+{{--						</a>--}}
+{{--					</li>--}}
+{{--					@endcan--}}
 
-					@can('Speciality List')
-					<li class="role">
-						<a href="{{url('speciality')}}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-							<span class="pcoded-mtext">Speciality List</span>
-						</a>
-					</li>
-					@endcan
+{{--					@can('Speciality List')--}}
+{{--					<li class="role">--}}
+{{--						<a href="{{url('speciality')}}" class="waves-effect waves-dark">--}}
+{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
+{{--							<span class="pcoded-mtext">Speciality List</span>--}}
+{{--						</a>--}}
+{{--					</li>--}}
+{{--					@endcan--}}
 
-					@can('Speciality List')
-					<li class="role">
-						<a href="{{url('header')}}" class="waves-effect waves-dark">
-							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
-							<span class="pcoded-mtext">Dashboard Settings</span>
-						</a>
-					</li>
-					@endcan
-					
+{{--					@can('Speciality List')--}}
+{{--					<li class="role">--}}
+{{--						<a href="{{url('header')}}" class="waves-effect waves-dark">--}}
+{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
+{{--							<span class="pcoded-mtext">Dashboard Settings</span>--}}
+{{--						</a>--}}
+{{--					</li>--}}
+{{--					@endcan--}}
+
 					<!-- <li class="module_link">
 						<a href="{{url('module_link')}}" class="waves-effect waves-dark">
 							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>

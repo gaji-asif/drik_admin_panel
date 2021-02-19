@@ -34,58 +34,135 @@
 
 
 <div class="card">
-	<div class="card-header">
-		<h5>Patients Lists</h5>
-		<a href="{{ route('create') }}" style="float: right; padding: 8px;" class="btn btn-success"> Add Patient </a>
-	</div>
-	<div class="card-block">
-		<div class="table table-responsive">
-		<table id="basic-btn" class="table table-striped table-bordered nowrap">
-			<thead>
-				<tr>
-					<th>Patient ID</th>
-					<th>NHS NO</th>
-					<th>Title</th>
-					<th>First Name</th>
-					<th>Surname</th>
-					<th>Date of Birth</th>
-					<th>Date of Death</th>
-					<th>Actions</th>
-				</tr>
-			</thead>
-			<tbody>
-				@php $i = 1 @endphp
-				@foreach($patients as $patient)
-				<tr>
-					<td>{{$patient->patient_id}}</td>
-					<td>{{$patient->nhs_no}}</td>
-					<td>{{$patient->title}}</td>
-					<td>{{$patient->first_name}}</td>
-					<td>{{$patient->sur_name}}</td>
-					<td>{{date('d-M-Y', strtotime($patient->date_of_birth))}}</td>
-					<td>
-						@if(isset($patient->date_of_death))
-						{{date('d-M-Y', strtotime($patient->date_of_death))}}
-						@endif
-					</td>
-					<td>
-						<!-- <a href="{{ route('patient.show',$patient->id) }}" title="view"><button type="button" class="btn btn-basic action-icon"><i class="fa fa-eye"></i></button></a> -->
+    <div id="Contributor_dashboard">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 text-center">
+                    <div class="step mb-3 shadow-sm">
+                        <form id="msform">
+                            <!-- fieldsets -->
+                            <fieldset>
+                                <div class="step-box">
+                                    <div class="form-row justify-content-center">
+                                        <div class="col-md-10">
+                                            <div class="form-row">
+                                                <div class="col-sm-12">
+                                                    <div class="imgUp">
+                                                        <div class="row align-items-center">
+                                                            <div class="col-md-4">
+                                                                <div class="imagePreview"></div>
+                                                                <label class="btn btn-primary theme-btn">
+                                                                    Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo" >
+                                                                </label>
+                                                            </div>
 
-						<a href="{{ route('patients_doc_types',$patient->id) }}" title="view"><button type="button" class="btn btn-basic action-icon"><i class="fa fa-eye"></i></button></a>
-						
-						<a href="{{ route('patient.edit',$patient->id) }}" title="edit"><button type="button" class="btn btn-info action-icon"><i class="fa fa-edit"></i></button></a>
+                                                            <div class="col-md-8">
+                                                                <div class="card shadow-sm">
+                                                                    <div class="card-body iptc_metadata">
+                                                                        <div class="form-row">
+                                                                            <div class="col-md-12 text-left">
+                                                                                <h6>IPTC Metadata</h6>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info1 mb-0">Info-1</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info1" placeholder="Info-1">
+                                                                                </div>
+                                                                            </div>
 
-						<a class="modalLink" title="Delete" data-modal-size="modal-md" href="{{url('deletePateientView', $patient->id)}}">
-							<button type="button" class="btn btn-danger action-icon"><i class="fa fa-trash-o"></i></button>
-						</a>
-						<a href="{{ url('document/create/'.$patient->id) }}" title="Add Document"><button type="button" class="btn btn-success action-icon"><i class="fa fa-plus"></i></button></a>
-					</td>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info2 mb-0">Info-2</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info2" placeholder="Info-2">
+                                                                                </div>
+                                                                            </div>
 
-				</tr>
-				@endforeach
-			</tbody>
-		</table>
-		</div>
-	</div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info3 mb-0">Info-3</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info3" placeholder="Info-3">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info4 mb-0">Info-4</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info4" placeholder="Info-4">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info5 mb-0">Info-5</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info5" placeholder="Info-5">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info6 mb-0">Info-6</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info6" placeholder="Info-6">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Info-7</label>
+                                                                                </div>
+                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0" id="info7" placeholder="Info-7">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-sm-12">
+                                                    <span class="btn btn-sm theme-btn imgAdd">Add More</span>
+                                                </div>
+
+
+
+                                            </div><!-- row -->
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                                <input type="button" name="finish" class="finish action-button" value="Finish" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(".imgAdd").click(function(){
+            $(this).closest(".row").find('.imgAdd').before('<div class="imgUp" id="imgUp"><div class="row align-items-center"><div class="col-md-4"><div class="imagePreview"></div><label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label><i class="fa fa-times del"></i></div><div class="col-md-8"><div class="card shadow-sm"><div class="card-body iptc_metadata"><div class="form-row"><div class="col-md-12 text-left"><h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Info-1</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info1" placeholder="Info-1"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info2 mb-0">Info-2</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info2" placeholder="Info-2"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info3 mb-0">Info-3</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info3" placeholder="Info-3"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Info-4</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info4" placeholder="Info-4"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Info-5</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info5" placeholder="Info-5"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Info-6</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info6" placeholder="Info-6"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Info-7</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info7" placeholder="Info-7"></div></div></div></div></div></div></div></div>');
+        });
+        $(document).on("click", "i.del" , function() {
+            $(this).closest(".imgUp").remove();
+        });
+    </script>
 </div>
 @endSection

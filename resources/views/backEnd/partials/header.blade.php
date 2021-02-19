@@ -55,5 +55,9 @@
 
    <!--   end css for select2 dropdown -->
 
+    <link rel="stylesheet" href="{{asset("public/css/drik/css/all.min.css")}}">
+    <link rel="stylesheet" href="{{asset("public/css/drik/css/style.css")}}">
+    <link rel="stylesheet" href="{{asset("public/css/drik/css/responsive.css")}}">
+
    <script type="text/javascript" src="{{asset('public/bower_components/jquery/js/jquery.min.js')}}"></script>
 
