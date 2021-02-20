@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contributor;
 use Illuminate\Http\Request;
 use App\ErpPatient;
 use App\PatientDocument;
@@ -34,9 +35,10 @@ class ErpPatientController extends Controller
      */
     public function index()
     {
-        
+
         $patients = ErpPatient::where('active_status', '=', 1)->get();
-        return view('backEnd.patients.index', compact('patients'));
+        $contributors = Contributor::all();
+        return view('backEnd.patients.index', compact('patients', 'contributors'));
     }
 
     /**
@@ -147,7 +149,7 @@ class ErpPatientController extends Controller
         session()->forget('doc_id');
         session()->forget('doc_type');
         $patient = ErpPatient::find($id);
-        
+
         $documents = DB::table('patient_documents')
             ->leftjoin('erp_document_types', 'patient_documents.doc_type', '=', 'erp_document_types.id')
             ->leftjoin('erp_specialities', 'patient_documents.speciality', '=', 'erp_specialities.id')
@@ -165,7 +167,7 @@ class ErpPatientController extends Controller
      */
 
     public function patients_doc_types($patient_id){
-        
+
 
        // echo $patient_id;exit;
 
@@ -319,7 +321,7 @@ class ErpPatientController extends Controller
         //$file = $request->file('upload_document');
 
         ini_set('memory_limit','256M');
-        
+
         $request->validate([
             'document_type_code' => 'required',
             'doc_type' => 'required',
@@ -525,7 +527,7 @@ class ErpPatientController extends Controller
             }
 
 
-           
+
         }
     }
 
@@ -752,13 +754,13 @@ class ErpPatientController extends Controller
     public function getDocTypeCode()
     {
         $doc_type = $_POST['doc_type'];
-    
+
         $result = ErpDocumentType::select('type_code')->where('id', '=', $doc_type)->first();
-       
+
         if (isset($result)) {
             echo $result->type_code;
         }
-      
+
     }
 
     public function doc_preview($id)
