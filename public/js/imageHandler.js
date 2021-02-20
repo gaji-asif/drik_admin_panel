@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
         $(".imgAdd").click(function(){
             addImageToList();
-            $(this).closest(".row").find('.imgAdd').before('<div class="imgUp" id="imgUp"><div class="row align-items-center"><div class="col-md-4"><div class="imagePreview"></div><label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label><i class="fa fa-times del"></i></div><div class="col-md-8"><div class="card shadow-sm"><div class="card-body iptc_metadata"><div class="form-row"><div class="col-md-12 text-left"><h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Info-1</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Height"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info2 mb-0">Width</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Image width"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info3 mb-0">Info-3</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info3" placeholder="Info-3"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Info-4</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info4" placeholder="Info-4"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Info-5</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info5" placeholder="Info-5"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Info-6</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info6" placeholder="Info-6"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Info-7</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info7" placeholder="Info-7"></div></div></div></div></div></div></div></div>');
+            $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" id="imgUp"><div class="row align-items-center"><div class="col-md-4"><div class="imagePreview"></div><label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label><i class="fa fa-times del"></i></div><div class="col-md-8"><div class="card shadow-sm"><div class="card-body iptc_metadata"><div class="form-row"><div class="col-md-12 text-left"><h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Info-1</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Height"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info2 mb-0">Width</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Image width"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info3 mb-0">Info-3</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info3" placeholder="Info-3"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Info-4</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info4" placeholder="Info-4"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Info-5</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info5" placeholder="Info-5"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Info-6</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info6" placeholder="Info-6"></div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center"><div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Info-7</label></div><div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info7" placeholder="Info-7"></div></div></div></div></div></div></div></div>');
         });
 
         $(document).on("click", "i.del" , function() {
@@ -87,10 +87,16 @@ function uploadImage(event) {
     contributor = contributor.value;
     let imageObj = images.pop();
     if(!imageObj) {
-        alert("Image uploading done!!");
+        swal("Image uploading done!!");
+        $(".dynamic-imgUp").remove();
+        let mainForm = document.querySelector('.imgUp');
+        mainForm.querySelector('.imagePreview').removeAttribute('style');
+        [...mainForm.querySelectorAll('input')].forEach(input => {
+            input.value = '';
+        })
         return ;
     }
-    console.log(imageObj);
+
     let image = imageObj.image;
     let formData = new FormData();
     formData.append("image", image);
@@ -117,5 +123,6 @@ function saveImage(formData) {
         .then(res => {
             masterId = res.data;
             uploadImage();
+
         })
 }

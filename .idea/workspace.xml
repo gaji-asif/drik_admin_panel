@@ -2,152 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2b6d4ce-e889-4537-9652-fded8baa42a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/imageHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._.htaccess" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._app" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._artisan" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._bootstrap" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._composer.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._composer.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._database" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._error_log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._files" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._phpunit.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._public" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._readme.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._resources" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._routes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._storage" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._tests" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._vendor" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/._webpack.mix.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ActivityLog.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Console" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpBaseGroup.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpBaseSetup.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpConsultant.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpDepartment.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpDesignation.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpDocumentType.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpEmployee.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpHeader.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpPatient.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpSendDoc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpSendDoc.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpSpeciality.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._ErpSupportPlan.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Exceptions" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Imports" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Mail" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Notifications" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._PatientDocument.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._PatientDocumentVersion.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._Providers" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/._User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ErpPatientController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ErpPatientController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/._html_files" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/._important_things.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._checkout.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._contributor_dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._font-awesome" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._icofont" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._images" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._index-2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._search-result.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._sign-in.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/html_files/._webfonts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/important_things.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/Contributor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._assets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._bower_components" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._images" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._index.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._robots.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._uploads" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._web.config" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._web_assets" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/._web_assets.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._ckeditor.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._custom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._developer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._pdfobject.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/._simpleviewer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/._js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/._lang" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/._sass" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/._views" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._.DS_Store" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._auth" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._backEnd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._backEnd.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._emails" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._home.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._layouts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._web" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/._welcome.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._all_doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._base_group" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._base_setup" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._blog" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._bulk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._dashboard.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._doc_type" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._employees" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._expenses" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._header" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._master.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._module_link" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._partials" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._patients" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._pricing" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._roles" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._showDeleteModal.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._speciality" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/._users" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/IMG_8931.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/index.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/imageHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/imageHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._allDocumentMsg.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._behavihour.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._checkedInModal.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._checkedOutModal.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._create.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._createDoc.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._docPreview.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._doc_dashboard.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._documentPreview.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._edit.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._editDoc.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._full_patients_details.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._index.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._patient_demog.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._previousVersions.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._show.blade - Copy.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._show.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._show_old.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/._support_plan.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/patients/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -322,7 +182,9 @@
       <workItem from="1613716107115" duration="956000" />
       <workItem from="1613732550464" duration="4453000" />
       <workItem from="1613742599521" duration="17059000" />
-      <workItem from="1613787086332" duration="1955000" />
+      <workItem from="1613787086332" duration="2554000" />
+      <workItem from="1613792163861" duration="2367000" />
+      <workItem from="1613797191036" duration="1601000" />
     </task>
     <servers />
   </component>

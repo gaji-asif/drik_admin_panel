@@ -85,4 +85,21 @@ class ImageController extends Controller {
 
         return "success";
     }
+
+    public function upload_images(Request $request) {
+        $contributor = $request["contributor"];
+        $images = json_decode($request["images"]);
+
+        return gettype($images);
+
+
+        foreach ($images as $image) {
+            return gettype($image->image);
+            $name = $imageFile->getClientOriginalName();
+            $destinaionPath = public_path("images\uploaded_images");
+            $imageFile->move($destinaionPath, $name);
+        }
+
+
+    }
 }
