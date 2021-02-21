@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\ImageChild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -47,6 +48,8 @@ class ImageController extends Controller {
                 'master_id' => $masterImage,
                 'image_name' => $name,
                 'user_id' => $userId,
+                'height' => $request['height'],
+                'width' => $request['width'],
                 'image_main_url' => $image_url
             ]);
         } catch (\Throwable $e) {
@@ -95,5 +98,14 @@ class ImageController extends Controller {
         imagejpeg($dst, $destination);
 
         return "success";
+    }
+
+    public function imageList() {
+        return view('backEnd.patients.image_list');
+    }
+
+    public function getAllImages() {
+        $images = ImageChild::all();
+        return response()->json($images);
     }
 }

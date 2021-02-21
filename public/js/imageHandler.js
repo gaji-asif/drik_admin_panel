@@ -68,7 +68,6 @@ function readImageMetaData(image, imageForm) {
                 height = metaData[1];
                 width = metaData[0];
             }
-            let {Height, Width} = metaData.COMPUTED || metaData;
 
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
@@ -113,14 +112,13 @@ function uploadImage(event) {
     let image = imageObj.image;
     let formData = new FormData();
     formData.append("image", image);
+    formData.append("width", imageObj.width || "");
+    formData.append("height", imageObj.height || "");
     formData.append("contributor", contributor);
     if(masterId) {
         formData.append("masterId", masterId);
     }
-
-
     saveImage(formData)
-
 
 }
 

@@ -137,4 +137,8 @@ Route::Post('bulk_import', 'BulkImportController@storeBulk');
 //image upload routes
 Route::post('get_image_metas', 'ImageController@get_image_metas');
 Route::post('upload_image', 'ImageController@upload_image');
+
+// image list
+Route::get('image_list', 'ImageController@imageList');
+Route::get('get_all_images', 'ImageController@getAllImages');
 });

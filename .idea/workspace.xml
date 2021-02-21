@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2b6d4ce-e889-4537-9652-fded8baa42a2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/ImageChild.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/ImageMaster.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/imageList.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/backEnd/patients/image_list.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/pages/data-table/extensions/buttons/js/extension-btns-custom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/IMG_8931.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/index.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/imageHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/imageHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/partials/sidebar.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -184,7 +194,8 @@
       <workItem from="1613797191036" duration="3375000" />
       <workItem from="1613821020324" duration="3720000" />
       <workItem from="1613892481559" duration="3251000" />
-      <workItem from="1613902463220" duration="231000" />
+      <workItem from="1613902463220" duration="480000" />
+      <workItem from="1613921320716" duration="7847000" />
     </task>
     <servers />
   </component>
@@ -204,9 +215,13 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613837602355">
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613902942808">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1613837602355" />
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1613902942808" />
+    <state x="667" y="253" width="585" height="534" key="find.popup" timestamp="1613927038412">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="253" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1613927038412" />
   </component>
 </project>
