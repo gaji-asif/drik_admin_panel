@@ -96,7 +96,11 @@ function uploadImage(event) {
     contributor = contributor.value;
     let imageObj = images.pop();
     if(!imageObj) {
-        swal("Image uploading done!!");
+        swal({
+            title: "Success!!",
+            text: "Images are uploaded successfully!",
+            icon: "success",
+        });
         $(".dynamic-imgUp").remove();
         let mainForm = document.querySelector('.imgUp');
         mainForm.querySelector('.imagePreview').removeAttribute('style');
