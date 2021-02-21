@@ -59,10 +59,19 @@ function readImageMetaData(image, imageForm) {
         .then(res => res.json())
         .then(res => {
             let metaData = res.data;
-            let {Height, Width} = metaData.COMPUTED;
+            console.log(metaData);
+            let height, width;
+            if(metaData.COMPUTED) {
+                height = metaData.COMPUTED.Height;
+                width = metaData.COMPUTED.Width;
+            } else {
+                height = metaData[1];
+                width = metaData[0];
+            }
+            let {Height, Width} = metaData.COMPUTED || metaData;
 
-            imageForm.querySelector(".image-height").value = Height;
-            imageForm.querySelector(".image-width").value = Width;
+            imageForm.querySelector(".image-height").value = height;
+            imageForm.querySelector(".image-width").value = width;
 
         })
 }
