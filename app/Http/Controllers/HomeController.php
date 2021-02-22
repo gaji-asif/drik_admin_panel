@@ -38,16 +38,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
+
         $Patient = ErpPatient::where('active_status', '=', 1)->get();
         $Document = PatientDocument::all();
-        
+
         $users = User::all();
         $userss = User::where('id', auth::user()->id)->first();
         Session::put('users_img', $userss->upload_img);
         $logs = "";
         $dateS = Carbon::now()->subMonth(1);
-        $dateE = Carbon::now(); 
+        $dateE = Carbon::now();
         if(Auth::user()->getRoleNames()->first() == 'Adminstrator'){
             $logs = ActivityLog::whereBetween('created_at',[$dateS,$dateE])->orderBy('created_at', 'desc')->get();
         }
@@ -56,9 +56,9 @@ class HomeController extends Controller
             $id = auth::user()->id;
             $logs = ActivityLog::whereBetween('created_at',[$dateS,$dateE])->where('user_id',$id)->get();
         }
-        
+
         $dashboard = ErpHeader::find('1');
-    
+
         return view('backEnd.dashboard', compact('userss', 'Patient', 'logs', 'Document','dashboard'));
     }
 

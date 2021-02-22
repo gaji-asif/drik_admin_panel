@@ -15,8 +15,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['revalidate','auth']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
-	Route::get('/', 'HomeController@index');
-	// Route::get('/home', 'HomeController@index');
+	//Route::get('/', 'HomeController@index');
+	Route::get('/home', 'HomeController@index');
 	Route::get('/dashboard', 'HomeController@index');
 
 

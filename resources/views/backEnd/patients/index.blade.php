@@ -147,8 +147,10 @@
                                     </div>
                                 </div>
 
-                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                                <input type="button" name="finish" class="finish action-button" value="Finish" />
+                                <input type="button" id="image-upload-btn" class="finish action-button" value="Upload">
+
+{{--                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />--}}
+{{--                                <input type="button" name="finish" class="finish action-button" value="Finish" />--}}
                             </fieldset>
                         </form>
                     </div>
