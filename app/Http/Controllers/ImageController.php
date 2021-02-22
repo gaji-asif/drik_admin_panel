@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\ImageChild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,7 +11,13 @@ use Illuminate\Support\Facades\DB;
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
-        $metas = @exif_read_data($image);
+
+        try {
+            $metas = exif_read_data($image);
+        } catch (\Throwable $e) {
+            $metas = getimagesize($image);
+        }
+
         return response()->json(['data' => $metas], 200);
     }
 
@@ -18,30 +25,37 @@ class ImageController extends Controller {
         $image = $request->file("image");
         $contributor = $request["contributor"];
         $masterId = $request["masterId"];
-        $name = $image->getClientOriginalName();
-        $destinaionPath = public_path("images\uploaded_images");
-        $image->move($destinaionPath, $name);
+        try{
+            $name = $image->getClientOriginalName();
+            $destinaionPath = public_path("images\uploaded_images");
+            $image->move($destinaionPath, $name);
 
-        // db saving
-        $image_url = $request->getHttpHost()."/drik/public/images/uploaded_images/".$name;
+            // db saving
+            $image_url = $request->getHttpHost()."/drik/public/images/uploaded_images/".$name;
 
-        $userId = Auth::user()->id;
+            $userId = Auth::user()->id;
 
-        if(!$masterId) {
-            $masterImage = DB::table('all_images_masters')->insertGetId([
-                'user_id' => $userId
+            if(!$masterId) {
+                $masterImage = DB::table('all_images_masters')->insertGetId([
+                    'user_id' => $userId
+                ]);
+            } else {
+                $masterImage = $masterId;
+            }
+
+
+            DB::table("all_images_childs")->insertGetId([
+                'master_id' => $masterImage,
+                'image_name' => $name,
+                'user_id' => $userId,
+                'height' => $request['height'],
+                'width' => $request['width'],
+                'image_main_url' => $image_url
             ]);
-        } else {
-            $masterImage = $masterId;
+        } catch (\Throwable $e) {
+            return response()->json(["data" => $masterId, "message" => $e->getMessage()], 500);
         }
 
-
-        DB::table("all_images_childs")->insertGetId([
-            'master_id' => $masterImage,
-            'image_name' => $name,
-            'user_id' => $userId,
-            'image_main_url' => $image_url
-        ]);
 
         //$imagePath = $destinaionPath."\\".$name;
         //$resizedImage =$this->resize_image($imagePath, 200, 200, $name);
@@ -86,20 +100,12 @@ class ImageController extends Controller {
         return "success";
     }
 
-    public function upload_images(Request $request) {
-        $contributor = $request["contributor"];
-        $images = json_decode($request["images"]);
+    public function imageList() {
+        return view('backEnd.patients.image_list');
+    }
 
-        return gettype($images);
-
-
-        foreach ($images as $image) {
-            return gettype($image->image);
-            $name = $imageFile->getClientOriginalName();
-            $destinaionPath = public_path("images\uploaded_images");
-            $imageFile->move($destinaionPath, $name);
-        }
-
-
+    public function getAllImages() {
+        $images = ImageChild::all();
+        return response()->json($images);
     }
 }

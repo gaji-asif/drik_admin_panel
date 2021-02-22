@@ -34,7 +34,7 @@
 				</a>
 			</li>
 
-            @canany(['Add patients','Edit patients'])
+{{--            @canany(['Add patients','Edit patients'])--}}
 			<li class="patient">
 				<a href="{{url('upload_photo')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-agenda"></i><b>P</b></span>
@@ -42,15 +42,15 @@
 					<span class="pcoded-mcaret"></span>
 				</a>
 			</li>
-			@endcanany
+{{--			@endcanany--}}
 
-{{--			<li class="document  pcoded-trigger">--}}
-{{--				<a href="{{url('doc_dashboard')}}" class="waves-effect waves-dark">--}}
-{{--					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>--}}
-{{--					<span class="pcoded-mtext">All Document</span>--}}
-{{--					<span class="pcoded-mcaret"></span>--}}
-{{--				</a>--}}
-{{--			</li>--}}
+			<li class="document  pcoded-trigger">
+				<a href="{{url('image_list')}}" class="waves-effect waves-dark">
+					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
+					<span class="pcoded-mtext">All images</span>
+					<span class="pcoded-mcaret"></span>
+				</a>
+			</li>
 
 
 

@@ -59,10 +59,18 @@ function readImageMetaData(image, imageForm) {
         .then(res => res.json())
         .then(res => {
             let metaData = res.data;
-            let {Height, Width} = metaData.COMPUTED;
+            console.log(metaData);
+            let height, width;
+            if(metaData.COMPUTED) {
+                height = metaData.COMPUTED.Height;
+                width = metaData.COMPUTED.Width;
+            } else {
+                height = metaData[1];
+                width = metaData[0];
+            }
 
-            imageForm.querySelector(".image-height").value = Height;
-            imageForm.querySelector(".image-width").value = Width;
+            imageForm.querySelector(".image-height").value = height;
+            imageForm.querySelector(".image-width").value = width;
 
         })
 }
@@ -87,7 +95,11 @@ function uploadImage(event) {
     contributor = contributor.value;
     let imageObj = images.pop();
     if(!imageObj) {
-        swal("Image uploading done!!");
+        swal({
+            title: "Success!!",
+            text: "Images are uploaded successfully!",
+            icon: "success",
+        });
         $(".dynamic-imgUp").remove();
         let mainForm = document.querySelector('.imgUp');
         mainForm.querySelector('.imagePreview').removeAttribute('style');
@@ -100,14 +112,13 @@ function uploadImage(event) {
     let image = imageObj.image;
     let formData = new FormData();
     formData.append("image", image);
+    formData.append("width", imageObj.width || "");
+    formData.append("height", imageObj.height || "");
     formData.append("contributor", contributor);
     if(masterId) {
         formData.append("masterId", masterId);
     }
-
-
     saveImage(formData)
-
 
 }
 
