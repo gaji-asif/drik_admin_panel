@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
-        $metas = exif_read_data($image);
+        $metas = @exif_read_data($image);
         return response()->json(['data' => $metas], 200);
     }
 

@@ -39,6 +39,7 @@ class HomeController extends Controller
     public function index()
     {
 
+        // echo "sss"; exit;
         $Patient = ErpPatient::where('active_status', '=', 1)->get();
         $Document = PatientDocument::all();
 

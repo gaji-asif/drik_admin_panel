@@ -123,7 +123,7 @@
 	<div class="col-md-6 col-lg-3">
 	
 	</div>
-	{{-- @if(Auth::user()->getRoleNames()->first() == 'Adminstrator') --}}
+	
 	
 </div>
 

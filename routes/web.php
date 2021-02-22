@@ -134,7 +134,12 @@ Route::put('doc-type/update/{id}', 'ErpDocumentListController@updateDoc');
 Route::get('add_bulk', 'BulkImportController@addBulk');
 Route::Post('bulk_import', 'BulkImportController@storeBulk');
 
+
+
 //image upload routes
+
+Route::resource('upload_photo', 'ErpPatientController');
+
 Route::post('get_image_metas', 'ImageController@get_image_metas');
 Route::post('upload_image', 'ImageController@upload_image');
 });
