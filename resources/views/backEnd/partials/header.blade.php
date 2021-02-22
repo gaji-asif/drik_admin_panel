@@ -1,4 +1,4 @@
-<title>EDMS</title>
+<title>Drik Gallery</title>
   <!--[if lt IE 10]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -56,10 +56,6 @@
 
    <!--   end css for select2 dropdown -->
 
-    <link rel="stylesheet" href="{{asset("public/css/drik/css/all.min.css")}}">
-    <link rel="stylesheet" href="{{asset("public/css/drik/css/style.css")}}">
-    <link rel="stylesheet" href="{{asset("public/css/drik/css/responsive.css")}}">
-
-   <script type="text/javascript" src="{{asset('public/bower_components/jquery/js/jquery.min.js')}}"></script>
+  <script type="text/javascript" src="{{asset('public/bower_components/jquery/js/jquery.min.js')}}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 

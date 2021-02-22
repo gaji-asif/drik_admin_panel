@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Users</h5>
+                    <h5>All Upload Images</h5>
                 </div>
                 <div class="card-block">
                     <div class="dt-responsive table-responsive">

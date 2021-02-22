@@ -1,6 +1,10 @@
 @extends('backEnd.master')
 @section('mainContent')
 
+<link rel="stylesheet" href="{{asset("public/css/drik/css/all.min.css")}}">
+<link rel="stylesheet" href="{{asset("public/css/drik/css/style.css")}}">
+<link rel="stylesheet" href="{{asset("public/css/drik/css/responsive.css")}}">
+
 @if(session()->has('message-success'))
 <div class="alert alert-success mb-3 background-success" role="alert">
 	{{ session()->get('message-success') }}
