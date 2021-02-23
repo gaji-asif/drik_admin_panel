@@ -65,7 +65,7 @@
                                                             <div class="col-md-4">
                                                                 <div class="imagePreview"></div>
                                                                 <label class="btn btn-primary theme-btn">
-                                                                    Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo" >
+                                                                    Upload Your Image<input type="file" required class="uploadFile img" value="Upload Photo" >
                                                                 </label>
                                                             </div>
 
@@ -82,6 +82,9 @@
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
                                                                                     <input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Info-1">
+                                                                                    <div class="invalid-feedback">
+                                                                                        Height is required
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 
@@ -91,6 +94,9 @@
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
                                                                                     <input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Info-2">
+                                                                                    <div class="invalid-feedback">
+                                                                                        Width is required
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
 

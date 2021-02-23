@@ -85,12 +85,12 @@
 					@endcan
 
 {{--					@can('View User List')--}}
-{{--					<li class="user">--}}
-{{--						<a href="{{url('user')}}" class="waves-effect waves-dark">--}}
-{{--							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>--}}
-{{--							<span class="pcoded-mtext">Users List</span>--}}
-{{--						</a>--}}
-{{--					</li>--}}
+					<li class="user">
+						<a href="{{url('user')}}" class="waves-effect waves-dark">
+							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
+							<span class="pcoded-mtext">Users List</span>
+						</a>
+					</li>
 {{--					@endcan--}}
 
 {{--					@can('Add/Edit Role')--}}

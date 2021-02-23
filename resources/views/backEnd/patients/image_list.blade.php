@@ -16,23 +16,10 @@
                                 <th>Image</th>
                                 <th>Height</th>
                                 <th>Width</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @if(isset($images))
-                                @php $i = 1 @endphp
-                                @foreach($images as $image)
-                                    <tr>
-                                        <td>{{$i++}}</td>
-                                        <td>{{$image->image_name}}</td>
-                                        <td>
-                                            <img src="{{$image->image_main_url}}" alt="">
-                                        </td>
-                                        <td>{{$image->height}}</td>
-                                        <td>{{$image->width}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
                             </tbody>
                         </table>
                     </div>

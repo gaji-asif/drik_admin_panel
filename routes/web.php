@@ -16,7 +16,7 @@ Auth::routes();
 Route::group(['middleware' => ['revalidate','auth']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
 	Route::get('/', 'HomeController@index');
-	// Route::get('/home', 'HomeController@index');
+	Route::get('/home', 'HomeController@index');
 	Route::get('/dashboard', 'HomeController@index');
 
 
@@ -146,4 +146,5 @@ Route::post('upload_image', 'ImageController@upload_image');
 // image list
 Route::get('image_list', 'ImageController@imageList');
 Route::get('get_all_images', 'ImageController@getAllImages');
+Route::post('delete_image', 'ImageController@deleteImage');
 });

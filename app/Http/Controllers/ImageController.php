@@ -7,6 +7,7 @@ use App\ImageChild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
@@ -22,12 +23,20 @@ class ImageController extends Controller {
     }
 
     public function upload_image(Request $request) {
+        $validator = Validator::make($request->all(), [
+            'image' => 'required',
+            'height' => 'required',
+            'width' => 'required'
+        ]);
+        if($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()]);
+        }
         $image = $request->file("image");
         $contributor = $request["contributor"];
         $masterId = $request["masterId"];
         try{
             $name = $image->getClientOriginalName();
-            $destinaionPath = public_path("images\uploaded_images");
+            $destinaionPath = public_path("images/uploaded_images");
             $image->move($destinaionPath, $name);
 
             // db saving
@@ -53,7 +62,7 @@ class ImageController extends Controller {
                 'image_main_url' => $image_url
             ]);
         } catch (\Throwable $e) {
-            return response()->json(["data" => $masterId, "message" => $e->getMessage()], 500);
+            return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
         }
 
 
@@ -107,5 +116,12 @@ class ImageController extends Controller {
     public function getAllImages() {
         $images = ImageChild::all();
         return response()->json($images);
+    }
+
+    public function deleteImage(Request $request) {
+        $imageId = $request->imageId;
+        $image = ImageChild::find($imageId);
+        $deleted = $image->delete();
+        return response()->json(['data' => $deleted]);
     }
 }

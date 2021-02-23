@@ -1,16 +1,14 @@
+let imageTable = null;
 document.addEventListener("DOMContentLoaded", function() {
-    console.log("Content loaded");
     let buttonPanel = document.querySelector('.dt-buttons');
-
-    console.log(buttonPanel);
 
     if(buttonPanel) {
         buttonPanel.classList.add('d-none');
     }
 
-    $('#image-table').DataTable({
+    imageTable = $('#image-table').DataTable({
         "ajax": {
-            "url": "http://localhost/drik/get_all_images",
+            "url": `${baseUrl}/get_all_images`,
             "dataSrc": ""
         },
         "buttons": [],
@@ -22,7 +20,45 @@ document.addEventListener("DOMContentLoaded", function() {
                   return '<img style="width: 50px" src="'+"http://"+data+'">';
               } },
             { "data": "height" },
-            { "data": "width" }
+            { "data": "width" },
+            {"data": "id",
+                "render": function(data) {
+                    return `<button onclick="deleteAnImage(${data})" type="button" class="btn btn-danger action-icon"><i class="fa fa-trash-o"></i></button>`;
+            }}
+
         ]
     });
-})
+});
+
+function deleteAnImage(imageId) {
+    console.log("Hello: ", imageId);
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this image!",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete) {
+                let formData = new FormData();
+                formData.append('imageId', imageId);
+                fetch(`${baseUrl}/delete_image`, {
+                    method: "POST",
+                    headers: {
+                        "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+                    },
+                    body: formData
+                })
+                    .then(res => res.json())
+                    .then(res => {
+                        swal("Image has been deleted!", {
+                            icon: "success",
+                        });
+                        imageTable.ajax.reload();
+                    })
+            } else {
+                swal("Your image is safe!");
+            }
+        });
+}
