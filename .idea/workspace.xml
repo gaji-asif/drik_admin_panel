@@ -2,29 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2b6d4ce-e889-4537-9652-fded8baa42a2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/common.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/GalleryController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/._ErpPatientController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/._HomeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ImageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/IMG_8931.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/Sample-jpg-image-500kb.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/asif_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/index.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ImageChild.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ImageChild.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/html_files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/files/html_files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/drik/css/all.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/drik/css/all.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/drik/css/responsive.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/drik/css/responsive.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/drik/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/drik/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/uploaded_images/testImage.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/imageHandler.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/imageHandler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/imageList.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/imageList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/._header.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/._header_top.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/._sidebar.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/partials/header.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/partials/sidebar.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/partials/sidebar.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/image_list.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/patients/image_list.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/backEnd/patients/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/backEnd/patients/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/._app.blade.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/._web.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +200,10 @@
       <workItem from="1613892481559" duration="3251000" />
       <workItem from="1613902463220" duration="480000" />
       <workItem from="1613921320716" duration="7847000" />
-      <workItem from="1614040229001" duration="2019000" />
+      <workItem from="1614040229001" duration="2231000" />
+      <workItem from="1614095300644" duration="6048000" />
+      <workItem from="1614126243181" duration="3524000" />
+      <workItem from="1614178815821" duration="5297000" />
     </task>
     <servers />
   </component>

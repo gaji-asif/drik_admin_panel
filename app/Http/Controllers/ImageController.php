@@ -16,10 +16,35 @@ class ImageController extends Controller {
         try {
             $metas = exif_read_data($image);
         } catch (\Throwable $e) {
-            $metas = getimagesize($image);
+            try{
+                $metas = getimagesize($image);
+            } catch (\Throwable $e){
+                $metas = $e->getMessage();
+            }
+
         }
 
+        $metas = $this->convert_from_latin1_to_utf8_recursively($metas);
+
         return response()->json(['data' => $metas], 200);
+    }
+
+    public function convert_from_latin1_to_utf8_recursively($dat)
+    {
+        if (is_string($dat)) {
+            return utf8_encode($dat);
+        } elseif (is_array($dat)) {
+            $ret = [];
+            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $ret;
+        } elseif (is_object($dat)) {
+            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
+
+            return $dat;
+        } else {
+            return $dat;
+        }
     }
 
     public function upload_image(Request $request) {
@@ -35,12 +60,12 @@ class ImageController extends Controller {
         $contributor = $request["contributor"];
         $masterId = $request["masterId"];
         try{
-            $name = $image->getClientOriginalName();
+            $name = time().$image->getClientOriginalName();
             $destinaionPath = public_path("images/uploaded_images");
             $image->move($destinaionPath, $name);
 
             // db saving
-            $image_url = $request->getHttpHost()."/drik/public/images/uploaded_images/".$name;
+            $image_url = config('app.url').'/public/images/uploaded_images/'.$name;
 
             $userId = Auth::user()->id;
 

@@ -33,7 +33,7 @@ class LoginController extends Controller
 
         ActivityLog::updateActivityLog('logged in');
 
-         return redirect('/');
+         return redirect('/dashboard');
     }
 
     /**
