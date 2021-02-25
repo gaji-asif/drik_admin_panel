@@ -23,12 +23,12 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $head = ErpHeader::find('1');
-        $header = $head->header;
-        $header_t = $head->header_title;
-        session()->flash('header', $header);
-        session()->flash('header_t', $header_t);
+//        $this->middleware('auth');
+//        $head = ErpHeader::find('1');
+//        $header = $head->header;
+//        $header_t = $head->header_title;
+//        session()->flash('header', $header);
+//        session()->flash('header_t', $header_t);
     }
 
     /**
@@ -62,5 +62,9 @@ class HomeController extends Controller
 
         return view('backEnd.dashboard', compact('userss', 'Patient', 'logs', 'Document','dashboard'));
     }
+
+     public function webIndex() {
+            return "dadfad";
+     }
 
 }

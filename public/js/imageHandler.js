@@ -76,8 +76,14 @@ document.addEventListener("DOMContentLoaded", function(){
 
         });
 
-        $(document).on("click", "i.del" , function() {
-            $(this).closest(".imgUp").remove();
+        $(document).on("click", "i.del" , function(event) {
+            let imgForm = event.target.closest(".imgUp");
+            let imageInput = imgForm.querySelector(".uploadFile");
+            if(imageInput.files.length > 0) {
+                images.pop();
+            }
+            imgForm.remove();
+
         });
     });
 
@@ -120,7 +126,6 @@ function readImageMetaData(image, imageForm) {
         .then(res => res.json())
         .then(res => {
             let metaData = res.data;
-            console.log(metaData);
             let height, width;
             if(metaData.COMPUTED) {
                 height = metaData.COMPUTED.Height;
@@ -133,12 +138,16 @@ function readImageMetaData(image, imageForm) {
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
 
-        })
+        }).catch(function(error) {
+            console.log(error);
+    })
 }
 
 function addImageToList() {
     let imageForms = [...document.querySelectorAll(".imgUp")];
     lastForm = imageForms[imageForms.length-1];
+
+    let imageFile = lastForm.querySelector(".uploadFile").files[0];
 
     let imageObj = {image: imageFile};
 
