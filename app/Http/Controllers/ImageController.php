@@ -54,9 +54,14 @@ class ImageController extends Controller {
 
     public function create_thumbnail($image, $name){
         $metas = $this->read_metas($image);
-        $computed = $metas["COMPUTED"];
-        $height = $computed["Height"];
-        $width = $computed["Width"];
+        if(isset($metas["COMPUTED"])) {
+            $computed = $metas["COMPUTED"];
+            $height = $computed["Height"];
+            $width = $computed["Width"];
+        } else {
+            $height = $metas[1];
+            $width = $metas[0];
+        }
 
         $size = $height < $width ? $height : $width;
 
