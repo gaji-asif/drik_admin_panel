@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { "data": "image_name" },
             { "data": "image_main_url",
               "render": function ( data ) {
-                  return '<img style="width: 50px" src="'+"http://"+data+'">';
+                  return '<img style="width: 50px" src="'+data+'">';
               } },
             { "data": "height" },
             { "data": "width" },

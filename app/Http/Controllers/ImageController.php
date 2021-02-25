@@ -54,24 +54,14 @@ class ImageController extends Controller {
 
     public function create_thumbnail($image, $name){
         $metas = $this->read_metas($image);
-        $computed = $metas["COMPUTED"];
-        // $height = $computed["Height"];
-        // $width = $computed["Width"];
-
-       if(isset($metas["COMPUTED"])){
-    $computed = $metas["COMPUTED"];
-        $height = $computed["Height"];
-        $width = $computed["Width"];
-} else {
-    if(isset($meta["height"])) {
-        $height = $meta["height"];
-        $width = $meta["width"];
-    } else {
-        $height = $meta[1];
-        $width = $meta[0];
-    }
-}
-
+        if(isset($metas["COMPUTED"])) {
+            $computed = $metas["COMPUTED"];
+            $height = $computed["Height"];
+            $width = $computed["Width"];
+        } else {
+            $height = $metas[1];
+            $width = $metas[0];
+        }
 
         $size = $height < $width ? $height : $width;
 
@@ -118,8 +108,7 @@ class ImageController extends Controller {
                 'height' => $request['height'],
                 'width' => $request['width'],
                 'image_main_url' => $image_url,
-                'thumbnail_url' => $thumbnail_url,
-                'user_id' => $contributor,
+                'thumbnail_url' => $thumbnail_url
             ]);
         } catch (\Throwable $e) {
             return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
