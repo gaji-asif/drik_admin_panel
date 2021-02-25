@@ -24,7 +24,7 @@
                 @foreach($images as $image)
                     <div class="col-xs-6 col-sm-6 col-md-3 col-xl-3 p-0 grid-image">
                         <div class="img">
-                            <img class="w-100" src="{{$image->image_main_url}}" alt="">
+                            <img class="w-100" src="{{$image->thumbnail_url}}" alt="">
 
                             <div class="img-details">
                                 <p class="category-name">Mountains</p>
@@ -49,7 +49,7 @@
                                         <div class="col-md-3">
                                             <div class="author">
                                                 <div class="author-img">
-                                                    <img class="w-100" src="{{$image->image_main_url}}" alt="">
+                                                    <img class="w-100" src="{{$image->thumbnail_url}}" alt="">
                                                 </div>
                                                 <div class="author-info">
                                                     <span class="author-name">{{$image->author->name}}</span>

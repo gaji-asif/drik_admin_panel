@@ -13,6 +13,12 @@ class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
 
+        $metas = $this->read_metas($image);
+
+        return response()->json(['data' => $metas], 200);
+    }
+
+    public function read_metas($image) {
         try {
             $metas = exif_read_data($image);
         } catch (\Throwable $e) {
@@ -25,8 +31,7 @@ class ImageController extends Controller {
         }
 
         $metas = $this->convert_from_latin1_to_utf8_recursively($metas);
-
-        return response()->json(['data' => $metas], 200);
+        return $metas;
     }
 
     public function convert_from_latin1_to_utf8_recursively($dat)
@@ -47,6 +52,19 @@ class ImageController extends Controller {
         }
     }
 
+    public function create_thumbnail($image, $name){
+        $metas = $this->read_metas($image);
+        $computed = $metas["COMPUTED"];
+        $height = $computed["Height"];
+        $width = $computed["Width"];
+
+        $size = $height < $width ? $height : $width;
+
+        $name = $this->resize_image($image, $size, $size, $name, false);
+
+        return config('app.url').'/public/images/uploaded_images/thumbnails/'.$name;
+    }
+
     public function upload_image(Request $request) {
         $validator = Validator::make($request->all(), [
             'image' => 'required',
@@ -63,7 +81,7 @@ class ImageController extends Controller {
             $name = time().$image->getClientOriginalName();
             $destinaionPath = public_path("images/uploaded_images");
             $image->move($destinaionPath, $name);
-
+            $thumbnail_url = $this->create_thumbnail($destinaionPath.'/'.$name, $name);
             // db saving
             $image_url = config('app.url').'/public/images/uploaded_images/'.$name;
 
@@ -84,29 +102,32 @@ class ImageController extends Controller {
                 'user_id' => $userId,
                 'height' => $request['height'],
                 'width' => $request['width'],
-                'image_main_url' => $image_url
+                'image_main_url' => $image_url,
+                'thumbnail_url' => $thumbnail_url
             ]);
         } catch (\Throwable $e) {
             return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
         }
-
-
-        //$imagePath = $destinaionPath."\\".$name;
-        //$resizedImage =$this->resize_image($imagePath, 200, 200, $name);
         return response()->json(['data' => $masterImage], 200);
     }
 
-    public function resize_image($file, $w, $h, $name) {
+    public function resize_image($file, $w, $h, $name, $keepRatio=true) {
         list($width, $height) = getimagesize($file);
         $what = getimagesize($file);
-        $r = $width / $height;
-        if ($w/$h > $r) {
-            $newwidth = $h*$r;
-            $newheight = $h;
+        if($keepRatio) {
+            $r = $width / $height;
+            if ($w/$h > $r) {
+                $newwidth = $h*$r;
+                $newheight = $h;
+            } else {
+                $newheight = $w/$r;
+                $newwidth = $w;
+            }
         } else {
-            $newheight = $w/$r;
+            $newheight = $h;
             $newwidth = $w;
         }
+
 
         $extension = "png";
 
@@ -128,10 +149,9 @@ class ImageController extends Controller {
         $dst = imagecreatetruecolor($newwidth, $newheight);
         imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
         $fileNameNoExtension = preg_replace("/\.[^.]+$/", "", $name);
-        $destination = public_path("images\uploaded_images\\".$fileNameNoExtension."200.".$extension);
+        $destination = public_path("images/uploaded_images/thumbnails/".$fileNameNoExtension.".".$extension);
         imagejpeg($dst, $destination);
-
-        return "success";
+        return $fileNameNoExtension.".".$extension;
     }
 
     public function imageList() {
