@@ -36,8 +36,8 @@ class ErpPatientController extends Controller
     public function index()
     {
 
-        $patients = ErpPatient::where('active_status', '=', 1)->get();
-        $contributors = Contributor::all();
+        $contributors = User::where('user_type', '=', 1)->get();
+        //$contributors = Contributor::all();
         return view('backEnd.patients.index', compact('patients', 'contributors'));
     }
 

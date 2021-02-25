@@ -45,20 +45,30 @@
                     <div class="step mb-3 shadow-sm">
                         <form id="msform">
                             <!-- fieldsets -->
+                             <div class="form-group row">
+                                <div class="col-lg-1"></div>
+                                <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select contributor: </label>
+                                <div class="col-lg-3">
+                                    <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">
+                                    <option value="">Select contributor</option>
+                                    @if(isset($contributors))
+                                        @foreach($contributors as $contributor)
+                                           
+                                           
+                                            <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
+                                       
+                                          
+                                        @endforeach
+                                    @endif
+                                    </select>
+                                   
+                                </div>
+                            </div>
                             <fieldset>
                                 <div class="step-box">
                                     <div class="form-row justify-content-center">
                                         <div class="col-md-10">
                                             <div class="form-row">
-                                                <div class="form-group">
-                                                    <label>Select contributor: </label>
-                                                    <select id="contributor" class="form-control">
-                                                        @foreach($contributors as $contributor)
-                                                            <option value="{{$contributor->id}}">{{$contributor->name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-
                                                 <div class="col-sm-12">
                                                     <div class="imgUp">
                                                         <div class="row align-items-center">
