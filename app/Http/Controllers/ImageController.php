@@ -54,6 +54,9 @@ class ImageController extends Controller {
 
     public function create_thumbnail($image, $name){
         $metas = $this->read_metas($image);
+        $x = 0;
+        $y = 0;
+        $size = 0;
         if(isset($metas["COMPUTED"])) {
             $computed = $metas["COMPUTED"];
             $height = $computed["Height"];
@@ -63,9 +66,17 @@ class ImageController extends Controller {
             $width = $metas[0];
         }
 
-        $size = $height < $width ? $height : $width;
+        if($height < $width) {
+            $size = $height;
+            $x = floor(($width - $size)/2);
+            $y = 0;
+        } else {
+            $size = $width;
+            $y = floor(($height - $size)/2);
+            $x = 0;
+        }
 
-        $name = $this->resize_image($image, $size, $size, $name, false);
+        $name = $this->cropImage($image, $x, $y, $size, $size, $name);
 
         return config('app.url').'/public/images/uploaded_images/thumbnails/'.$name;
     }
@@ -157,6 +168,35 @@ class ImageController extends Controller {
         $destination = public_path("images/uploaded_images/thumbnails/".$fileNameNoExtension.".".$extension);
         imagejpeg($dst, $destination);
         return $fileNameNoExtension.".".$extension;
+    }
+
+    public function cropImage($image, $x, $y, $width, $height, $name){
+        $what = getimagesize($image);
+
+        $extension = "png";
+
+        switch(strtolower($what['mime']))
+        {
+            case 'image/png':
+                $src = imagecreatefrompng($image);
+                break;
+            case 'image/jpeg':
+                $src = imagecreatefromjpeg($image);
+                $extension = "jpeg";
+                break;
+            case 'image/gif':
+                $src = imagecreatefromgif($image);
+                $extension = "gif";
+                break;
+            default: die();
+        };
+
+        $croppedImage = imagecrop($src, ['x' => $x, 'y' => $y, 'width' => $width, 'height' => $height]);
+        $fileNameNoExtension = preg_replace("/\.[^.]+$/", "", $name);
+        $croppedImageName = $fileNameNoExtension.".".$extension;
+        $destination = public_path("images/uploaded_images/thumbnails/".$croppedImageName);
+        imagejpeg($croppedImage, $destination);
+        return $croppedImageName;
     }
 
     public function imageList() {
