@@ -53,22 +53,25 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<div class="invalid-feedback">Width is required</div>'+
                     '</div>' +
                     '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info3 mb-0">Info-3</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info3" placeholder="Info-3"></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3">' +
+                    '<label for="info3 mb-0">Author</label>' +
+                    '</div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-author" id="info3" placeholder="Author"></div>' +
                     '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Info-4</label></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Country</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0" id="info4" placeholder="Info-4">' +
+                    '<input type="text" class="form-control mb-0 image-country" placeholder="Country">' +
                     '</div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Info-5</label></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">City</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0" id="info5" placeholder="Info-5"></div></div>' +
+                    '<input type="text" class="form-control mb-0 image-city" placeholder="City"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Info-6</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info6" placeholder="Info-6"></div></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Caption</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-caption" placeholder="Caption"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Info-7</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info7" placeholder="Info-7">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Copyright</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">' +
                     '</div></div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
                 imageFile = null;
@@ -126,17 +129,19 @@ function readImageMetaData(image, imageForm) {
         .then(res => res.json())
         .then(res => {
             let metaData = res.data;
-            let height, width;
-            if(metaData.COMPUTED) {
-                height = metaData.COMPUTED.Height;
-                width = metaData.COMPUTED.Width;
-            } else {
-                height = metaData[1];
-                width = metaData[0];
-            }
+            let height = metaData["Height"];
+            let width = metaData["Width"];
 
+            let keywords = metaData["Keywords"] || [];
+            keywords = keywords.toString();
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
+            imageForm.querySelector(".image-author").value = metaData["AuthorTitle"];
+            imageForm.querySelector(".image-country").value = metaData["Country"];
+            imageForm.querySelector(".image-city").value = metaData["City"];
+            imageForm.querySelector(".image-caption").value = metaData["Caption"];
+            imageForm.querySelector(".image-copyright").value = metaData["Copyright"];
+            //imageForm.querySelector(".image-keywords").value = keywords.toString();
 
         }).catch(function(error) {
             console.log(error);
@@ -153,10 +158,22 @@ function addImageToList() {
 
     let height= lastForm.querySelector(".image-height").value;
     let width = lastForm.querySelector(".image-width").value;
+    let author = lastForm.querySelector(".image-author").value;
+    let country = lastForm.querySelector(".image-country").value;
+    let city = lastForm.querySelector(".image-city").value;
+    let caption = lastForm.querySelector(".image-caption").value;
+    let copyright = lastForm.querySelector(".image-copyright").value;
+
+    let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
-
+    metas.AuthorTitle = author || "";
+    metas.Country = country || "";
+    metas.City = city || "";
+    metas.Caption = caption || "";
+    metas.Copyright = copyright || "";
+    imageObj.metas = metas;
     if(imageObj.image && imageObj.height && imageObj.width) {
         images.push(imageObj);
         return true;
@@ -192,6 +209,7 @@ function uploadImage(event) {
     formData.append("width", imageObj.width || "");
     formData.append("height", imageObj.height || "");
     formData.append("contributor", contributor);
+    formData.append("metas", JSON.stringify(imageObj.metas));
     if(masterId) {
         formData.append("masterId", masterId);
     }

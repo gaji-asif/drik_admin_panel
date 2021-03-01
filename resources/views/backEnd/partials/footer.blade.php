@@ -47,7 +47,7 @@
 <script src="{{asset('public/assets/js/pcoded.min.js')}}"></script>
 <script src="{{asset('public/assets/js/vertical/vertical-layout.min.js')}}"></script>
 
-<script type="text/javascript" src="{{asset('public/assets/pages/dashboard/custom-dashboard.js')}}"></script> 
+<script type="text/javascript" src="{{asset('public/assets/pages/dashboard/custom-dashboard.js')}}"></script>
 <script type="text/javascript" src="{{asset('public/assets/js/script.js')}}"></script>
 
 
@@ -81,6 +81,7 @@
 </script>
 <script type="text/javascript" src="{{asset('public/assets/pages/advance-elements/select2-custom.js')}}">
 </script>
+<script src="{{asset('public/js/bootstrap-tagsinput.js')}}"></script>
 <!-- end for select2 dropdown -->
 
 <!-- Added by Gautam -->

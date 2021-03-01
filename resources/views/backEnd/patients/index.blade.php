@@ -53,15 +53,15 @@
                                     <option value="">Select contributor</option>
                                     @if(isset($contributors))
                                         @foreach($contributors as $contributor)
-                                           
-                                           
+
+
                                             <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
-                                       
-                                          
+
+
                                         @endforeach
                                     @endif
                                     </select>
-                                   
+
                                 </div>
                             </div>
                             <fieldset>
@@ -91,7 +91,7 @@
                                                                                     <label for="info1 mb-0">Height</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Info-1">
+                                                                                    <input type="text" class="form-control mb-0 image-height" placeholder="Info-1">
                                                                                     <div class="invalid-feedback">
                                                                                         Height is required
                                                                                     </div>
@@ -103,7 +103,7 @@
                                                                                     <label for="info2 mb-0">Width</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Info-2">
+                                                                                    <input type="text" class="form-control mb-0 image-width" placeholder="Info-2">
                                                                                     <div class="invalid-feedback">
                                                                                         Width is required
                                                                                     </div>
@@ -112,46 +112,46 @@
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info3 mb-0">Info-3</label>
+                                                                                    <label for="artist mb-0">Author</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info3" placeholder="Info-3">
+                                                                                    <input type="text" class="form-control mb-0 image-author" placeholder="Author">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info4 mb-0">Info-4</label>
+                                                                                    <label for="info4 mb-0">Country</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info4" placeholder="Info-4">
+                                                                                    <input type="text" class="form-control mb-0 image-country" placeholder="Country">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info5 mb-0">Info-5</label>
+                                                                                    <label for="info5 mb-0">City</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info5" placeholder="Info-5">
+                                                                                    <input type="text" class="form-control mb-0 image-city" placeholder="City">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info6 mb-0">Info-6</label>
+                                                                                    <label for="info6 mb-0">Caption</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info6" placeholder="Info-6">
+                                                                                    <input type="text" class="form-control mb-0 image-caption" placeholder="Caption">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info7 mb-0">Info-7</label>
+                                                                                    <label for="info7 mb-0">Copyright</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info7" placeholder="Info-7">
+                                                                                    <input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">
                                                                                 </div>
                                                                             </div>
                                                                         </div>

@@ -2,69 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\ImageChild;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Svg\Tag\Image;
 
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
 
-        $metas = $this->read_metas($image);
+        $metas = ImageHelper::read_metas($image);
 
         return response()->json(['data' => $metas], 200);
     }
 
-    public function read_metas($image) {
-        try {
-            $metas = exif_read_data($image);
-        } catch (\Throwable $e) {
-            try{
-                $metas = getimagesize($image);
-            } catch (\Throwable $e){
-                $metas = $e->getMessage();
-            }
-
-        }
-
-        $metas = $this->convert_from_latin1_to_utf8_recursively($metas);
-        return $metas;
-    }
-
-    public function convert_from_latin1_to_utf8_recursively($dat)
-    {
-        if (is_string($dat)) {
-            return utf8_encode($dat);
-        } elseif (is_array($dat)) {
-            $ret = [];
-            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
-
-            return $ret;
-        } elseif (is_object($dat)) {
-            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
-
-            return $dat;
-        } else {
-            return $dat;
-        }
-    }
-
     public function create_thumbnail($image, $name){
-        $metas = $this->read_metas($image);
+        $metas = ImageHelper::read_metas($image);
         $x = 0;
         $y = 0;
         $size = 0;
-        if(isset($metas["COMPUTED"])) {
-            $computed = $metas["COMPUTED"];
-            $height = $computed["Height"];
-            $width = $computed["Width"];
-        } else {
-            $height = $metas[1];
-            $width = $metas[0];
-        }
+        $height = $metas["Height"];
+        $width = $metas["Width"];
 
         if($height < $width) {
             $size = $height;
@@ -76,7 +38,7 @@ class ImageController extends Controller {
             $x = 0;
         }
 
-        $name = $this->cropImage($image, $x, $y, $size, $size, $name);
+        $name = ImageHelper::cropImage($image, $x, $y, $size, $size, $name, "images/uploaded_images/thumbnails");
 
         return config('app.url').'/public/images/uploaded_images/thumbnails/'.$name;
     }
@@ -94,10 +56,28 @@ class ImageController extends Controller {
         $contributor = $request["contributor"];
         $masterId = $request["masterId"];
         try{
+            $width = $request["width"];
+            $height = $request["height"];
+            $medium_width = floor($width*0.8);
+            $medium_height = floor($height*0.8);
+            $small_width = floor($width*0.5);
+            $small_height = floor($height*0.5);
             $name = time().$image->getClientOriginalName();
             $destinaionPath = public_path("images/uploaded_images");
             $image->move($destinaionPath, $name);
-            $thumbnail_url = $this->create_thumbnail($destinaionPath.'/'.$name, $name);
+            $imagePath = $destinaionPath.'/'.$name;
+
+            if($request["metas"]) {
+                $metas = json_decode($request["metas"]);
+                ImageHelper::addMetaToImage($imagePath, $metas);
+            }
+
+
+            $thumbnail_url = $this->create_thumbnail($imagePath, $name);
+            $medium_url = ImageHelper::resize_image($imagePath, $medium_width, $medium_height, $name, "images/uploaded_images/medium");
+            $medium_url = config('app.url')."/public/images/uploaded_images/medium/".$medium_url;
+            $small_url = ImageHelper::resize_image($imagePath, $small_width, $small_height, $name, "images/uploaded_images/small");
+            $small_url = config('app.url')."/public/images/uploaded_images/small/".$small_url;
             // db saving
             $image_url = config('app.url').'/public/images/uploaded_images/'.$name;
 
@@ -111,7 +91,6 @@ class ImageController extends Controller {
                 $masterImage = $masterId;
             }
 
-
             DB::table("all_images_childs")->insertGetId([
                 'master_id' => $masterImage,
                 'image_name' => $name,
@@ -119,84 +98,14 @@ class ImageController extends Controller {
                 'height' => $request['height'],
                 'width' => $request['width'],
                 'image_main_url' => $image_url,
+                'medium_url' => $medium_url,
+                'small_url' => $small_url,
                 'thumbnail_url' => $thumbnail_url
             ]);
         } catch (\Throwable $e) {
             return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
         }
         return response()->json(['data' => $masterImage], 200);
-    }
-
-    public function resize_image($file, $w, $h, $name, $keepRatio=true) {
-        list($width, $height) = getimagesize($file);
-        $what = getimagesize($file);
-        if($keepRatio) {
-            $r = $width / $height;
-            if ($w/$h > $r) {
-                $newwidth = $h*$r;
-                $newheight = $h;
-            } else {
-                $newheight = $w/$r;
-                $newwidth = $w;
-            }
-        } else {
-            $newheight = $h;
-            $newwidth = $w;
-        }
-
-
-        $extension = "png";
-
-        switch(strtolower($what['mime']))
-        {
-            case 'image/png':
-                $src = imagecreatefrompng($file);
-                break;
-            case 'image/jpeg':
-                $src = imagecreatefromjpeg($file);
-                $extension = "jpeg";
-                break;
-            case 'image/gif':
-                $src = imagecreatefromgif($file);
-                $extension = "gif";
-                break;
-            default: die();
-        };
-        $dst = imagecreatetruecolor($newwidth, $newheight);
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        $fileNameNoExtension = preg_replace("/\.[^.]+$/", "", $name);
-        $destination = public_path("images/uploaded_images/thumbnails/".$fileNameNoExtension.".".$extension);
-        imagejpeg($dst, $destination);
-        return $fileNameNoExtension.".".$extension;
-    }
-
-    public function cropImage($image, $x, $y, $width, $height, $name){
-        $what = getimagesize($image);
-
-        $extension = "png";
-
-        switch(strtolower($what['mime']))
-        {
-            case 'image/png':
-                $src = imagecreatefrompng($image);
-                break;
-            case 'image/jpeg':
-                $src = imagecreatefromjpeg($image);
-                $extension = "jpeg";
-                break;
-            case 'image/gif':
-                $src = imagecreatefromgif($image);
-                $extension = "gif";
-                break;
-            default: die();
-        };
-
-        $croppedImage = imagecrop($src, ['x' => $x, 'y' => $y, 'width' => $width, 'height' => $height]);
-        $fileNameNoExtension = preg_replace("/\.[^.]+$/", "", $name);
-        $croppedImageName = $fileNameNoExtension.".".$extension;
-        $destination = public_path("images/uploaded_images/thumbnails/".$croppedImageName);
-        imagejpeg($croppedImage, $destination);
-        return $croppedImageName;
     }
 
     public function imageList() {
