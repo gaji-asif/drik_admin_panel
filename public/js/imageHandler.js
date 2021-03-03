@@ -3,6 +3,7 @@ let images = [];
 let imageFile = null;
 let masterId = null;
 let lastForm = null;
+let formCount = 1;
 document.addEventListener("DOMContentLoaded", function(){
     csrf = $('meta[name="csrf-token"]').attr('content');
     let imageSubmitBtn = document.getElementById("image_upload_btn");
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 imageFormValidationError();
 
             } else {
-                $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" id="imgUp">' +
+                $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" data-index="'+formCount+'" id="imgUp">' +
                     '<div class="row align-items-center"><div class="col-md-4">' +
                     '<div class="imagePreview"></div>' +
                     '<label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label>' +
@@ -71,10 +72,15 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-caption" placeholder="Caption"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
                     '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Copyright</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">' +
-                    '</div></div></div></div></div></div></div></div>');
+                    '<div class="col-sm-12 col-md-10 col-lg-12"><input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">' +
+                    '</div></div><div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
+                    '<label>Keywords</label>' +
+                    '<input type="text" class="form-control tags-input" id="tags'+formCount+'" value="" />' +
+                    '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
                 imageFile = null;
+                $(`#tags${formCount}`).tokenfield();
+                formCount++;
             }
 
         });
@@ -98,6 +104,14 @@ document.addEventListener("DOMContentLoaded", function(){
             uploadImage();
         }
 
+    });
+
+    $('#tags').tokenfield({
+        autocomplete:{
+            source: [],
+            delay:100
+        },
+        showAutocompleteOnFocus: true
     });
 
 });
@@ -133,7 +147,6 @@ function readImageMetaData(image, imageForm) {
             let width = metaData["Width"];
 
             let keywords = metaData["Keywords"] || [];
-            keywords = keywords.toString();
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
             imageForm.querySelector(".image-author").value = metaData["AuthorTitle"];
@@ -141,7 +154,11 @@ function readImageMetaData(image, imageForm) {
             imageForm.querySelector(".image-city").value = metaData["City"];
             imageForm.querySelector(".image-caption").value = metaData["Caption"];
             imageForm.querySelector(".image-copyright").value = metaData["Copyright"];
-            //imageForm.querySelector(".image-keywords").value = keywords.toString();
+            if(keywords.length > 0) {
+                let tagInput = imageForm.querySelector('.tags-input');
+                let id = tagInput.getAttribute("id");
+                $(`#${id}`).tokenfield('setTokens', keywords);
+            }
 
         }).catch(function(error) {
             console.log(error);
@@ -151,6 +168,10 @@ function readImageMetaData(image, imageForm) {
 function addImageToList() {
     let imageForms = [...document.querySelectorAll(".imgUp")];
     lastForm = imageForms[imageForms.length-1];
+    let tagInputId = "tags";
+    if(lastForm.dataset.index) {
+        tagInputId = `tags${lastForm.dataset.index}`;
+    }
 
     let imageFile = lastForm.querySelector(".uploadFile").files[0];
 
@@ -163,7 +184,8 @@ function addImageToList() {
     let city = lastForm.querySelector(".image-city").value;
     let caption = lastForm.querySelector(".image-caption").value;
     let copyright = lastForm.querySelector(".image-copyright").value;
-
+    let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
+    //keywords = keywords.map(word => word.value);
     let metas = {};
 
     imageObj.height = height;
@@ -173,6 +195,7 @@ function addImageToList() {
     metas.City = city || "";
     metas.Caption = caption || "";
     metas.Copyright = copyright || "";
+    metas.Keywords = keywords;
     imageObj.metas = metas;
     if(imageObj.image && imageObj.height && imageObj.width) {
         images.push(imageObj);

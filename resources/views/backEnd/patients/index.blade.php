@@ -150,9 +150,13 @@
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
                                                                                     <label for="info7 mb-0">Copyright</label>
                                                                                 </div>
-                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
+                                                                                <div class="col-sm-12 col-md-12 col-lg-12">
                                                                                     <input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">
                                                                                 </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">
+                                                                                <label>Keywords</label>
+                                                                                <input type="text" class="form-control tags-input" id="tags" value="" />
                                                                             </div>
                                                                         </div>
                                                                     </div>

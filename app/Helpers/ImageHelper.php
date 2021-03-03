@@ -23,6 +23,7 @@ class ImageHelper
         '2#110'=>'Source',
         '2#115'=>'PhotoSource',
         '2#116'=>'Copyright',
+        '2#118'=>'Contact',
         '2#120'=>'Caption',
         '2#122'=>'CaptionWriter'
     );
@@ -126,7 +127,12 @@ class ImageHelper
                 $filteredMetas[$value] = $allMetas[$value];
             } else if(isset($allMetas[$meta])){
                 if($meta === "2#025") {
-                    $filteredMetas[$value] = $allMetas[$meta];
+                    $keywords = $allMetas[$meta];
+                    if(count($keywords) == 1) {
+                        $keywords = $keywords[0];
+                        if(is_string($keywords)) $keywords = explode(",", $keywords);
+                    }
+                    $filteredMetas[$value] = $keywords;
                 } else {
                     $filteredMetas[$value] = $allMetas[$meta][0];
                 }
