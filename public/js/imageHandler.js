@@ -3,6 +3,7 @@ let images = [];
 let imageFile = null;
 let masterId = null;
 let lastForm = null;
+let formCount = 1;
 document.addEventListener("DOMContentLoaded", function(){
     csrf = $('meta[name="csrf-token"]').attr('content');
     let imageSubmitBtn = document.getElementById("image_upload_btn");
@@ -34,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 imageFormValidationError();
 
             } else {
-                $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" id="imgUp">' +
+                $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" data-index="'+formCount+'" id="imgUp">' +
                     '<div class="row align-items-center"><div class="col-md-4">' +
                     '<div class="imagePreview"></div>' +
                     '<label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label>' +
@@ -53,25 +54,33 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<div class="invalid-feedback">Width is required</div>'+
                     '</div>' +
                     '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info3 mb-0">Info-3</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info3" placeholder="Info-3"></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3">' +
+                    '<label for="info3 mb-0">Author</label>' +
+                    '</div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-author" id="info3" placeholder="Author"></div>' +
                     '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Info-4</label></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Country</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0" id="info4" placeholder="Info-4">' +
+                    '<input type="text" class="form-control mb-0 image-country" placeholder="Country">' +
                     '</div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Info-5</label></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">City</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0" id="info5" placeholder="Info-5"></div></div>' +
+                    '<input type="text" class="form-control mb-0 image-city" placeholder="City"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Info-6</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info6" placeholder="Info-6"></div></div>' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Caption</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-caption" placeholder="Caption"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Info-7</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0" id="info7" placeholder="Info-7">' +
-                    '</div></div></div></div></div></div></div></div>');
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Copyright</label></div>' +
+                    '<div class="col-sm-12 col-md-10 col-lg-12"><input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">' +
+                    '</div></div><div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
+                    '<label>Keywords</label>' +
+                    '<input type="text" class="form-control tags-input" id="tags'+formCount+'" value="" />' +
+                    '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
                 imageFile = null;
+                $(`#tags${formCount}`).tokenfield();
+                formCount++;
             }
 
         });
@@ -95,6 +104,14 @@ document.addEventListener("DOMContentLoaded", function(){
             uploadImage();
         }
 
+    });
+
+    $('#tags').tokenfield({
+        autocomplete:{
+            source: [],
+            delay:100
+        },
+        showAutocompleteOnFocus: true
     });
 
 });
@@ -126,17 +143,22 @@ function readImageMetaData(image, imageForm) {
         .then(res => res.json())
         .then(res => {
             let metaData = res.data;
-            let height, width;
-            if(metaData.COMPUTED) {
-                height = metaData.COMPUTED.Height;
-                width = metaData.COMPUTED.Width;
-            } else {
-                height = metaData[1];
-                width = metaData[0];
-            }
+            let height = metaData["Height"];
+            let width = metaData["Width"];
 
+            let keywords = metaData["Keywords"] || [];
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
+            imageForm.querySelector(".image-author").value = metaData["AuthorTitle"];
+            imageForm.querySelector(".image-country").value = metaData["Country"];
+            imageForm.querySelector(".image-city").value = metaData["City"];
+            imageForm.querySelector(".image-caption").value = metaData["Caption"];
+            imageForm.querySelector(".image-copyright").value = metaData["Copyright"];
+            if(keywords.length > 0) {
+                let tagInput = imageForm.querySelector('.tags-input');
+                let id = tagInput.getAttribute("id");
+                $(`#${id}`).tokenfield('setTokens', keywords);
+            }
 
         }).catch(function(error) {
             console.log(error);
@@ -146,6 +168,10 @@ function readImageMetaData(image, imageForm) {
 function addImageToList() {
     let imageForms = [...document.querySelectorAll(".imgUp")];
     lastForm = imageForms[imageForms.length-1];
+    let tagInputId = "tags";
+    if(lastForm.dataset.index) {
+        tagInputId = `tags${lastForm.dataset.index}`;
+    }
 
     let imageFile = lastForm.querySelector(".uploadFile").files[0];
 
@@ -153,10 +179,24 @@ function addImageToList() {
 
     let height= lastForm.querySelector(".image-height").value;
     let width = lastForm.querySelector(".image-width").value;
+    let author = lastForm.querySelector(".image-author").value;
+    let country = lastForm.querySelector(".image-country").value;
+    let city = lastForm.querySelector(".image-city").value;
+    let caption = lastForm.querySelector(".image-caption").value;
+    let copyright = lastForm.querySelector(".image-copyright").value;
+    let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
+    //keywords = keywords.map(word => word.value);
+    let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
-
+    metas.AuthorTitle = author || "";
+    metas.Country = country || "";
+    metas.City = city || "";
+    metas.Caption = caption || "";
+    metas.Copyright = copyright || "";
+    metas.Keywords = keywords;
+    imageObj.metas = metas;
     if(imageObj.image && imageObj.height && imageObj.width) {
         images.push(imageObj);
         return true;
@@ -192,6 +232,7 @@ function uploadImage(event) {
     formData.append("width", imageObj.width || "");
     formData.append("height", imageObj.height || "");
     formData.append("contributor", contributor);
+    formData.append("metas", JSON.stringify(imageObj.metas));
     if(masterId) {
         formData.append("masterId", masterId);
     }

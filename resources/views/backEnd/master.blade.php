@@ -3,6 +3,11 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
 	@include('backEnd.partials.header')
+    <style>
+        .tokenfield{
+            height: auto !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -121,9 +126,9 @@
 										<div class="page-header-title">
 											@if (session()->has('header'))
 											 <h5 class="m-b-10">{{session()->get('header')}}</h5>
-											<p class="m-b-0">{{session()->get('header_t')}}</p>				
+											<p class="m-b-0">{{session()->get('header_t')}}</p>
 											@endif
- 								
+
 										</div>
 									</div>
 									<div class="col-md-4">

@@ -38,7 +38,7 @@ class ErpPatientController extends Controller
 
         $contributors = User::where('user_type', '=', 1)->get();
         //$contributors = Contributor::all();
-        return view('backEnd.patients.index', compact('patients', 'contributors'));
+        return view('backEnd.patients.index', compact('contributors'));
     }
 
     /**

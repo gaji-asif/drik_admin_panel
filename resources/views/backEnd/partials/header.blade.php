@@ -53,10 +53,13 @@
    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/select2/css/select2.min.css')}}">
    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css')}}">
    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/multiselect/css/multi-select.css')}}">
+<link rel="stylesheet" href="{{asset('public/css/bootstrap-tagsinput.css')}}">
 
    <!--   end css for select2 dropdown -->
 
-  <script type="text/javascript" src="{{asset('public/bower_components/jquery/js/jquery.min.js')}}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{asset('public/bower_components/jquery/js/jquery.min.js')}}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
 <script src="{{asset('public/js/common.js')}}"></script>
 
