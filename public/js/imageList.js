@@ -1,6 +1,24 @@
 let imageTable = null;
+let heightInput, widthInput, authorInput, countryInput, cityInput, stateInput, copyRightInput,
+    postalCodeInput, titleInput, websiteInput, phoneInput, emailInput, headlineInput, captionInput, tagInput, editingImageId;
 document.addEventListener("DOMContentLoaded", function() {
     let buttonPanel = document.querySelector('.dt-buttons');
+
+    heightInput = document.querySelector(".image-height");
+    widthInput = document.querySelector(".image-width");
+    authorInput = document.querySelector(".image-author");
+    countryInput = document.querySelector(".image-country");
+    cityInput = document.querySelector(".image-city");
+    stateInput = document.querySelector(".image-state");
+    copyRightInput = document.querySelector(".image-copyright");
+    postalCodeInput = document.querySelector(".image-postal-code");
+    titleInput = document.querySelector(".image-title");
+    websiteInput = document.querySelector(".image-website");
+    phoneInput = document.querySelector(".image-phone");
+    emailInput = document.querySelector(".image-email");
+    headlineInput = document.querySelector(".image-headline");
+    captionInput = document.querySelector(".image-caption");
+    tagInput = document.querySelector('.tags-input');
 
     if(buttonPanel) {
         buttonPanel.classList.add('d-none');
@@ -23,15 +41,19 @@ document.addEventListener("DOMContentLoaded", function() {
             { "data": "width" },
             {"data": "id",
                 "render": function(data) {
-                    return `<button onclick="deleteAnImage(${data})" type="button" class="btn btn-danger action-icon"><i class="fa fa-trash-o"></i></button>`;
+                    return `<div>
+                        <button onclick="deleteAnImage(${data})" type="button" class="btn btn-danger action-icon"><i class="fa fa-trash-o"></i></button>
+                        <button onclick="editImage(${data})" type="button" class="btn btn-danger action-icon"><i class="fa fa-edit"></i></button>
+                    </div>`;
             }}
 
         ]
     });
+    $('#tags').tokenfield();
+    $("#update_image_btn").on('click', updateImage);
 });
 
 function deleteAnImage(imageId) {
-    console.log("Hello: ", imageId);
     swal({
         title: "Are you sure?",
         text: "Once deleted, you will not be able to recover this image!",
@@ -61,4 +83,78 @@ function deleteAnImage(imageId) {
                 swal("Your image is safe!");
             }
         });
+}
+
+function editImage(imageId) {
+    if(imageId) {
+        editingImageId = imageId;
+        fetch(`${baseUrl}/image_details/${imageId}`, {
+            method: 'GET'
+        }).then(res => res.json())
+            .then(res => {
+                if(imageId) {
+                    fetch(`${baseUrl}/image_details/${imageId}`, {
+                        method: 'GET'
+                    }).then(res => res.json())
+                        .then(res => {
+                            let imageDetails = res.data;
+                            let keywords = imageDetails["keywords"] || [];
+                            let {author, height, width, caption, city, copy_right, country, email, headline, phone, postal_code, state, title, website} = imageDetails;
+                            heightInput.value = height;
+                            widthInput.value = width;
+                            authorInput.value = author;
+                            countryInput.value = country;
+                            cityInput.value = city;
+                            stateInput.value = state;
+                            copyRightInput.value = copy_right;
+                            postalCodeInput.value = postal_code;
+                            titleInput.value = title;
+                            websiteInput.value = website;
+                            phoneInput.value = phone;
+                            emailInput.value = email;
+                            headlineInput.value = headline;
+                            captionInput.value = caption;
+                            $("#tags").tokenfield('setTokens', keywords);
+                        });
+                }
+                $('#image-edit-modal').modal({show:true});
+            })
+    }
+}
+
+function updateImage() {
+     let updates = {
+         author: authorInput.value,
+         country: countryInput.value,
+         city: cityInput.value,
+         state: stateInput.value,
+         postal_code: postalCodeInput.value,
+         copy_right: copyRightInput.value,
+         phone: phoneInput.value,
+         website: websiteInput.value,
+         title: titleInput.value,
+         email: emailInput.value,
+         caption: captionInput.value,
+         headline: headlineInput.value,
+         keywords: $("#tags").tokenfield('getTokensList')
+     };
+
+     let formData = new FormData();
+     Object.keys(updates).forEach(key => {
+        formData.append(key, updates[key]);
+     });
+     fetch(`${baseUrl}/update_image/${editingImageId}`, {
+         method: 'POST',
+         headers: {
+             "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+         },
+         body: formData
+     })
+         .then(res => res.json())
+         .then(res => {
+             $('#image-edit-modal').modal('hide');
+             swal("Image updated successfully!");
+         })
+
+
 }

@@ -18,7 +18,8 @@
         "phpoffice/phpword": "^0.17.0",
         "spatie/laravel-permission": "^2.37",
         "symfony/translation": "4.3.8",
-      "ext-gd": "*"
+      "ext-gd": "*",
+      "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
