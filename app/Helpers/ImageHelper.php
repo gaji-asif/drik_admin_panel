@@ -6,15 +6,19 @@ class ImageHelper
 {
     public static $iptcHeaderArray = array
     (
-        '2#005'=>'DocumentTitle',
+        '2#005'=>'Title',
+        '2#007'=>'Website',
+        '2#008'=>'Phone',
         '2#010'=>'Urgency',
         '2#015'=>'Category',
         '2#020'=>'Subcategories',
+        '2#023'=>'Website',
+        '2#024'=>'PostalCode',
         '2#025'=>'Keywords',
         '2#040'=>'SpecialInstructions',
         '2#055'=>'CreationDate',
         '2#080'=>'AuthorByline',
-        '2#085'=>'AuthorTitle',
+        '2#085'=>'Author',
         '2#090'=>'City',
         '2#095'=>'State',
         '2#101'=>'Country',
@@ -23,7 +27,7 @@ class ImageHelper
         '2#110'=>'Source',
         '2#115'=>'PhotoSource',
         '2#116'=>'Copyright',
-        '2#118'=>'Contact',
+        '2#118'=>'Email',
         '2#120'=>'Caption',
         '2#122'=>'CaptionWriter'
     );
@@ -106,19 +110,33 @@ class ImageHelper
 
     public static function read_metas($image) {
         $allMetas = [];
-        $filteredMetas = [];
+        $filteredMetas = ["Height"=>0, "Width"=>0];
         $size = getimagesize($image, $info);
-        $allMetas = array_merge($allMetas, $size);
-        $allMetas = array_merge($allMetas, $info);
-        $filteredMetas["Width"] = $allMetas[0];
-        $filteredMetas["Height"] = $allMetas[1];
+        if(is_array($size)) {
+            $allMetas = array_merge($allMetas, $size);
+        }
+        if(is_array($info)) {
+            $allMetas = array_merge($allMetas, $info);
+        }
+
+        if(isset($allMetas[0]) && isset($allMetas[1])) {
+            $filteredMetas["Width"] = $allMetas[0];
+            $filteredMetas["Height"] = $allMetas[1];
+        }
+
         if(is_array($info) && isset($info['APP13'])) {
             $iptc = iptcparse($info["APP13"]);
-            $allMetas = array_merge($iptc, $allMetas);
+            if(is_array($iptc)) {
+                $allMetas = array_merge($iptc, $allMetas);
+            }
+
         }
         try {
             $metas = exif_read_data($image);
-            $allMetas = array_merge($metas, $allMetas);
+            if(is_array($metas)) {
+                $allMetas = array_merge($metas, $allMetas);
+            }
+
         } catch (\Throwable $e) {
         }
 

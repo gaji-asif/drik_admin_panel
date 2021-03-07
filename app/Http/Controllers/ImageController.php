@@ -72,7 +72,6 @@ class ImageController extends Controller {
                 ImageHelper::addMetaToImage($imagePath, $metas);
             }
 
-
             $thumbnail_url = $this->create_thumbnail($imagePath, $name);
             $medium_url = ImageHelper::resize_image($imagePath, $medium_width, $medium_height, $name, "images/uploaded_images/medium");
             $medium_url = config('app.url')."/public/images/uploaded_images/medium/".$medium_url;
@@ -97,6 +96,19 @@ class ImageController extends Controller {
                 'user_id' => $userId,
                 'height' => $request['height'],
                 'width' => $request['width'],
+                'author' => isset($metas->Author) ? $metas->Author : "",
+                'country' => isset($metas->Country) ? $metas->Country : "",
+                'city' => isset($metas->City) ? $metas->City : "",
+                'state' => isset($metas->State) ? $metas->State : "",
+                'postal_code' => isset($metas->PostalCode) ? $metas->PostalCode : "",
+                'phone' => isset($metas->Phone) ? $metas->Phone : "",
+                'email' => isset($metas->Email) ? $metas->Email : "",
+                'caption' => isset($metas->Caption) ? $metas->Caption : "",
+                'website' => isset($metas->Website) ? $metas->Website : "",
+                'headline' => isset($metas->Headline) ? $metas->Headline : "",
+                'title' => isset($metas->Title) ? $metas->Title : "",
+                'copy_right' => isset($metas->Copyright) ? $metas->Copyright : "",
+                'keywords' => isset($metas->Keywords) ? $metas->Keywords : "",
                 'image_main_url' => $image_url,
                 'medium_url' => $medium_url,
                 'small_url' => $small_url,
@@ -122,5 +134,35 @@ class ImageController extends Controller {
         $image = ImageChild::find($imageId);
         $deleted = $image->delete();
         return response()->json(['data' => $deleted]);
+    }
+
+    public function imageDetails($id) {
+        $image = ImageChild::find($id);
+        return response()->json(['data'=> $image], 200);
+    }
+
+    public function updateImage(Request $request, $id) {
+        $image = ImageChild::find($id);
+        $imageName = $image->image_name;
+        ImageHelper::addMetaToImage(public_path("images/uploaded_images/${imageName}"), [
+            'Author' => $request->author
+        ]);
+        $image = $image->update([
+            'author'=>$request->author,
+            'phone'=>$request->phone,
+            'country'=>$request->country,
+            'email'=>$request->email,
+            'city'=>$request->city,
+            'state'=>$request->state,
+            'title'=>$request->title,
+            'caption'=>$request->caption,
+            'website'=>$request->website,
+            'headline'=>$request->headline,
+            'keywords'=>$request->keywords,
+            'copy_right'=>$request->copy_right,
+            'postal_code'=>$request->postal_code
+
+        ]);
+        return response()->json(['data'=>$image], 200);
     }
 }

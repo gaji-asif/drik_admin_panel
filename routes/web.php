@@ -148,4 +148,6 @@ Route::post('upload_image', 'ImageController@upload_image');
 Route::get('image_list', 'ImageController@imageList');
 Route::get('get_all_images', 'ImageController@getAllImages');
 Route::post('delete_image', 'ImageController@deleteImage');
+Route::post('update_image/{id}', 'ImageController@updateImage');
+Route::get('image_details/{id}', 'ImageController@imageDetails');
 });

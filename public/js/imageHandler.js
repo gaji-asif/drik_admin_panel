@@ -68,18 +68,56 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
                     '<input type="text" class="form-control mb-0 image-city" placeholder="City"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                        '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">State</label></div>' +
+                        '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                            '<input type="text" class="form-control mb-0 image-state" placeholder="State"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Postal code</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-postal-code" placeholder="Postal code"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
                     '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Caption</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-caption" placeholder="Caption"></div></div>' +
                     '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info7 mb-0">Copyright</label></div>' +
-                    '<div class="col-sm-12 col-md-10 col-lg-12"><input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">' +
-                    '</div></div><div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Copyright</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Email</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-email" placeholder="Phone"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Phone</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-phone" placeholder="Phone"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Website</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-website" placeholder="Website"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Headline</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-headline" placeholder="Headline"></div></div>'+
+                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Title</label></div>' +
+                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
+                    '<input type="text" class="form-control mb-0 image-title" placeholder="Title"></div></div>'+
+                    '<div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">\n' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3">\n' +
+                    '<label for="info7 mb-0">Creation date</label>\n' +
+                    '</div>\n' +
+                    '<div class="col-sm-12 col-md-9 col-lg-9">\n' +
+                    '<input id="creation-date-'+formCount+'" type="text" class="form-control creation-date">\n' +
+                    '</div>\n' +
+                    '</div>'+
+                    '<div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
                     '<label>Keywords</label>' +
                     '<input type="text" class="form-control tags-input" id="tags'+formCount+'" value="" />' +
                     '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
                 imageFile = null;
                 $(`#tags${formCount}`).tokenfield();
+                $(`#creation-date-${formCount}`).datepicker();
                 formCount++;
             }
 
@@ -113,6 +151,8 @@ document.addEventListener("DOMContentLoaded", function(){
         },
         showAutocompleteOnFocus: true
     });
+
+    $(".creation-date").datepicker();
 
 });
 
@@ -149,11 +189,19 @@ function readImageMetaData(image, imageForm) {
             let keywords = metaData["Keywords"] || [];
             imageForm.querySelector(".image-height").value = height;
             imageForm.querySelector(".image-width").value = width;
-            imageForm.querySelector(".image-author").value = metaData["AuthorTitle"];
+            imageForm.querySelector(".image-author").value = metaData["Author"];
             imageForm.querySelector(".image-country").value = metaData["Country"];
             imageForm.querySelector(".image-city").value = metaData["City"];
+            imageForm.querySelector(".image-state").value = metaData["State"];
+            imageForm.querySelector(".image-postal-code").value = metaData["PostalCode"];
+            imageForm.querySelector(".image-email").value = metaData["Email"];
+            imageForm.querySelector(".image-website").value = metaData["Website"];
+            imageForm.querySelector(".image-phone").value = metaData["Phone"];
             imageForm.querySelector(".image-caption").value = metaData["Caption"];
+            imageForm.querySelector(".image-headline").value = metaData["Headline"];
+            imageForm.querySelector(".image-title").value = metaData["Title"];
             imageForm.querySelector(".image-copyright").value = metaData["Copyright"];
+            imageForm.querySelector(".creation-date").value = metaData["CreationDate"];
             if(keywords.length > 0) {
                 let tagInput = imageForm.querySelector('.tags-input');
                 let id = tagInput.getAttribute("id");
@@ -182,20 +230,36 @@ function addImageToList() {
     let author = lastForm.querySelector(".image-author").value;
     let country = lastForm.querySelector(".image-country").value;
     let city = lastForm.querySelector(".image-city").value;
+    let state = lastForm.querySelector(".image-state").value;
+    let postalCode = lastForm.querySelector(".image-postal-code").value;
     let caption = lastForm.querySelector(".image-caption").value;
+    let email = lastForm.querySelector(".image-email").value;
+    let phone = lastForm.querySelector(".image-phone").value;
+    let website = lastForm.querySelector(".image-website").value;
     let copyright = lastForm.querySelector(".image-copyright").value;
+    let headline = lastForm.querySelector(".image-headline").value;
+    let title = lastForm.querySelector(".image-title").value;
+    let creationDate = lastForm.querySelector(".creation-date").value;
+    console.log({creationDate});
     let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
-    //keywords = keywords.map(word => word.value);
     let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
-    metas.AuthorTitle = author || "";
+    metas.Author = author || "";
     metas.Country = country || "";
     metas.City = city || "";
     metas.Caption = caption || "";
     metas.Copyright = copyright || "";
-    metas.Keywords = keywords;
+    metas.Email = email || "";
+    metas.Phone = phone || "";
+    metas.Website = website || "";
+    metas.Headline = headline || "";
+    metas.Title = title || "";
+    metas.State = state || "";
+    metas.PostalCode = postalCode || "";
+    metas.Keywords = keywords || "";
+    metas.CreationDate = creationDate || "";
     imageObj.metas = metas;
     if(imageObj.image && imageObj.height && imageObj.width) {
         images.push(imageObj);

@@ -53,11 +53,7 @@
                                     <option value="">Select contributor</option>
                                     @if(isset($contributors))
                                         @foreach($contributors as $contributor)
-
-
                                             <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
-
-
                                         @endforeach
                                     @endif
                                     </select>
@@ -139,6 +135,24 @@
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">State</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-state" placeholder="State">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Postal code</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-postal-code" placeholder="Postal code">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
                                                                                     <label for="info6 mb-0">Caption</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
@@ -150,8 +164,56 @@
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
                                                                                     <label for="info7 mb-0">Copyright</label>
                                                                                 </div>
-                                                                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
                                                                                     <input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Email</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-email" placeholder="Email">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Phone</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-phone" placeholder="Phone">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Website</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-website" placeholder="Website">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Headline</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-headline" placeholder="Headline">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Title</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-title" placeholder="Title">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Creation date</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input id="creation-date" class="creation-date" type="text" class="form-control">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">
