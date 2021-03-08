@@ -22,6 +22,7 @@ class ImageController extends Controller {
 
     public function create_thumbnail($image, $name){
         $metas = ImageHelper::read_metas($image);
+
         $x = 0;
         $y = 0;
         $size = 0;
@@ -58,6 +59,8 @@ class ImageController extends Controller {
         try{
             $width = $request["width"];
             $height = $request["height"];
+            $category = $request["category"];
+            $sub_category = $request["subCategory"];
             $medium_width = floor($width*0.8);
             $medium_height = floor($height*0.8);
             $small_width = floor($width*0.5);
@@ -109,6 +112,8 @@ class ImageController extends Controller {
                 'title' => isset($metas->Title) ? $metas->Title : "",
                 'copy_right' => isset($metas->Copyright) ? $metas->Copyright : "",
                 'keywords' => isset($metas->Keywords) ? $metas->Keywords : "",
+                'category'=>$request["category"],
+                'sub_category'=> isset($request["subCategory"]) ? $request["subCategory"] : null,
                 'image_main_url' => $image_url,
                 'medium_url' => $medium_url,
                 'small_url' => $small_url,

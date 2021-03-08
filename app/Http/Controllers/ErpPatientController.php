@@ -19,6 +19,7 @@ use App\ErpSpeciality;
 use App\ErpDocumentType;
 use App\ErpConsultant;
 use App\ErpSendDoc;
+use App\Category;
 use DB;
 use Mail;
 use App\PatientDocumentVersion;
@@ -38,7 +39,8 @@ class ErpPatientController extends Controller
 
         $contributors = User::where('user_type', '=', 1)->get();
         //$contributors = Contributor::all();
-        return view('backEnd.patients.index', compact('contributors'));
+        $categories = Category::where('parent_category_id', null)->get();
+        return view('backEnd.patients.index', compact('contributors', 'categories'));
     }
 
     /**

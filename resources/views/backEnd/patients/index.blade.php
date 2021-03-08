@@ -82,7 +82,34 @@
                                                                             <div class="col-md-12 text-left">
                                                                                 <h6>IPTC Metadata</h6>
                                                                             </div>
-                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center category-select-group">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info1 mb-0">Category</label>
+                                                                                </div>
+                                                                                <div class="form-group col-sm-9 col-md-10 col-lg-9">
+                                                                                    <select style="border: 1px solid #3434" required class="col-sm-12 main-category form-control" name="category" id="category">
+                                                                                        @if(isset($categories))
+                                                                                            @foreach($categories as $category)
+                                                                                                <option value="{{ $category->id }}">{{$category->cat_name}}</option>
+                                                                                            @endforeach
+
+                                                                                        @endif
+                                                                                    </select>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Category is required
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center sub-category-select-group">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info1 mb-0">Sub category</label>
+                                                                                </div>
+                                                                                <div class="form-group col-sm-9 col-md-10 col-lg-9">
+                                                                                    <select style="border: 1px solid #3434" class="form-control col-sm-12 sub-category form-select sub-category" name="sub-category" id="sub-category">
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center height-input-group">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
                                                                                     <label for="info1 mb-0">Height</label>
                                                                                 </div>
@@ -232,12 +259,7 @@
                                                 <div class="col-sm-12">
                                                     <span class="btn btn-sm theme-btn imgAdd">Add More</span>
                                                 </div>
-
-
-
                                             </div><!-- row -->
-
-
                                         </div>
                                     </div>
                                 </div>

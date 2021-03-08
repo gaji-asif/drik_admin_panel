@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label>' +
                     '<i class="fa fa-times del"></i></div><div class="col-md-8"><div class="card shadow-sm"><' +
                     'div class="card-body iptc_metadata"><div class="form-row"><div class="col-md-12 text-left">' +
-                    '<h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Info-1</label></div>' +
+                    '<h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center height-input-group">' +
+                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Height</label></div>' +
                     '<div class="col-sm-9 col-md-10 col-lg-9">' +
                     '<input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Height">' +
                     '<div class="invalid-feedback">Height is required</div>'+
@@ -115,6 +115,18 @@ document.addEventListener("DOMContentLoaded", function(){
                     '<input type="text" class="form-control tags-input" id="tags'+formCount+'" value="" />' +
                     '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
+                let newForm = $(`div[data-index="${formCount}"]`)[0];
+                let heightInput = newForm.querySelector(".height-input-group");
+                let categorySelect = lastForm.querySelector(".category-select-group");
+                let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
+                let newCategorySelect = categorySelect.cloneNode(true);
+                let newSubCategorySelect = subCategorySelect.cloneNode(true);
+                newSubCategorySelect.querySelector("select").innerHTML = "";
+                heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
+                heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
+
+                newCategorySelect.addEventListener("change",getSubCategories);
+
                 imageFile = null;
                 $(`#tags${formCount}`).tokenfield();
                 $(`#creation-date-${formCount}`).datepicker();
@@ -154,7 +166,36 @@ document.addEventListener("DOMContentLoaded", function(){
 
     $(".creation-date").datepicker();
 
+    $(".main-category").change(getSubCategories);
+
 });
+
+function getSubCategories(e){
+    let target = e.target,
+        value = target.value;
+    let imageForm = target.closest(".imgUp");
+    let subCategoryElement = imageForm.querySelector(".sub-category");
+    subCategoryElement.innerHTML = "";
+    let formData = new FormData();
+    formData.append("categoryId", value);
+    fetch(`${baseUrl}/get_sub_categories`, {
+        method: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": csrf
+        },
+        body: formData
+    }).then(res => res.json())
+        .then(res => {
+            let subCategories = res.subCategories;
+            subCategories.forEach(function(category) {
+                let option = document.createElement("option");
+                option.setAttribute("value", category.id);
+                option.textContent = category.cat_name;
+                subCategoryElement.append(option);
+            });
+
+        })
+}
 
 function imageFormValidationError() {
     if(!imageFile) {
@@ -240,12 +281,15 @@ function addImageToList() {
     let headline = lastForm.querySelector(".image-headline").value;
     let title = lastForm.querySelector(".image-title").value;
     let creationDate = lastForm.querySelector(".creation-date").value;
-    console.log({creationDate});
+    let category = lastForm.querySelector(".main-category").value;
+    let subCategory = lastForm.querySelector(".sub-category").value;
     let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
     let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
+    imageObj.category = category;
+    imageObj.subCategory = subCategory;
     metas.Author = author || "";
     metas.Country = country || "";
     metas.City = city || "";
@@ -295,6 +339,8 @@ function uploadImage(event) {
     formData.append("image", image);
     formData.append("width", imageObj.width || "");
     formData.append("height", imageObj.height || "");
+    formData.append("category", imageObj.category || "");
+    formData.append("subCategory", imageObj.subCategory || "");
     formData.append("contributor", contributor);
     formData.append("metas", JSON.stringify(imageObj.metas));
     if(masterId) {
