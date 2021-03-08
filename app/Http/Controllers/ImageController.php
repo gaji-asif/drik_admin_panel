@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\ImageChild;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -131,7 +133,9 @@ class ImageController extends Controller
 
     public function imageList()
     {
-        return view('backEnd.patients.image_list');
+        $contributors = User::where('user_type', 1)->get();
+        $categories = Category::where('parent_category_id', 0)->get();
+        return view('backEnd.patients.image_list', compact('contributors', 'categories'));
     }
 
     public function getAllImages()
@@ -178,5 +182,29 @@ class ImageController extends Controller
 
         ]);
         return response()->json(['data' => $image], 200);
+    }
+
+    public function editImageInfo(Request $request)
+    {
+        // $getData = [isset($request->category):'category' => $request->category, 'contributor_id' => $request->contributor];
+        $getData = [];
+        if (isset($request->category)) {
+            $getData['category'] = $request->category;
+        }
+        if (isset($request->contributor)) {
+            $getData['contributor_id'] = $request->contributor;
+        }
+
+        if (isset($request->id)) {
+
+            $data = ImageChild::whereIn('id', $request->id)->update($getData);
+            if (count($getData) == 0)
+                return redirect()->back()->with('message-danger', 'Select item before submite');
+            else
+                return redirect()->back()->with('message-success', 'Bulk Edit successfully');
+        }
+
+
+        return redirect()->back()->with('message-danger', 'Select item before submite');
     }
 }

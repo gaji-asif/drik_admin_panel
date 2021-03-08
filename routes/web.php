@@ -147,6 +147,7 @@ Route::group(['middleware' => ['revalidate', 'auth']], function () {
 
 	// image list
 	Route::get('image_list', 'ImageController@imageList');
+	Route::post('edit_image_info', 'ImageController@editImageInfo');
 	Route::get('get_all_images', 'ImageController@getAllImages');
 	Route::post('delete_image', 'ImageController@deleteImage');
 	Route::post('update_image/{id}', 'ImageController@updateImage');
