@@ -32,7 +32,12 @@ class ImageHelper
         '2#122'=>'CaptionWriter'
     );
     public static function cropImage($image, $x, $y, $width, $height, $name, $savingDir){
-        $what = getimagesize($image);
+        try {
+            $what = getimagesize($image);
+        } catch(\Exception $e) {
+            dd($e);
+        }
+
         $extension = "png";
         switch(strtolower($what['mime']))
         {
@@ -110,8 +115,13 @@ class ImageHelper
 
     public static function read_metas($image) {
         $allMetas = [];
-        $filteredMetas = ["Height"=>0, "Width"=>0];
-        $size = getimagesize($image, $info);
+        $filteredMetas = [];
+        try {
+            $size = getimagesize($image, $info);
+        } catch(\Exception $e) {
+            $size = @getimagesize($image, $info);
+        }
+
         if(is_array($size)) {
             $allMetas = array_merge($allMetas, $size);
         }

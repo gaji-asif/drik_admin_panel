@@ -135,7 +135,8 @@ Route::put('doc-type/update/{id}', 'ErpDocumentListController@updateDoc');
 Route::get('add_bulk', 'BulkImportController@addBulk');
 Route::Post('bulk_import', 'BulkImportController@storeBulk');
 
-
+// getting sub categories
+Route::post('get_sub_categories', 'HomeController@get_sub_categories');
 
 //image upload routes
 
