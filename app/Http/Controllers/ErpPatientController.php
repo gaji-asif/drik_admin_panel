@@ -39,7 +39,7 @@ class ErpPatientController extends Controller
 
         $contributors = User::where('user_type', '=', 1)->get();
         //$contributors = Contributor::all();
-        $categories = Category::where('parent_category_id', null)->get();
+        $categories = Category::where('parent_category_id', 0)->get();
         return view('backEnd.patients.index', compact('contributors', 'categories'));
     }
 
