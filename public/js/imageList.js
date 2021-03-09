@@ -29,8 +29,18 @@ document.addEventListener("DOMContentLoaded", function() {
             "url": `${baseUrl}/get_all_images`,
             "dataSrc": ""
         },
+        'columnDefs': [{
+            'targets': 0,
+            'searchable': false,
+          
+            'className': 'dt-body-center',
+            'render': function (data, type, full, meta){
+                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+            }
+         }],
         "buttons": [],
         "columns": [
+            { "data": "id" },
             { "data": "id" },
             { "data": "image_name" },
             { "data": "image_main_url",
@@ -158,3 +168,46 @@ function updateImage() {
 
 
 }
+$(document).ready(function () {
+    $('#example-select-all').on('click', function(){
+        // Get all rows with search applied
+        var rows = imageTable.rows({ 'search': 'applied' }).nodes();
+        // Check/uncheck checkboxes for all rows in the table
+        $('input[type="checkbox"]', rows).prop('checked', this.checked);
+     });
+  
+     // Handle click on checkbox to set state of "Select all" control
+     $('#image-table tbody').on('change', 'input[type="checkbox"]', function(){
+        // If checkbox is not checked
+        if(!this.checked){
+           var el = $('#example-select-all').get(0);
+           // If "Select all" control is checked and has 'indeterminate' property
+           if(el && el.checked && ('indeterminate' in el)){
+              el.indeterminate = true;
+             
+           }
+        }
+     });
+  
+     // Handle form submission event
+     $('.get-all-selected').on('click', function(e){
+        var form = $('.new_form');
+  
+        // Iterate over all checkboxes in the table
+        imageTable.$('input[type="checkbox"]').each(function(){
+           // If checkbox doesn't exist in DOM
+           if(!$.contains(document, this)){
+              // If checkbox is checked
+              if(this.checked){
+                 // Create a hidden element
+                 $(form).append(
+                    $('<input>')
+                       .attr('type', 'hidden')
+                       .attr('name', this.name)
+                       .val(this.value)
+                 );
+              }
+           }
+        });
+     });
+});
