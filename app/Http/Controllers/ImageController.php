@@ -14,9 +14,11 @@ use Svg\Tag\Image;
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
-
-        $metas = ImageHelper::read_metas($image);
-
+        $name = $image->getClientOriginalName();
+        $tempPath = public_path("images/temp_images");
+        $image->move($tempPath, $name);
+        $imagePath = $tempPath.'/'.$name;
+        $metas = ImageHelper::read_metas($imagePath);
         return response()->json(['data' => $metas], 200);
     }
 
