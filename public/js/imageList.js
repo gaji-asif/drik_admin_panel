@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
             { "data": "id" },
             { "data": "id" },
             { "data": "image_name" },
-            { "data": "image_main_url",
+            { "data": "thumbnail_url",
               "render": function ( data ) {
                   return '<img style="width: 50px" src="'+data+'">';
               } },

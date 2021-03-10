@@ -211,6 +211,7 @@ function imageFormValidationError() {
 }
 
 function readImageMetaData(image, imageForm) {
+    showLoader();
     imageForm = imageForm[0];
     let formData = new FormData();
     formData.append("image", image);
@@ -248,6 +249,8 @@ function readImageMetaData(image, imageForm) {
                 let id = tagInput.getAttribute("id");
                 $(`#${id}`).tokenfield('setTokens', keywords);
             }
+
+            removeLoader();
 
         }).catch(function(error) {
             console.log(error);
@@ -316,6 +319,7 @@ function addImageToList() {
 }
 
 function uploadImage(event) {
+    showLoader();
     let contributor = document.getElementById("contributor");
     contributor = contributor.value;
     let imageObj = images.pop();
@@ -330,7 +334,9 @@ function uploadImage(event) {
         mainForm.querySelector('.imagePreview').removeAttribute('style');
         [...mainForm.querySelectorAll('input')].forEach(input => {
             input.value = '';
-        })
+        });
+        $(".token").remove();
+        removeLoader();
         return ;
     }
 
@@ -347,7 +353,6 @@ function uploadImage(event) {
         formData.append("masterId", masterId);
     }
     saveImage(formData)
-
 }
 
 function saveImage(formData) {
