@@ -240,7 +240,7 @@
                                                                                     <label for="info7 mb-0">Creation date</label>
                                                                                 </div>
                                                                                 <div class="col-sm-12 col-md-9 col-lg-9">
-                                                                                    <input id="creation-date" class="creation-date" type="text" class="form-control">
+                                                                                    <input id="creation-date" class="creation-date form-control" type="text" class="form-control">
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">

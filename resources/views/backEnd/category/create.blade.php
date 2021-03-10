@@ -1,7 +1,7 @@
 @extends('backEnd.master')
 @section('mainContent')
 <div class="row">
-	<div class="col-md-4">
+	<div class="col-md-5">
 	
 
 		@if(session()->has('message-success'))
@@ -114,7 +114,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-7">
 		<div class="card">
 			<div class="card-header">
 				<h5>Categories</h5>
