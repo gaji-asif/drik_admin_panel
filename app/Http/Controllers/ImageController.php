@@ -14,22 +14,16 @@ use Svg\Tag\Image;
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
-        $name = $image->getClientOriginalName();
-        $tempPath = public_path("images/temp_images");
-        $image->move($tempPath, $name);
-        $imagePath = $tempPath.'/'.$name;
-        $metas = ImageHelper::read_metas($imagePath);
+        $metas = ImageHelper::read_metas($image);
         return response()->json(['data' => $metas], 200);
     }
 
-    public function create_thumbnail($image, $name){
+    public function create_thumbnail($image, $name, $width, $height){
         $metas = ImageHelper::read_metas($image);
 
         $x = 0;
         $y = 0;
         $size = 0;
-        $height = $metas["Height"];
-        $width = $metas["Width"];
 
         if($height < $width) {
             $size = $height;
@@ -61,8 +55,6 @@ class ImageController extends Controller {
         try{
             $width = $request["width"];
             $height = $request["height"];
-            $category = $request["category"];
-            $sub_category = $request["subCategory"];
             $medium_width = floor($width*0.8);
             $medium_height = floor($height*0.8);
             $small_width = floor($width*0.5);
@@ -77,7 +69,7 @@ class ImageController extends Controller {
                 ImageHelper::addMetaToImage($imagePath, $metas);
             }
 
-            $thumbnail_url = $this->create_thumbnail($imagePath, $name);
+            $thumbnail_url = $this->create_thumbnail($imagePath, $name, $request['width'], $request['height']);
             $medium_url = ImageHelper::resize_image($imagePath, $medium_width, $medium_height, $name, "images/uploaded_images/medium");
             $medium_url = config('app.url')."/public/images/uploaded_images/medium/".$medium_url;
             $small_url = ImageHelper::resize_image($imagePath, $small_width, $small_height, $name, "images/uploaded_images/small");

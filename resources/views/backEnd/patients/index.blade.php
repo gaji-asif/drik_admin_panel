@@ -36,7 +36,6 @@
 </div>
 @endif
 
-
 <div class="card">
     <div id="Contributor_dashboard">
         <div class="container-fluid">

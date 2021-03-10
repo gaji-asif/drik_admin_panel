@@ -12,7 +12,7 @@
 */
 
 Auth::routes();
-
+Route::post('drik-logout', 'Auth\LoginController@logout')->name('drik-logout');
 Route::get('/home', 'GalleryController@index');
 
 Route::group(['middleware' => ['revalidate','auth']], function(){
