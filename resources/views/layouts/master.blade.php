@@ -7,6 +7,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/x-icon" href="images/logo.png" />
+    <script src="{{asset('public/js/drik_js/jquery.min.js')}}"></script>
+    <script src="{{asset('public/js/imagesLoaded.js')}}"></script>
+    <script src="{{asset('public/js/drik_js/masonry.pkgd.min.js')}}"></script>
+    <script src="{{asset('public/js/common.js')}}"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,6 +19,7 @@
     <link rel="stylesheet" href="{{asset('public/css/drik/css/icofont.min.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/drik/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/drik/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/drik/css/sidebar.css')}}">
 </head>
 
 <body>
@@ -281,23 +286,11 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="search-result.html">Nature</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="search-result.html">Creative</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="search-result.html">Food</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="search-result.html">Flowers</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="search-result.html">City</a>
-                    </li>
+                    @foreach($categories as $category)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('filter',['category' => $category->id])}}">{{$category->cat_name}}</a>
+                        </li>
+                    @endforeach
                 </ul>
 
                 <div class="header_actions text-right navbar p-0">
@@ -460,8 +453,10 @@
 
 
 
-<script src="{{asset('public/js/drik_js/jquery.min.js')}}"></script>
+
 <script src="{{asset('public/js/drik_js/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/js/drik_js/sidebar.js')}}"></script>
+
 <script src="{{asset('public/js/drik_js/main.js')}}"></script>
 
 <script>

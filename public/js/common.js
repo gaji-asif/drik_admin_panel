@@ -59,3 +59,21 @@ function removeLoader() {
     let preLoader = document.querySelector(".theme-loader");
     if(preLoader) preLoader.remove();
 }
+
+function imageGrid(imageObj) {
+    let grid =  $(`<div class="grid-item grid-image">
+                            <div class="img">
+                                <img class="w-100" src="${imageObj.thumbnail_url}" alt="" />
+
+                                <div class="img-details">
+                                    <p class="category-name">Mountains</p>
+                                    <h4 class="image-name">Mountains with Cloud and Lake</h4>
+                                </div>
+                                <div class="corner-top"></div>
+                                <div class="corner-bottom"></div>
+                                <a href="#" class="image-popup" data-toggle="modal" data-target="#image_details"></a>
+                            </div>
+                        </div>`);
+
+    return grid[0];
+}

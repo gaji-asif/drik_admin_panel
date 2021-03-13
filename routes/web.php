@@ -15,6 +15,9 @@ Auth::routes();
 Route::post('drik-logout', 'Auth\LoginController@logout')->name('drik-logout');
 Route::get('/home', 'GalleryController@index');
 
+Route::get('filter/{category}','FilterController@index')->name('filter');
+Route::post('filter','FilterController@filterImage');
+
 Route::group(['middleware' => ['revalidate','auth']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
 	//Route::get('/home', 'HomeController@index');
