@@ -12,4 +12,8 @@ class Category extends Model
         return $this->belongsTo(self::class, 'parent_category_id', 'id');
     }
     protected $guarded = [];
+
+    public function images() {
+        return $this->hasMany(ImageChild::class, 'category', 'id');
+    }
 }
