@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:8080/drik";
+const baseUrl = "http://localhost/drik";
 
 const preLoader = $("\t<div class=\"theme-loader\">\n" +
     "\t\t<div class=\"loader-track\">\n" +
