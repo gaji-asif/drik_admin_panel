@@ -1,6 +1,7 @@
-let sorting = null;
+let sorting = 'asc';
 let time = null;
 let $grid = null;
+let pagination = null;
 document.addEventListener("DOMContentLoaded", function(){
     $('.grid').imagesLoaded( function() {
         $grid = $('.grid').masonry({
@@ -9,6 +10,15 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     $("#sort-menu").on('click', sortImages);
     $("#time-menu").on('click', filterByTime);
+
+    pagination = document.querySelector(".pagination");
+
+    if(pagination) {
+        [...pagination.querySelectorAll('li')].forEach((item, index) => {
+            item.dataset.page = index.toString();
+        });
+        pagination.onclick = changePage;
+    }
 
 });
 
@@ -29,13 +39,16 @@ function filterByTime(event) {
     filterImages();
 }
 
-function filterImages() {
+function filterImages(pageNumber=1) {
     let formData = new FormData();
     if(sorting) {
         formData.append('sorting', sorting);
     }
     if(time) {
         formData.append('time', time);
+    }
+    if(pageNumber) {
+        formData.append('page', pageNumber);
     }
     fetch(baseUrl+"/filter", {
         method: 'POST',
@@ -55,8 +68,21 @@ function filterImages() {
                 imageElements.push(imageGridElement);
             });
 
-            var $elems = $( imageElements );
+            let $elems = $( imageElements );
 
             $grid.append( $elems ).masonry( 'prepended', $elems );
         })
 }
+
+function changePage(e) {
+    e.preventDefault();
+    let target = e.target;
+    let listItem = target.closest('li');
+    let page = listItem.dataset.page;
+    filterImages(page);
+    let previouslyActive = pagination.querySelector('.active');
+    previouslyActive.classList.remove('active');
+    listItem.classList.add('active');
+
+}
+

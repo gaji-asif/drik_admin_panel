@@ -10,15 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class FilterController extends Controller {
     public function index($category) {
-        $selectedCategory = Category::find($category);
         $categories = Category::all();
-        $images = $selectedCategory->images;
+        $images = ImageChild::where('category', $category)->paginate(1);
         return view('filter', compact('images', 'categories'));
     }
 
     public function filterImage(Request $request) {
 //        $searchKey = $request['search'];
 //        $images = ImageChild::Where('title', 'like', '%' . $searchKey . '%')->get();
+        $page = $request["page"];
+        $previousPage = $page - 1;
 
         $images = DB::table('all_images_childs')
             ->orderBy('id', 'desc');
@@ -36,7 +37,7 @@ class FilterController extends Controller {
             $images = $images->where('created_at', '>=', Carbon::now()->subDay($request["time"]));
         }
 
-        $images = $images->get();
+        $images = $images->skip($previousPage * 1)->take(1)->get();
 
         return response()->json(['images' => $images, 'status' => 200], 200);
     }

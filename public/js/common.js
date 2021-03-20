@@ -1,4 +1,5 @@
-const baseUrl = "http://localhost:8080/drik";
+const baseUrl = "http://localhost/drik";
+csrf = $('meta[name="csrf-token"]').attr('content');
 
 const preLoader = $("\t<div class=\"theme-loader\">\n" +
     "\t\t<div class=\"loader-track\">\n" +
@@ -62,18 +63,206 @@ function removeLoader() {
 
 function imageGrid(imageObj) {
     let grid =  $(`<div class="grid-item grid-image">
-                            <div class="img">
-                                <img class="w-100" src="${imageObj.thumbnail_url}" alt="" />
+                        <div class="img">
+                            <img class="w-100" src="${imageObj.thumbnail_url}" alt="" />
 
-                                <div class="img-details">
-                                    <p class="category-name">Mountains</p>
-                                    <h4 class="image-name">Mountains with Cloud and Lake</h4>
-                                </div>
-                                <div class="corner-top"></div>
-                                <div class="corner-bottom"></div>
-                                <a href="#" class="image-popup" data-toggle="modal" data-target="#image_details"></a>
+                            <div class="img-details">
+                                <p class="category-name">Mountains</p>
+                                <h4 class="image-name">Mountains with Cloud and Lake</h4>
                             </div>
-                        </div>`);
+                            <div class="corner-top"></div>
+                            <div class="corner-bottom"></div>
+                            <a href="#" class="image-popup" data-toggle="modal" data-target="#image_details-${imageObj.id}"></a>
+                        </div>
+                        <div class="modal fade" id="image_details-${imageObj.id}" tabindex="-1" role="dialog" aria-labelledby="image_detailsTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <div class="modal-close" data-dismiss="modal">
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="form-row align-items-center">
+                                            <div class="col-md-9">
+                                                <div class="full-img">
+                                                    <img class="w-100" src="${imageObj.thumbnail_url}" alt="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <div class="author">
+                                                    <div class="author-img">
+                                                        <img class="w-100" src="${imageObj.thumbnail_url}" alt="">
+                                                    </div>
+                                                    <div class="author-info">
+                                                        <span class="author-name">Author Name</span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="actions text-center">
+                                                    <button class="btn author-action-button"><i class="icofont-like"></i>&nbsp;50</button>
+                                                    <button class="btn author-action-button"><i class="icofont-star"></i>&nbsp;50</button>
+                                                    <button class="btn author-action-button"><i class="icofont-share"></i>&nbsp;50</button>
+                                                </div>
+
+                                                <div class="purchase">
+                                                    <h6>PURCHASE A LICENSE</h6>
+
+                                                    <div class="list-group">
+                                                        <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="image-sizes" id="smallRadio" value="small_price">
+                                                                <label class="form-check-label" for="smallRadio">Small</label>
+                                                            </div>
+
+                                                            <span class="badge badge-pill">$ ${imageObj.small_price}</span>
+                                                        </div>
+
+                                                        <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="image-sizes" id="mediumRadios" value="medium_price">
+                                                                <label class="form-check-label" for="mediumRadios">Medium</label>
+                                                            </div>
+
+                                                            <span class="badge badge-pill">$ ${imageObj.medium_price}</span>
+                                                        </div>
+
+                                                        <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="image-sizes" id="largeRadio" value="large_price">
+                                                                <label class="form-check-label" for="largeRadio">Large</label>
+                                                            </div>
+
+                                                            <span class="badge badge-pill">$ ${imageObj.large_price}</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="enter-promo_code">
+                                                        <div class="form-group form-row align-items-center">
+                                                            <label for="promo_code" class="col-sm-7 col-form-label">Discount/Promo Code&nbsp;&nbsp;:</label>
+                                                            <div class="col-sm-5">
+                                                                <input type="text" class="form-control" id="promo_code" placeholder="Promo Code">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group form-row align-items-center">
+                                                            <label for="price" class="col-sm-7 col-form-label">Price (After discount)&nbsp;&nbsp;:</label>
+                                                            <div class="col-sm-5">
+                                                                <input type="text" class="form-control" id="price" placeholder="0.00">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="download">
+                                                        <button onclick="addToCart(${imageObj.id})" class="btn btn-block download-btn" data-dismiss="modal"><i class="icofont-download"></i> Add to cart</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
 
     return grid[0];
+}
+
+function cartItem(product) {
+    let row = $(`<tr>
+                    <td class="v-align-middle w-5">
+                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
+                        <input type="text" class="qty" id="qty" name="" value="0" >
+                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
+                    </td>
+
+                    <td class="v-align-middle">
+                        <div class="product d-flex align-items-center">
+                            <div class="product-image">
+                                <img class="w-100" src="images/img-12.jpg" alt="">
+                            </div>
+                            <div class="product-info">
+                                <table class="table table-bordered m-0">
+                                    <tbody>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>${product.title}&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Size</td>
+                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>License type:</td>
+                                        <td>Royalty-free|View license summaries</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="v-align-middle w-10 text-right">৳ ${product.price}</td>
+                    <td class="v-align-middle w-5 text-right">
+                        <button onclick="removeFromCart(${product.id})" class="product-minus"><i class="icofont-close"></i></button>
+                    </td>
+                </tr>`);
+
+    return row[0];
+}
+
+function refreshCart() {
+    let drikCart = document.getElementById("drik-cart");
+    let cartTotal = document.getElementById("cart-total");
+    let cartCount = document.getElementById("cart-count");
+    drikCart.innerHTML = "";
+
+    fetch(`${baseUrl}/get_cart`)
+        .then(res => res.json())
+        .then(res => {
+            let cart = res.data;
+            let products = Object.values(cart);
+            cartCount.textContent = products.length;
+            let total = 0;
+            products.forEach(product => {
+                total += product.price;
+                let productRow = cartItem(product);
+                drikCart.append(productRow);
+            });
+            cartTotal.textContent = total;
+        })
+}
+
+function addToCart(imageId) {
+
+    let form = document.getElementById(`image_details-${imageId}`);
+    let size = form.querySelector('.form-check-input:checked').value;
+    let formData = new FormData();
+    formData.append('imageId', imageId);
+    formData.append('size', size);
+    fetch(`${baseUrl}/add_to_cart`, {
+        method: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": csrf
+        },
+        body: formData
+    }).then(res => res.json())
+        .then(res => {
+            refreshCart();
+        })
+}
+
+function removeFromCart(productId) {
+    let formData = new FormData();
+    formData.append('productId', productId);
+    fetch(`${baseUrl}/remove_from_cart`, {
+        method: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": csrf
+        },
+        body: formData
+    }).then(res => res.json())
+        .then(res => {
+            refreshCart();
+        });
 }
