@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 class CheckoutController extends Controller {
     public function index() {
         $categories = Category::all();
-        return view('checkout', compact('categories'));
+        $page = "checkout";
+        return view('checkout', compact('categories', 'page'));
     }
 }

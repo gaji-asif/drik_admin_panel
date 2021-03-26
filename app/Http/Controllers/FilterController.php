@@ -13,7 +13,7 @@ class FilterController extends Controller {
     public function index($category) {
         $categories = Category::all();
         $photographers = User::where('user_type', 1)->get();
-        $images = ImageChild::where('category', $category)->paginate(1);
+        $images = ImageChild::where('category', $category)->paginate(20);
         return view('filter', compact('images', 'categories', 'photographers'));
     }
 
@@ -43,7 +43,7 @@ class FilterController extends Controller {
             $images = $images->where('user_id', $request["photographer"]);
         }
 
-        $images = $images->skip($previousPage * 1)->take(1)->paginate(1);
+        $images = $images->skip($previousPage * 1)->take(1)->paginate(20);
 
         return response()->json(['images' => $images, 'status' => 200], 200);
     }

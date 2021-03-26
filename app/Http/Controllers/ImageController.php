@@ -82,7 +82,7 @@ class ImageController extends Controller {
 
             if(!$masterId) {
                 $masterImage = DB::table('all_images_masters')->insertGetId([
-                    'user_id' => $userId
+                    'user_id' => $contributor
                 ]);
             } else {
                 $masterImage = $masterId;
@@ -91,7 +91,7 @@ class ImageController extends Controller {
             ImageChild::create([
                 'master_id' => $masterImage,
                 'image_name' => $name,
-                'user_id' => $userId,
+                'user_id' => $contributor,
                 'height' => $request['height'],
                 'width' => $request['width'],
                 'author' => isset($metas->Author) ? $metas->Author : "",

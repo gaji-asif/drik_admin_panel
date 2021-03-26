@@ -1,4 +1,3 @@
-let csrf = null;
 let images = [];
 let imageFile = null;
 let masterId = null;
@@ -9,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function(){
 
     $(function() {
         $(document).on("change",".uploadFile", function(){
+            console.log("File uploaded");
             var uploadFile = $(this);
             var files = !!this.files ? this.files : [];
             if (!files.length || !window.FileReader) return;

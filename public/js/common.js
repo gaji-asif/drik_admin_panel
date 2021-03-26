@@ -1,5 +1,5 @@
 const baseUrl = "http://localhost/drik";
-csrf = $('meta[name="csrf-token"]').attr('content');
+const csrf = $('meta[name="csrf-token"]').attr('content');
 
 const preLoader = $("\t<div class=\"theme-loader\">\n" +
     "\t\t<div class=\"loader-track\">\n" +

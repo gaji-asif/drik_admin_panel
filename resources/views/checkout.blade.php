@@ -11,9 +11,9 @@
                         </div>
                         <div class="col-md-6 text-right">
                             <div class="icons">
-                                <img src="images/visa.png" />
-                                <img src="images/mastercard-logo.png" />
-                                <img src="images/maestro.png" />
+                                <img src="{{url('/public/images/visa.png')}}" />
+                                <img src="{{url('/public/images/mastercard-logo.png')}}" />
+                                <img src="{{url('/public/images/maestro.png')}}" />
                             </div>
                         </div>
                     </div>

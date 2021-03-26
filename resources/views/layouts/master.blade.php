@@ -57,16 +57,16 @@
                     @foreach(session('cart') as $id => $details)
                         <?php $total += $details->price ?>
                         <tr>
-                            <td class="v-align-middle w-5">
+                            {{--<td class="v-align-middle w-5">
                                 <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
                                 <input type="text" class="qty" id="qty" name="" value="0" >
                                 <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                            </td>
+                            </td>--}}
 
                             <td class="v-align-middle">
                                 <div class="product d-flex align-items-center">
                                     <div class="product-image">
-                                        <img class="w-100" src="images/img-12.jpg" alt="">
+                                        <img class="w-100" src="{{$details["thumbnail_url"]}}" alt="">
                                     </div>
                                     <div class="product-info">
                                         <table class="table table-bordered m-0">
@@ -185,6 +185,7 @@
     </div>
     <!-- Header Part End -->
 
+@if(!isset($page))
     <!-- Hero section start -->
     <div class="hero">
         <div class="container">
@@ -203,6 +204,7 @@
             </div>
         </div>
     </div>
+@endif
     <!-- Hero section end -->
 
 @yield('main-content')
