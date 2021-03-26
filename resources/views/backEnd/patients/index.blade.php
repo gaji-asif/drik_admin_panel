@@ -75,6 +75,9 @@
                                                             </div>
 
                                                             <div class="col-md-8">
+                                                                <div class="row loader_global">
+                                                                    <img style="margin: 0 auto; margin-bottom: 10px;" src="{{asset('public/images/loading.gif')}}" width="10%">
+                                                                </div>
                                                                 <div class="card shadow-sm">
                                                                     <div class="card-body iptc_metadata">
                                                                         <div class="form-row">
