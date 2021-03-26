@@ -211,7 +211,8 @@ function imageFormValidationError() {
 }
 
 function readImageMetaData(image, imageForm) {
-    showLoader();
+    //showLoader();
+    $('.loader_global').show();
     imageForm = imageForm[0];
     let formData = new FormData();
     formData.append("image", image);
@@ -250,7 +251,8 @@ function readImageMetaData(image, imageForm) {
                 $(`#${id}`).tokenfield('setTokens', keywords);
             }
 
-            removeLoader();
+            // removeLoader();
+            $('.loader_global').hide();
 
         }).catch(function(error) {
             console.log(error);
