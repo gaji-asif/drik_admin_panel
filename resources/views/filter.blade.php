@@ -395,28 +395,21 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
 
-{{--                <li class="treeview">--}}
-{{--                    <a href="#">--}}
-{{--                        <i class="fa fa-camera-retro"></i> <span>PHOTOGRAPHERS</span>--}}
-{{--                        <span class="pull-right-container">--}}
-{{--                                <i class="fa fa-angle-left pull-right"></i>--}}
-{{--                            </span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="treeview-menu">--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-1</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-2</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-3</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-4</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-camera-retro"></i> <span>PHOTOGRAPHERS</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu" id="photographer-menu">
+                        @foreach($photographers as $photographer)
+                            <li data-value="{{$photographer->id}}">
+                                <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;{{$photographer->name}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
 
 {{--                <li class="treeview">--}}
 {{--                    <a href="#">--}}
@@ -479,100 +472,100 @@
                                 </div>
                                 <div class="corner-top"></div>
                                 <div class="corner-bottom"></div>
-                                <a href="#" class="image-popup" data-toggle="modal" data-target="#image_details"></a>
+                                <a href="#" class="image-popup" data-toggle="modal" data-target="#image_details-{{$image->id}}"></a>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="image_details-{{$image->id}}" tabindex="-1" role="dialog" aria-labelledby="image_detailsTitle" aria-hidden="true">
+                                <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <div class="modal-close" data-dismiss="modal">
+                                                <i class="fas fa-times"></i>
+                                            </div>
+                                            <div class="form-row align-items-center">
+                                                <div class="col-md-9">
+                                                    <div class="full-img">
+                                                        <img class="w-100" src="{{$image->thumbnail_url}}" alt="">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <div class="author">
+                                                        <div class="author-img">
+                                                            <img class="w-100" src="{{$image->thumbnail_url}}" alt="">
+                                                        </div>
+                                                        <div class="author-info">
+                                                            <span class="author-name">Author Name</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="actions text-center">
+                                                        <button class="btn author-action-button"><i class="icofont-like"></i>&nbsp;50</button>
+                                                        <button class="btn author-action-button"><i class="icofont-star"></i>&nbsp;50</button>
+                                                        <button class="btn author-action-button"><i class="icofont-share"></i>&nbsp;50</button>
+                                                    </div>
+
+                                                    <div class="purchase">
+                                                        <h6>PURCHASE A LICENSE</h6>
+
+                                                        <div class="list-group">
+                                                            <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="image-sizes" id="smallRadio" value="small_price">
+                                                                    <label class="form-check-label" for="smallRadio">Small</label>
+                                                                </div>
+
+                                                                <span class="badge badge-pill">${{$image->small_price}}</span>
+                                                            </div>
+
+                                                            <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="image-sizes" id="mediumRadios" value="medium_price">
+                                                                    <label class="form-check-label" for="mediumRadios">Medium</label>
+                                                                </div>
+
+                                                                <span class="badge badge-pill">${{$image->medium_price}}</span>
+                                                            </div>
+
+                                                            <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="image-sizes" id="largeRadio" value="large_price">
+                                                                    <label class="form-check-label" for="largeRadio">Large</label>
+                                                                </div>
+
+                                                                <span class="badge badge-pill">${{$image->large_price}}</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="enter-promo_code">
+                                                            <div class="form-group form-row align-items-center">
+                                                                <label for="promo_code" class="col-sm-7 col-form-label">Discount/Promo Code&nbsp;&nbsp;:</label>
+                                                                <div class="col-sm-5">
+                                                                    <input type="text" class="form-control" id="promo_code" placeholder="Promo Code">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group form-row align-items-center">
+                                                                <label for="price" class="col-sm-7 col-form-label">Price (After discount)&nbsp;&nbsp;:</label>
+                                                                <div class="col-sm-5">
+                                                                    <input type="text" class="form-control" id="price" placeholder="0.00">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="download">
+                                                            <button onclick="addToCart('{{$image->id}}')" class="btn btn-block download-btn" data-dismiss="modal"><i class="icofont-download"></i> Add to cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="image_details" tabindex="-1" role="dialog" aria-labelledby="image_detailsTitle" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="modal-close" data-dismiss="modal">
-                        <i class="fas fa-times"></i>
-                    </div>
-                    <div class="form-row align-items-center">
-                        <div class="col-md-9">
-                            <div class="full-img">
-                                <img class="w-100" src="images/img-10.jpg" alt="">
-                            </div>
-                        </div>
-
-                        <div class="col-md-3">
-                            <div class="author">
-                                <div class="author-img">
-                                    <img class="w-100" src="images/img-21.jpg" alt="">
-                                </div>
-                                <div class="author-info">
-                                    <span class="author-name">Author Name</span>
-                                </div>
-                            </div>
-
-                            <div class="actions text-center">
-                                <button class="btn author-action-button"><i class="icofont-like"></i>&nbsp;50</button>
-                                <button class="btn author-action-button"><i class="icofont-star"></i>&nbsp;50</button>
-                                <button class="btn author-action-button"><i class="icofont-share"></i>&nbsp;50</button>
-                            </div>
-
-                            <div class="purchase">
-                                <h6>PURCHASE A LICENSE</h6>
-
-                                <div class="list-group">
-                                    <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="image-sizes" id="smallRadio" value="">
-                                            <label class="form-check-label" for="smallRadio">Small</label>
-                                        </div>
-
-                                        <span class="badge badge-pill">$100</span>
-                                    </div>
-
-                                    <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="image-sizes" id="mediumRadios" value="">
-                                            <label class="form-check-label" for="mediumRadios">Medium</label>
-                                        </div>
-
-                                        <span class="badge badge-pill">$200</span>
-                                    </div>
-
-                                    <div class="list-group-item d-flex justify-content-between align-items-center list-group-item-action">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="image-sizes" id="largeRadio" value="">
-                                            <label class="form-check-label" for="largeRadio">Large</label>
-                                        </div>
-
-                                        <span class="badge badge-pill">$500</span>
-                                    </div>
-                                </div>
-
-                                <div class="enter-promo_code">
-                                    <div class="form-group form-row align-items-center">
-                                        <label for="promo_code" class="col-sm-7 col-form-label">Discount/Promo Code&nbsp;&nbsp;:</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="promo_code" placeholder="Promo Code">
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-row align-items-center">
-                                        <label for="price" class="col-sm-7 col-form-label">Price (After discount)&nbsp;&nbsp;:</label>
-                                        <div class="col-sm-5">
-                                            <input type="text" class="form-control" id="price" placeholder="0.00">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="download">
-                                    <button class="btn btn-block download-btn" data-dismiss="modal"><i class="icofont-download"></i> Add to cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ $images->links()  }}
             </div>
         </div>
     </div>

@@ -5,7 +5,6 @@ let masterId = null;
 let lastForm = null;
 let formCount = 1;
 document.addEventListener("DOMContentLoaded", function(){
-    csrf = $('meta[name="csrf-token"]').attr('content');
     let imageSubmitBtn = document.getElementById("image_upload_btn");
 
     $(function() {

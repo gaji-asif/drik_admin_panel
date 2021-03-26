@@ -32,239 +32,84 @@
         <span></span>
     </div>
 </div>
-
+<?php $total=0 ?>
 <!-- Cart sidebar start-->
 <div class="cart_sidebar w3-bar-block w3-card w3-animate-left"id="mySidebar">
     <div class="cart">
         <div class="cart-header d-flex align-items-center justify-content-between">
             <button class="btn btn-sm border px-2" onclick="cart_close()">Close &times;</button>
-            <h5 class="mb-0 text-total"><i class="icofont-prestashop"></i> 15 Items </h5>
-        </div>
+            <h5 class="mb-0 text-total"><i class="icofont-prestashop"></i>
+                <span id="cart-count">
+                    @if(session('cart'))
+                        {{ count(session('cart')) }}
+                    @else
+                        0
+                    @endif
+                </span>
 
+                Items
+            </h5>
+        </div>
         <div class="product-list">
             <table class="table mb-0">
-                <tbody>
-                <tr>
-                    <td class="v-align-middle w-5">
-                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
-                        <input type="text" class="qty" id="qty" name="" value="0" >
-                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                    </td>
+                <tbody id="drik-cart">
+                @if(session('cart'))
+                    @foreach(session('cart') as $id => $details)
+                        <?php $total += $details->price ?>
+                        <tr>
+                            <td class="v-align-middle w-5">
+                                <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
+                                <input type="text" class="qty" id="qty" name="" value="0" >
+                                <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
+                            </td>
 
-                    <td class="v-align-middle">
-                        <div class="product d-flex align-items-center">
-                            <div class="product-image">
-                                <img class="w-100" src="images/img-12.jpg" alt="">
-                            </div>
-                            <div class="product-info">
-                                <table class="table table-bordered m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Creative image&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
-                                    </tr>
+                            <td class="v-align-middle">
+                                <div class="product d-flex align-items-center">
+                                    <div class="product-image">
+                                        <img class="w-100" src="images/img-12.jpg" alt="">
+                                    </div>
+                                    <div class="product-info">
+                                        <table class="table table-bordered m-0">
+                                            <tbody>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>{{$details["title"]}}&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
+                                            </tr>
 
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
-                                    </tr>
+                                            <tr>
+                                                <td>Size</td>
+                                                <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
+                                            </tr>
 
-                                    <tr>
-                                        <td>License type:</td>
-                                        <td>Royalty-free|View license summaries</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
+                                            <tr>
+                                                <td>License type:</td>
+                                                <td>Royalty-free|View license summaries</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
 
-                    <td class="v-align-middle w-10 text-right">৳ 859</td>
-                    <td class="v-align-middle w-5 text-right">
-                        <button class="product-minus"><i class="icofont-close"></i></button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="v-align-middle w-5">
-                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
-                        <input type="text" class="qty" id="qty" name="" value="0" >
-                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                    </td>
-
-                    <td class="v-align-middle">
-                        <div class="product d-flex align-items-center">
-                            <div class="product-image">
-                                <img class="w-100" src="images/img-13.jpg" alt="">
-                            </div>
-                            <div class="product-info">
-                                <table class="table table-bordered m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Creative image&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>License type:</td>
-                                        <td>Royalty-free|View license summaries</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td class="v-align-middle w-10 text-right">৳ 859</td>
-                    <td class="v-align-middle w-5 text-right">
-                        <button class="product-minus"><i class="icofont-close"></i></button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="v-align-middle w-5">
-                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
-                        <input type="text" class="qty" id="qty" name="" value="0" >
-                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                    </td>
-
-                    <td class="v-align-middle">
-                        <div class="product d-flex align-items-center">
-                            <div class="product-image">
-                                <img class="w-100" src="images/img-14.jpg" alt="">
-                            </div>
-                            <div class="product-info">
-                                <table class="table table-bordered m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Creative image&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>License type:</td>
-                                        <td>Royalty-free|View license summaries</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td class="v-align-middle w-10 text-right">৳ 859</td>
-                    <td class="v-align-middle w-5 text-right">
-                        <button class="product-minus"><i class="icofont-close"></i></button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="v-align-middle w-5">
-                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
-                        <input type="text" class="qty" id="qty" name="" value="0" >
-                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                    </td>
-
-                    <td class="v-align-middle">
-                        <div class="product d-flex align-items-center">
-                            <div class="product-image">
-                                <img class="w-100" src="images/img-6.jpg" alt="">
-                            </div>
-                            <div class="product-info">
-                                <table class="table table-bordered m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Creative image&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>License type:</td>
-                                        <td>Royalty-free|View license summaries</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td class="v-align-middle w-10 text-right">৳ 859</td>
-                    <td class="v-align-middle w-5 text-right">
-                        <button class="product-minus"><i class="icofont-close"></i></button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="v-align-middle w-5">
-                        <button class="qty_plus_btn"><i class="icofont-simple-up"></i></button>
-                        <input type="text" class="qty" id="qty" name="" value="0" >
-                        <button class="qty_minus_btn"><i class="icofont-simple-down"></i></button>
-                    </td>
-
-                    <td class="v-align-middle">
-                        <div class="product d-flex align-items-center">
-                            <div class="product-image">
-                                <img class="w-100" src="images/img-8.jpg" alt="">
-                            </div>
-                            <div class="product-info">
-                                <table class="table table-bordered m-0">
-                                    <tbody>
-                                    <tr>
-                                        <td>Name</td>
-                                        <td>Creative image&nbsp;&nbsp;|&nbsp;&nbsp;1205797237</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Size</td>
-                                        <td>4445 x 6668 px (14.82 x 22.23 in.) - 300 dpi - RGB File size on download 15 MB</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>License type:</td>
-                                        <td>Royalty-free|View license summaries</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </td>
-
-                    <td class="v-align-middle w-10 text-right">৳ 859</td>
-                    <td class="v-align-middle w-5 text-right">
-                        <button class="product-minus"><i class="icofont-close"></i></button>
-                    </td>
-                </tr>
-
-
-
-
-
-
+                            <td class="v-align-middle w-10 text-right">৳ @if(isset($details["price"])) {{$details["price"]}} @endif</td>
+                            <td class="v-align-middle w-5 text-right">
+                                <button class="product-minus" onclick="removeFromCart('{{ $id }}')"><i class="icofont-close"></i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
 
+
         <div class="cart-footer d-flex align-items-center justify-content-between">
             <div class="">
                 <!-- <h6 class="mb-0 text-secondary">Items selected for purchase: 2</h6> -->
-                <h5 class="mb-0 text-total">Subtotal : ৳998.00 BDT</h5>
+                <h5 class="mb-0 text-total">Subtotal : ৳<span id="cart-total">{{$total}}</span> BDT</h5>
             </div>
             <div class="text-right">
-                <a href="checkout.html" class="btn btn-sm theme-btn">Checkout</a>
+                <a href="{{route('checkout')}}" class="btn btn-sm theme-btn">Checkout</a>
             </div>
         </div>
     </div>

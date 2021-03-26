@@ -18,6 +18,12 @@ Route::get('/home', 'GalleryController@index');
 Route::get('filter/{category}','FilterController@index')->name('filter');
 Route::post('filter','FilterController@filterImage');
 
+Route::post('add_to_cart', 'CartController@addItem');
+Route::post('remove_from_cart', 'CartController@removeItem');
+Route::get('get_cart', 'CartController@getCart');
+Route::get('checkout', 'CheckoutController@index')->name('checkout');
+
+
 Route::group(['middleware' => ['revalidate','auth']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
 	//Route::get('/home', 'HomeController@index');
