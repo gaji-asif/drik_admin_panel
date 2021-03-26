@@ -177,7 +177,7 @@ function cartItem(product) {
                     <td class="v-align-middle">
                         <div class="product d-flex align-items-center">
                             <div class="product-image">
-                                <img class="w-100" src="images/img-12.jpg" alt="">
+                                <img class="w-100" src="${product.thumbnail_url}" alt="">
                             </div>
                             <div class="product-info">
                                 <table class="table table-bordered m-0">
