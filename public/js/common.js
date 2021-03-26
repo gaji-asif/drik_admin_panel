@@ -235,6 +235,8 @@ function refreshCart() {
 
 function addToCart(imageId) {
 
+    console.log({imageId});
+
     let form = document.getElementById(`image_details-${imageId}`);
     let size = form.querySelector('.form-check-input:checked').value;
     let formData = new FormData();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Category;
 use App\ImageChild;
 use Carbon\Carbon;
@@ -11,8 +12,9 @@ use Illuminate\Support\Facades\DB;
 class FilterController extends Controller {
     public function index($category) {
         $categories = Category::all();
+        $photographers = User::where('user_type', 1)->get();
         $images = ImageChild::where('category', $category)->paginate(1);
-        return view('filter', compact('images', 'categories'));
+        return view('filter', compact('images', 'categories', 'photographers'));
     }
 
     public function filterImage(Request $request) {
@@ -37,7 +39,11 @@ class FilterController extends Controller {
             $images = $images->where('created_at', '>=', Carbon::now()->subDay($request["time"]));
         }
 
-        $images = $images->skip($previousPage * 1)->take(1)->get();
+        if($request["photographer"]) {
+            $images = $images->where('user_id', $request["photographer"]);
+        }
+
+        $images = $images->skip($previousPage * 1)->take(1)->paginate(1);
 
         return response()->json(['images' => $images, 'status' => 200], 200);
     }

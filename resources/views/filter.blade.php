@@ -395,28 +395,21 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
 
-{{--                <li class="treeview">--}}
-{{--                    <a href="#">--}}
-{{--                        <i class="fa fa-camera-retro"></i> <span>PHOTOGRAPHERS</span>--}}
-{{--                        <span class="pull-right-container">--}}
-{{--                                <i class="fa fa-angle-left pull-right"></i>--}}
-{{--                            </span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="treeview-menu">--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-1</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-2</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-3</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Photographer-4</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-camera-retro"></i> <span>PHOTOGRAPHERS</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu" id="photographer-menu">
+                        @foreach($photographers as $photographer)
+                            <li data-value="{{$photographer->id}}">
+                                <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;{{$photographer->name}}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
 
 {{--                <li class="treeview">--}}
 {{--                    <a href="#">--}}
