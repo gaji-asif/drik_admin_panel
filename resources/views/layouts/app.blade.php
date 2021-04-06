@@ -18,6 +18,8 @@
 
         <!-- Styles -->
         <link href="{{ asset('public/css/app.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{asset('public/css/drik/css/style.css')}}">
+        <link rel="stylesheet" href="{{asset('public/css/drik/css/all.min.css')}}">
     </head>
     <body>
         <div id="app">

@@ -13,7 +13,15 @@
 
 Auth::routes();
 Route::post('drik-logout', 'Auth\LoginController@logout')->name('drik-logout');
-Route::get('/home', 'GalleryController@index');
+Route::get('user-logout', 'UserController@logout')->name('user-logout');
+Route::middleware(['guest'])->group(function () {
+    Route::get('user-login', 'UserController@login')->name('user-login');
+    Route::post('user-registration', 'UserController@registration')->name('user-registration');
+    Route::post('make-login', 'UserController@make_login')->name('make-login');
+});
+
+
+Route::get('home', 'GalleryController@index')->name('home');
 
 Route::get('filter/{category}','FilterController@index')->name('filter');
 Route::post('filter','FilterController@filterImage');
@@ -24,7 +32,7 @@ Route::get('get_cart', 'CartController@getCart');
 Route::get('checkout', 'CheckoutController@index')->name('checkout');
 
 
-Route::group(['middleware' => ['revalidate','auth']], function(){
+Route::group(['middleware' => ['revalidate','auth', 'contributor']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
 	//Route::get('/home', 'HomeController@index');
 	Route::get('dashboard', 'HomeController@index');

@@ -19,11 +19,6 @@ class ImageController extends Controller {
     }
 
     public function create_thumbnail($image, $name, $width, $height){
-        $metas = ImageHelper::read_metas($image);
-
-        $x = 0;
-        $y = 0;
-        $size = 0;
 
         if($height < $width) {
             $size = $height;
@@ -78,8 +73,6 @@ class ImageController extends Controller {
             // db saving
             $image_url = config('app.url').'/public/images/uploaded_images/'.$name;
 
-            $userId = Auth::user()->id;
-
             if(!$masterId) {
                 $masterImage = DB::table('all_images_masters')->insertGetId([
                     'user_id' => $contributor
@@ -115,32 +108,6 @@ class ImageController extends Controller {
                 'thumbnail_url' => $thumbnail_url
             ]);
 
-//            DB::table("all_images_childs")->insertGetId([
-//                'master_id' => $masterImage,
-//                'image_name' => $name,
-//                'user_id' => $userId,
-//                'height' => $request['height'],
-//                'width' => $request['width'],
-//                'author' => isset($metas->Author) ? $metas->Author : "",
-//                'country' => isset($metas->Country) ? $metas->Country : "",
-//                'city' => isset($metas->City) ? $metas->City : "",
-//                'state' => isset($metas->State) ? $metas->State : "",
-//                'postal_code' => isset($metas->PostalCode) ? $metas->PostalCode : "",
-//                'phone' => isset($metas->Phone) ? $metas->Phone : "",
-//                'email' => isset($metas->Email) ? $metas->Email : "",
-//                'caption' => isset($metas->Caption) ? $metas->Caption : "",
-//                'website' => isset($metas->Website) ? $metas->Website : "",
-//                'headline' => isset($metas->Headline) ? $metas->Headline : "",
-//                'title' => isset($metas->Title) ? $metas->Title : "",
-//                'copy_right' => isset($metas->Copyright) ? $metas->Copyright : "",
-//                'keywords' => isset($metas->Keywords) ? $metas->Keywords : "",
-//                'category'=>$request["category"],
-//                'sub_category'=> isset($request["subCategory"]) ? $request["subCategory"] : null,
-//                'image_main_url' => $image_url,
-//                'medium_url' => $medium_url,
-//                'small_url' => $small_url,
-//                'thumbnail_url' => $thumbnail_url
-//            ]);
         } catch (\Throwable $e) {
             return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
         }

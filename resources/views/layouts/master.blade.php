@@ -140,17 +140,19 @@
 
                 <div class="header_actions text-right navbar p-0">
                     <ul class="navbar-nav ml-auto">
+
                         <li class="nav-item dropdown">
                             <a class="nav-link" href="sign-in.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icofont-user"></i>
                             </a>
                             <div class="dropdown-menu user-custom" aria-labelledby="navbarDropdown">
+                                @if($user)
                                 <div class="author">
                                     <div class="author-img">
                                         <img class="w-100" src="images/img-21.jpg" alt="">
                                     </div>
                                     <div class="author-info">
-                                        <span class="author-name">Author Name</span>
+                                        <span class="author-name">{{$user->name}}</span>
                                     </div>
                                 </div>
 
@@ -158,20 +160,23 @@
                                     <button class="btn author-action-button"><i class="icofont-like"></i>&nbsp;50</button>
                                     <button class="btn author-action-button"><i class="icofont-star"></i>&nbsp;50</button>
                                     <button class="btn author-action-button"><i class="icofont-share"></i>&nbsp;50</button>
-                                </div>
 
-
-                                <div class="form-row mt-3">
-                                    <div class="col-md-6">
-                                        <a href="sign-in.html" class="btn btn-block theme-btn sign-in">Profile</a>
+                                    <div class="form-row mt-3">
+                                        <div class="col-md-6">
+                                            <a href="sign-in.html" class="btn btn-block theme-btn sign-in">Profile</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a href="{{route('user-logout')}}" class="btn btn-block theme-btn sign-up">Log Out</a>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <a href="#" class="btn btn-block theme-btn sign-up">Log Out</a>
-                                    </div>
                                 </div>
-
-
-
+                                @else
+                                    <div class="form-row mt-3">
+                                        <div class="col-md-12">
+                                            <a href="{{route('user-login')}}" class="btn btn-block theme-btn sign-up">Log In</a>
+                                        </div>
+                                    </div>
+                                @endif
 
                             </div>
                         </li>
