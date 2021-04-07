@@ -197,9 +197,9 @@ img {
     width: 150px;
 }
 
-.header_actions{
+/*.header_actions{
     width: 150px;
-}
+}*/
 .header .nav-link {
     font-size: 14px;
 }
@@ -1943,3 +1943,4 @@ li strong{
         opacity: 0.35;
     }
 }
+
