@@ -108,7 +108,7 @@
 
                                 <div class="form-group last mb-3">
                                     <label for="company_name">Company name (optional)</label>
-                                    <input type="text" class="form-control" id="company_name" />
+                                    <input name="company_name" type="text" class="form-control" id="company_name" />
                                 </div>
 
                                 <div class="form-group last mb-3">

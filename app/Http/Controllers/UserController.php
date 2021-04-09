@@ -32,9 +32,9 @@ class UserController extends Controller {
         ];
 
         if($userType === "1") {
-            $inputs["active"] = 0;
+            $inputs["active_status"] = 0;
         } else {
-            $inputs["active"] = 1;
+            $inputs["active_status"] = 1;
         }
 
         User::create($inputs);
@@ -44,12 +44,11 @@ class UserController extends Controller {
 
     public function make_login(Request $request)
     {
-        $credentials = $request->only(['email', 'password']);
-        if(Auth::attempt($credentials))  {
-            $user = User::where('email', $request["email"])->first();
+        $user = User::where('email', $request["email"])->first();
+        if(Hash::check($request["password"], $user->password) && $user->active_status === 1){
             Auth::login($user);
             return redirect()->route('home');
-        }  else {
+        } else {
             return redirect()->back();
         }
     }

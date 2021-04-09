@@ -172,4 +172,9 @@ Route::get('image_details/{id}', 'ImageController@imageDetails');
 
 Route::resource('category', 'CategoriesController');
 Route::get('delete-category/{id}', 'CategoriesController@deleteCategory');
+
+//Contributor list
+Route::get('contributors', 'ContributorController@index');
+Route::get('contributor_list', 'ContributorController@getContributors');
+Route::post('approve_contributor', 'ContributorController@approveContributor');
 });
