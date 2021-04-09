@@ -1,5 +1,4 @@
 @extends('layouts.master')
-
 @section('main-content')
     <div class="gallery-2">
         <div class="container-fluid">

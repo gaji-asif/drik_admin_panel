@@ -11,9 +11,17 @@
 |
 */
 
-Auth::routes();
+Route::get('/', 'GalleryController@index')->name('index');
+Route::get('index', 'GalleryController@index')->name('index');
+
+Route::group(['prefix' => 'admin'], function() {
+    Route::auth();
+});
+
+// Auth::routes();
 Route::post('drik-logout', 'Auth\LoginController@logout')->name('drik-logout');
 Route::get('user-logout', 'UserController@logout')->name('user-logout');
+
 Route::middleware(['guest'])->group(function () {
     Route::get('user-login', 'UserController@login')->name('user-login');
     Route::post('user-registration', 'UserController@registration')->name('user-registration');
@@ -21,7 +29,7 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-Route::get('home', 'GalleryController@index')->name('home');
+// Route::get('home', 'GalleryController@index')->name('home');
 
 Route::get('filter/{category}','FilterController@index')->name('filter');
 Route::post('filter','FilterController@filterImage');
