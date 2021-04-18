@@ -43,6 +43,15 @@ class FilterController extends Controller {
             $images = $images->where('user_id', $request["photographer"]);
         }
 
+        if($request["orientation"]) {
+            $images = $images->where('orientation', $request["orientation"]);
+        }
+
+        if($request["people"])
+        {
+            $images = $images->where('no_people', $request["people"]);
+        }
+
         $images = $images->skip($previousPage * 1)->take(1)->paginate(20);
 
         return response()->json(['images' => $images, 'status' => 200], 200);

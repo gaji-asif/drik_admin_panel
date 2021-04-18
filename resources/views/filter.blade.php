@@ -71,28 +71,28 @@
                     </ul>
                 </li>
 
-{{--                <li class="treeview">--}}
-{{--                    <a href="#">--}}
-{{--                        <i class="fas fa-expand"></i> <span>ORIENTATION</span>--}}
-{{--                        <span class="pull-right-container">--}}
-{{--                                <i class="fa fa-angle-left pull-right"></i>--}}
-{{--                            </span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="treeview-menu">--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Vertical</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Horizontal</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Square</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Panoramic Horizontal</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fas fa-expand"></i> <span>ORIENTATION</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu" id="orientation-menu">
+                        <li data-value="vertical">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Vertical</a>
+                        </li>
+                        <li data-value="horizontal">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Horizontal</a>
+                        </li>
+                        <li data-value="square">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Square</a>
+                        </li>
+                        <li data-value="panoramic_horizontal">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Panoramic Horizontal</a>
+                        </li>
+                    </ul>
+                </li>
 
 {{--                <li class="treeview">--}}
 {{--                    <a href="#">--}}
@@ -117,28 +117,31 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
 
-{{--                <li class="treeview">--}}
-{{--                    <a href="#">--}}
-{{--                        <i class="fa fa-users"></i> <span>PEOPLE</span>--}}
-{{--                        <span class="pull-right-container">--}}
-{{--                                <i class="fa fa-angle-left pull-right"></i>--}}
-{{--                            </span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="treeview-menu">--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-1</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-2</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-3</a>--}}
-{{--                        </li>--}}
-{{--                        <li>--}}
-{{--                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-4</a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span>PEOPLE</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu" id="people-menu">
+                        <li data-value="people_1">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-1</a>
+                        </li>
+                        <li data-value="people-2">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-2</a>
+                        </li>
+                        <li data-value="people-3">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-3</a>
+                        </li>
+                        <li data-value="people-4">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-4</a>
+                        </li>
+                        <li data-value="people-group">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Group</a>
+                        </li>
+                    </ul>
+                </li>
 
 {{--                <li class="treeview">--}}
 {{--                    <a href="#">--}}
