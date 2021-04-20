@@ -60,7 +60,7 @@
 
                             <a href="{{route('user-login')}}" class="btn btn-block theme-btn sign-up">Log In</a>
                             <div class="dropdown-menu user-custom" aria-labelledby="navbarDropdown">
-                                @if($user)
+                                @if(isset($user))
                                 <div class="author">
                                     <div class="author-img">
                                         <img class="w-100" src="images/img-21.jpg" alt="">
