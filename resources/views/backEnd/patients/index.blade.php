@@ -44,17 +44,17 @@
                     <div class="step mb-3 shadow-sm">
                         <form id="msform">
                             <!-- fieldsets -->
-                             <div class="form-group row">
+                            <div class="form-group row">
                                 <div class="col-lg-1"></div>
                                 <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select contributor: </label>
                                 <div class="col-lg-3">
                                     <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">
-                                    <option value="">Select contributor</option>
-                                    @if(isset($contributors))
+                                        <option value="">Select contributor</option>
+                                        @if(isset($contributors))
                                         @foreach($contributors as $contributor)
-                                            <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
+                                        <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
                                         @endforeach
-                                    @endif
+                                        @endif
                                     </select>
 
                                 </div>
@@ -91,9 +91,9 @@
                                                                                 <div class="form-group col-sm-9 col-md-10 col-lg-9">
                                                                                     <select style="border: 1px solid #3434" required class="col-sm-12 main-category form-control" name="category" id="category">
                                                                                         @if(isset($categories))
-                                                                                            @foreach($categories as $category)
-                                                                                                <option value="{{ $category->id }}">{{$category->cat_name}}</option>
-                                                                                            @endforeach
+                                                                                        @foreach($categories as $category)
+                                                                                        <option value="{{ $category->id }}">{{$category->cat_name}}</option>
+                                                                                        @endforeach
 
                                                                                         @endif
                                                                                     </select>
@@ -257,25 +257,43 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-lg-12">
+                                                   <div class="form-group row">
+                                                    <div class="col-lg-1"></div>
+                                                    <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select Oreientation: </label>
+                                                    <div class="col-lg-3">
+                                                        <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">
+                                                            <option value="">Select Oreientation</option>
+                                                            <option value="Vertical">Vertical</option>
+                                                            <option value="Horizontal">Horizontal</option>
+                                                            <option value="Square">Square</option>
+                                                            <option value="Panaromic">Panaromic</option>
+                                                            
+                                                        </select>
 
-                                                <div class="col-sm-12">
-                                                    <span class="btn btn-sm theme-btn imgAdd">Add More</span>
+                                                    </div>
                                                 </div>
-                                            </div><!-- row -->
-                                        </div>
+                                            </div>
+
+
+                                            <div class="col-sm-12">
+                                                <span class="btn btn-sm theme-btn imgAdd">Add More</span>
+                                            </div>
+                                        </div><!-- row -->
                                     </div>
                                 </div>
+                            </div>
 
-                                <input id="image_upload_btn" type="button" class="finish action-button" value="Upload" />
-{{--                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />--}}
-{{--                                <input type="button" name="finish" class="finish action-button" value="Finish" />--}}
-                            </fieldset>
-                        </form>
-                    </div>
+                            <input id="image_upload_btn" type="button" class="finish action-button" value="Upload" />
+                            {{--                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />--}}
+                            {{--                                <input type="button" name="finish" class="finish action-button" value="Finish" />--}}
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src={{asset("public/js/imageHandler.js")}}></script>
+</div>
+<script src={{asset("public/js/imageHandler.js")}}></script>
 </div>
 @endSection
