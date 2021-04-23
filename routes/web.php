@@ -189,3 +189,6 @@ Route::post('approve_contributor', 'ContributorController@approveContributor');
 
 // Route::get('your-dashboard', 'ErpPatientController@index');
 Route::get('your-dashboard', ['as' => 'your-dashboard', 'uses' => 'CustomerController@index']);
+Route::get('customer-profile', ['as' => 'customer-profile', 'uses' => 'CustomerController@profile']);
+Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 'CustomerController@edit_profile']);
+Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
