@@ -57,8 +57,14 @@
                            <!--  <a class="nav-link" href="sign-in.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="icofont-user"></i>asdasd
                             </a> -->
-
-                            <a href="{{route('user-login')}}" class="btn btn-block theme-btn sign-up">Log In</a>
+                            @if(isset($user)== false)
+                                <a href="{{route('user-login')}}" class="btn btn-block theme-btn sign-up">Log In</a>
+                            @else
+<!--                                <a href="{{route('your-dashboard')}}" class="btn theme-btn ">
+                                    <img width="40" class="rounded-circle" src="{{ asset($user->upload_img) }}" alt="">
+                                    {{ Auth::user()->name }}
+                                </a>-->
+                            @endif
                             <div class="dropdown-menu user-custom" aria-labelledby="navbarDropdown">
                                 @if(isset($user))
                                 <div class="author">
@@ -94,9 +100,11 @@
 
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" id="openNav" onclick="cart_open()"><i class="icofont-cart"></i></a>
-                        </li>
+                        @if(isset($user)== false)
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" id="openNav" onclick="cart_open()"><i class="icofont-cart"></i></a>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

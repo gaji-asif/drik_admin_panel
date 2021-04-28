@@ -21,7 +21,11 @@ class CustomerController extends Controller {
         $categories = Category::all();
         $images = ImageChild::all();
         $user = Auth::user();
-        return view('web.customers.index', compact('images', 'categories', 'user'));
+        if($user->user_type == 1){//contributors
+            return view('web.contributors.dashboard', compact('images', 'categories', 'user'));
+        }else{
+            return view('web.customers.dashboard', compact('images', 'categories', 'user'));
+        }
     }
     
     public function profile(){
@@ -72,7 +76,12 @@ class CustomerController extends Controller {
         $categories = Category::all();
         $images = ImageChild::all();
         $user = Auth::user();
-        return view('web.customers.wishlist', compact('images', 'categories', 'user'));
+        $favorites = DB::table('favorites')
+                    ->leftjoin('all_images_childs', 'all_images_childs.id', '=', 'favorites.image_id')
+                    ->select('favorites.*', 'all_images_childs.image_name', 'all_images_childs.small_url', 'all_images_childs.small_price')
+                    ->where('favorites.user_id', $user->id)
+                    ->get();
+        return view('web.customers.wishlist', compact('images', 'categories', 'user', 'favorites'));
     }
    
 }
