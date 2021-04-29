@@ -52,6 +52,11 @@ class FilterController extends Controller {
             $images = $images->where('no_people', $request["people"]);
         }
 
+        if($request["composition"])
+        {
+            $images = $images->where('people_composition', $request["composition"]);
+        }
+
         $images = $images->skip($previousPage * 1)->take(1)->paginate(20);
 
         return response()->json(['images' => $images, 'status' => 200], 200);

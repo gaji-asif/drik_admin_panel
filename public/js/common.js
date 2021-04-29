@@ -52,12 +52,27 @@ const preLoader = $("\t<div class=\"theme-loader\">\n" +
     "\t\t</div>\n" +
     "\t</div>");
 
+
+const customPreloader = $(`<div style="width: 100vw; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 1000; position: fixed; top: 0; left:0; background: #ffffff70" class="custom-preloader"><img style="width: 25%;" src="${baseUrl}/public/images/loader.gif"></div>`);
+
+
+function showCustomLoader()
+{
+    $("body").append(customPreloader);
+}
+
 function showLoader() {
     $("body").append(preLoader);
 }
 
 function removeLoader() {
     let preLoader = document.querySelector(".theme-loader");
+    if(preLoader) preLoader.remove();
+}
+
+function removeCustomLoader()
+{
+    let preLoader = document.querySelector(".custom-preloader");
     if(preLoader) preLoader.remove();
 }
 

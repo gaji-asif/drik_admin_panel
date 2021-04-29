@@ -25,9 +25,10 @@
                     <div class="dt-responsive table-responsive">
                         {{ Form::open(['class' => 'new_form', 'files' => true, 'url' => 'edit_image_info','method' => 'POST', 'enctype' => 'multipart/form-data']) }}
                         <div class="text-right">
+                            <button type="button" class="btn btn-danger" id="btn-bulk-delete"  data-toggle="modal">Bulk Delete</button>
                             <button type="button" class="btn btn-success get-all-selected"  data-toggle="modal" data-target="#edit-image-info">Bulk Edit</button>
                         </div>
-                        
+
                         <table id="image-table" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
@@ -58,10 +59,10 @@
                                                 <div class="card-body iptc_metadata">
                                                     <div class="form-row">
                                                         <div class="form-group col-sm-12 ">
-                                                           
+
                                                                 <label for="info2 mb-0">Contributor</label>
-                                                           
-                                                           
+
+
                                                                 <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="info2">
                                                                     <option value="">Select Contributor</option>
                                                                     @if(isset($contributors))
@@ -70,13 +71,13 @@
                                                                         @endforeach
                                                                     @endif
                                                                     </select>
-                                                            
+
                                                         </div>
                                                         <div class="form-group col-sm-12 ">
-                                                           
+
                                                             <label for="info1 mb-0">Category</label>
-                                                       
-                                                       
+
+
                                                             <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="category" id="info1">
                                                                 <option value="">Select Category</option>
                                                                 @if(isset($categories))
@@ -85,11 +86,11 @@
                                                                     @endforeach
                                                                 @endif
                                                                 </select>
-                            
-                                                        
+
+
                                                     </div>
-                                               
-                                                        
+
+
                                                     </div>
                                                 </div>
                                             </div>

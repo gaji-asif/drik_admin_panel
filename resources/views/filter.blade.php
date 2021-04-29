@@ -88,7 +88,7 @@
                         <li data-value="square">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Square</a>
                         </li>
-                        <li data-value="panoramic_horizontal">
+                        <li data-value="panoramic">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Panoramic Horizontal</a>
                         </li>
                     </ul>
@@ -125,20 +125,43 @@
                             </span>
                     </a>
                     <ul class="treeview-menu" id="people-menu">
-                        <li data-value="people_1">
+                        <li data-value="no_people">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;No people</a>
+                        </li>
+                        <li data-value="1_person">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-1</a>
                         </li>
-                        <li data-value="people-2">
+                        <li data-value="2_person">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-2</a>
                         </li>
-                        <li data-value="people-3">
+                        <li data-value="3_person">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-3</a>
                         </li>
-                        <li data-value="people-4">
-                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;People-4</a>
-                        </li>
-                        <li data-value="people-group">
+                        <li data-value="group">
                             <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Group</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-users"></i> <span>PEOPLE COMPOSITION</span>
+                        <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu" id="people-composition">
+                        <li data-value="head_shot">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Head shot</a>
+                        </li>
+                        <li data-value="waist_up">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Waist up</a>
+                        </li>
+                        <li data-value="full_length">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;Full length</a>
+                        </li>
+                        <li data-value="3_quarter">
+                            <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;3 quarter</a>
                         </li>
                     </ul>
                 </li>

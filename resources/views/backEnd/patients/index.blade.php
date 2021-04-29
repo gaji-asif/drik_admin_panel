@@ -63,7 +63,7 @@
                                 <div class="step-box">
                                     <div class="form-row justify-content-center">
                                         <div class="col-md-10">
-                                            <div class="form-row">
+                                            <div class="form-row-container">
                                                 <div class="col-sm-12">
                                                     <div class="imgUp">
                                                         <div class="row align-items-center">
@@ -249,6 +249,39 @@
                                                                                 <label>Keywords</label>
                                                                                 <input type="text" class="form-control tags-input" id="tags" value="" />
                                                                             </div>
+                                                                            <div class="col-12 col-md-12 search-filter-panel">
+                                                                                <h4>Search Filter Panel</h4>
+                                                                                <div class="row">
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-orientation">
+                                                                                            <option disabled selected value="">Image orientation</option>
+                                                                                            <option disabled value="">Select orientation</option>
+                                                                                            <option value="vertical">Vertical</option>
+                                                                                            <option value="horizontal">Horizontal</option>
+                                                                                            <option value="square">Square</option>
+                                                                                            <option value="panaromic">Panaromic</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-people">
+                                                                                            <option disabled selected value="">No of people</option>
+                                                                                            <option value="no_people">No people</option>
+                                                                                            <option value="1_person">1 person</option>
+                                                                                            <option value="2_person">2 people</option>
+                                                                                            <option value="group">Group of people</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-composition">
+                                                                                            <option disabled selected value="">People composition</option>
+                                                                                            <option value="head_shot">Head shot</option>
+                                                                                            <option value="waist_up">Waist up</option>
+                                                                                            <option value="full_length">Full length</option>
+                                                                                            <option value="3_quarter">3 quarter</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -257,23 +290,23 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-12">
-                                                   <div class="form-group row">
-                                                    <div class="col-lg-1"></div>
-                                                    <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select Oreientation: </label>
-                                                    <div class="col-lg-3">
-                                                        <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">
-                                                            <option value="">Select Oreientation</option>
-                                                            <option value="Vertical">Vertical</option>
-                                                            <option value="Horizontal">Horizontal</option>
-                                                            <option value="Square">Square</option>
-                                                            <option value="Panaromic">Panaromic</option>
-                                                            
-                                                        </select>
+{{--                                                <div class="col-lg-12">--}}
+{{--                                                   <div class="form-group row">--}}
+{{--                                                    <div class="col-lg-1"></div>--}}
+{{--                                                    <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select Oreientation: </label>--}}
+{{--                                                    <div class="col-lg-3">--}}
+{{--                                                        <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">--}}
+{{--                                                            <option value="">Select Oreientation</option>--}}
+{{--                                                            <option value="Vertical">Vertical</option>--}}
+{{--                                                            <option value="Horizontal">Horizontal</option>--}}
+{{--                                                            <option value="Square">Square</option>--}}
+{{--                                                            <option value="Panaromic">Panaromic</option>--}}
+{{--                                                            --}}
+{{--                                                        </select>--}}
 
-                                                    </div>
-                                                </div>
-                                            </div>
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
 
                                             <div class="col-sm-12">

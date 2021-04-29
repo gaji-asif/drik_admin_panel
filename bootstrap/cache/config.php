@@ -175,7 +175,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\framework/cache/data',
+        'path' => 'C:\\xampp\\htdocs\\drik\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -382,7 +382,7 @@
     ),
     'temporary_files' => 
     array (
-      'local_path' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\framework/laravel-excel',
+      'local_path' => 'C:\\xampp\\htdocs\\drik\\storage\\framework/laravel-excel',
       'remote_disk' => NULL,
       'remote_prefix' => NULL,
       'force_resync_remote' => NULL,
@@ -397,12 +397,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\app',
+        'root' => 'C:\\xampp\\htdocs\\drik\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\app/public',
+        'root' => 'C:\\xampp\\htdocs\\drik\\storage\\app/public',
         'url' => 'http://localhost/drik/storage',
         'visibility' => 'public',
       ),
@@ -448,13 +448,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\drik\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\logs/laravel.log',
+        'path' => 'C:\\xampp\\htdocs\\drik\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -518,7 +518,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'C:\\wamp64\\www\\drik_admin_panel\\resources\\views/vendor/mail',
+        0 => 'C:\\xampp\\htdocs\\drik\\resources\\views/vendor/mail',
       ),
     ),
     'log_channel' => NULL,
@@ -652,7 +652,7 @@
     'lifetime' => 120,
     'expire_on_close' => true,
     'encrypt' => false,
-    'files' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\framework/sessions',
+    'files' => 'C:\\xampp\\htdocs\\drik\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -672,9 +672,9 @@
   array (
     'paths' => 
     array (
-      0 => 'C:\\wamp64\\www\\drik_admin_panel\\resources\\views',
+      0 => 'C:\\xampp\\htdocs\\drik\\resources\\views',
     ),
-    'compiled' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\framework\\views',
+    'compiled' => 'C:\\xampp\\htdocs\\drik\\storage\\framework\\views',
   ),
   'dompdf' => 
   array (
@@ -682,10 +682,10 @@
     'orientation' => 'portrait',
     'defines' => 
     array (
-      'font_dir' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\fonts/',
-      'font_cache' => 'C:\\wamp64\\www\\drik_admin_panel\\storage\\fonts/',
-      'temp_dir' => 'C:\\Users\\Acer\\AppData\\Local\\Temp',
-      'chroot' => 'C:\\wamp64\\www\\drik_admin_panel',
+      'font_dir' => 'C:\\xampp\\htdocs\\drik\\storage\\fonts/',
+      'font_cache' => 'C:\\xampp\\htdocs\\drik\\storage\\fonts/',
+      'temp_dir' => 'C:\\Users\\USER\\AppData\\Local\\Temp',
+      'chroot' => 'C:\\xampp\\htdocs\\drik',
       'enable_font_subsetting' => false,
       'pdf_backend' => 'CPDF',
       'default_media_type' => 'screen',
@@ -707,18 +707,18 @@
   array (
     'config' => 
     array (
-      'model_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/model.txt',
-      'scaffold_model_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/scaffolding/model.txt',
-      'controller_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/controller.txt',
-      'scaffold_controller_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/scaffolding/controller.txt',
-      'migration_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/migration.txt',
-      'seed_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/seed.txt',
-      'view_template_path' => 'C:\\wamp64\\www\\drik_admin_panel\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/view.txt',
-      'model_target_path' => 'C:\\wamp64\\www\\drik_admin_panel\\app',
-      'controller_target_path' => 'C:\\wamp64\\www\\drik_admin_panel\\app\\Http/Controllers',
-      'migration_target_path' => 'C:\\wamp64\\www\\drik_admin_panel\\database/migrations',
-      'seed_target_path' => 'C:\\wamp64\\www\\drik_admin_panel\\database/seeds',
-      'view_target_path' => 'C:\\wamp64\\www\\drik_admin_panel\\resources/views',
+      'model_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/model.txt',
+      'scaffold_model_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/scaffolding/model.txt',
+      'controller_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/controller.txt',
+      'scaffold_controller_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/scaffolding/controller.txt',
+      'migration_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/migration.txt',
+      'seed_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/seed.txt',
+      'view_template_path' => 'C:\\xampp\\htdocs\\drik\\vendor/xethron/laravel-4-generators/src/Way/Generators/templates/view.txt',
+      'model_target_path' => 'C:\\xampp\\htdocs\\drik\\app',
+      'controller_target_path' => 'C:\\xampp\\htdocs\\drik\\app\\Http/Controllers',
+      'migration_target_path' => 'C:\\xampp\\htdocs\\drik\\database/migrations',
+      'seed_target_path' => 'C:\\xampp\\htdocs\\drik\\database/seeds',
+      'view_target_path' => 'C:\\xampp\\htdocs\\drik\\resources/views',
     ),
   ),
   'trustedproxy' => 

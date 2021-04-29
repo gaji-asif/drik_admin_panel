@@ -6,6 +6,8 @@ let formCount = 1;
 document.addEventListener("DOMContentLoaded", function(){
     let imageSubmitBtn = document.getElementById("image_upload_btn");
 
+    $(".js-example-basic-single-1").select2();
+
     $(function() {
         $(document).on("change",".uploadFile", function(){
             console.log("File uploaded");
@@ -115,6 +117,9 @@ document.addEventListener("DOMContentLoaded", function(){
                     '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
                 let newForm = $(`div[data-index="${formCount}"]`)[0];
+
+                appendFilterSelects(newForm);
+
                 let heightInput = newForm.querySelector(".height-input-group");
                 let categorySelect = lastForm.querySelector(".category-select-group");
                 let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
@@ -168,6 +173,46 @@ document.addEventListener("DOMContentLoaded", function(){
     $(".main-category").change(getSubCategories);
 
 });
+
+function appendFilterSelects(form)
+{
+    let element = $($.parseHTML('<div class="col-12 col-md-12 search-filter-panel">\n' +
+        '                                                                                <h4>Search Filter Panel</h4>\n' +
+        '                                                                                <div class="row">\n' +
+        '                                                                                    <div class="col-1 col-sm-1 col-md-4">\n' +
+        '                                                                                        <select class="js-example-basic-single col-sm-12 image-orientation">\n' +
+        '                                                                                            <option disabled selected value="">Select orientation</option>\n' +
+        '                                                                                            <option value="">Vertical</option>\n' +
+        '                                                                                            <option value="">Horizontal</option>\n' +
+        '                                                                                            <option value="">Square</option>\n' +
+        '                                                                                            <option value="">Panaromic</option>\n' +
+        '                                                                                        </select>\n' +
+        '                                                                                    </div>\n' +
+        '                                                                                    <div class="col-1 col-sm-1 col-md-4">\n' +
+        '                                                                                        <select class="js-example-basic-single col-sm-12 image-people">\n' +
+        '                                                                                            <option disabled selected value="">No of people</option>\n' +
+        '                                                                                            <option value="no_people">No people</option>\n' +
+        '                                                                                            <option value="1_person">1 person</option>\n' +
+        '                                                                                            <option value="2_person">2 people</option>\n' +
+        '                                                                                            <option value="group">Group of people</option>\n' +
+        '                                                                                        </select>\n' +
+        '                                                                                    </div>\n' +
+        '                                                                                    <div class="col-1 col-sm-1 col-md-4">\n' +
+        '                                                                                        <select class="js-example-basic-single col-sm-12 image-composition">\n' +
+        '                                                                                            <option disabled selected value="">People composition</option>\n' +
+        '                                                                                            <option value="head_shot">Head shot</option>\n' +
+        '                                                                                            <option value="waist_up">Waist up</option>\n' +
+        '                                                                                            <option value="full_length">Full length</option>\n' +
+        '                                                                                            <option value="3_quarter">3 quarter</option>\n' +
+        '                                                                                        </select>\n' +
+        '                                                                                    </div>\n' +
+        '                                                                                </div>\n' +
+        '                                                                            </div>'));
+
+    let filterPanel = element[0];
+    form.append(filterPanel);
+    $('.js-example-basic-single').select2();
+}
 
 function getSubCategories(e){
     let target = e.target,
@@ -261,6 +306,8 @@ function readImageMetaData(image, imageForm) {
 function addImageToList() {
     let imageForms = [...document.querySelectorAll(".imgUp")];
     lastForm = imageForms[imageForms.length-1];
+    let orientationElement = $(".image-orientation").select2().val();
+    console.log(orientationElement);
     let tagInputId = "tags";
     if(lastForm.dataset.index) {
         tagInputId = `tags${lastForm.dataset.index}`;
@@ -288,12 +335,18 @@ function addImageToList() {
     let category = lastForm.querySelector(".main-category").value;
     let subCategory = lastForm.querySelector(".sub-category").value;
     let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
+    let orientation = lastForm.querySelector(".image-orientation").value;
+    let people = lastForm.querySelector(".image-people").value;
+    let composition = lastForm.querySelector(".image-composition").value;
     let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
     imageObj.category = category;
     imageObj.subCategory = subCategory;
+    imageObj.orientation = orientation;
+    imageObj.people = people;
+    imageObj.composition = composition;
     metas.Author = author || "";
     metas.Country = country || "";
     metas.City = city || "";
@@ -320,9 +373,13 @@ function addImageToList() {
 }
 
 function uploadImage(event) {
-    showLoader();
     let contributor = document.getElementById("contributor");
     contributor = contributor.value;
+    if(!contributor) {
+        swal("Select a contributor");
+        return;
+    }
+    showCustomLoader();
     let imageObj = images.pop();
     if(!imageObj) {
         swal({
@@ -337,7 +394,7 @@ function uploadImage(event) {
             input.value = '';
         });
         $(".token").remove();
-        removeLoader();
+        removeCustomLoader();
         return ;
     }
 
@@ -349,6 +406,9 @@ function uploadImage(event) {
     formData.append("category", imageObj.category || "");
     formData.append("subCategory", imageObj.subCategory || "");
     formData.append("contributor", contributor);
+    formData.append("orientation", imageObj.orientation);
+    formData.append("people", imageObj.people);
+    formData.append("composition", imageObj.composition);
     formData.append("metas", JSON.stringify(imageObj.metas));
     if(masterId) {
         formData.append("masterId", masterId);
