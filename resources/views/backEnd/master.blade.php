@@ -3,8 +3,19 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
 	@include('backEnd.partials.header')
+    <style>
+        .tokenfield{
+            height: auto !important;
+        }
+    </style>
 </head>
 <body>
+
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 
 	<div class="theme-loader">
 		<div class="loader-track">
@@ -121,9 +132,9 @@
 										<div class="page-header-title">
 											@if (session()->has('header'))
 											 <h5 class="m-b-10">{{session()->get('header')}}</h5>
-											<p class="m-b-0">{{session()->get('header_t')}}</p>				
+											<p class="m-b-0">{{session()->get('header_t')}}</p>
 											@endif
- 								
+
 										</div>
 									</div>
 									<div class="col-md-4">

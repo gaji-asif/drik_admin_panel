@@ -19,6 +19,7 @@ use App\ErpSpeciality;
 use App\ErpDocumentType;
 use App\ErpConsultant;
 use App\ErpSendDoc;
+use App\Category;
 use DB;
 use Mail;
 use App\PatientDocumentVersion;
@@ -38,7 +39,8 @@ class ErpPatientController extends Controller
 
         $contributors = User::where('user_type', '=', 1)->get();
         //$contributors = Contributor::all();
-        return view('backEnd.patients.index', compact('patients', 'contributors'));
+        $categories = Category::where('parent_category_id', null)->get();
+        return view('backEnd.patients.index', compact('contributors', 'categories'));
     }
 
     /**
@@ -166,10 +168,11 @@ class ErpPatientController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function patients_doc_types($patient_id){
+    public function patients_doc_types($patient_id)
+    {
 
 
-       // echo $patient_id;exit;
+        // echo $patient_id;exit;
 
         $patient_data = ErpPatient::find($patient_id);
 
@@ -179,8 +182,8 @@ class ErpPatientController extends Controller
 
         // $allDocType = ErpDocumentType::with('patient_docs')->get();
         $allDocType = ErpDocumentType::all();
-        $allDoc = PatientDocument::where('check_in_out','1')->where('patient_id', $patient_user_define_id)->get();
-        return view('backEnd.patients.doc_dashboard',compact('allDocType','allDoc', 'patient_user_define_id', 'patient_data'));
+        $allDoc = PatientDocument::where('check_in_out', '1')->where('patient_id', $patient_user_define_id)->get();
+        return view('backEnd.patients.doc_dashboard', compact('allDocType', 'allDoc', 'patient_user_define_id', 'patient_data'));
     }
 
     public function edit($id)
@@ -320,7 +323,7 @@ class ErpPatientController extends Controller
 
         //$file = $request->file('upload_document');
 
-        ini_set('memory_limit','256M');
+        ini_set('memory_limit', '256M');
 
         $request->validate([
             'document_type_code' => 'required',
@@ -505,18 +508,15 @@ class ErpPatientController extends Controller
             }
             $results = $documentVersions->save();
 
-            if(session()->has('doc_id'))
-            {
-               $docId = session()->get('doc_id');
-               $docType = session()->get('doc_type');
+            if (session()->has('doc_id')) {
+                $docId = session()->get('doc_id');
+                $docType = session()->get('doc_type');
                 if ($results) {
-                    return redirect('doc_list/'.$docId.'/'.$docType)->with('message-success', 'Document has been updated successfully');
+                    return redirect('doc_list/' . $docId . '/' . $docType)->with('message-success', 'Document has been updated successfully');
                 } else {
                     return redirect()->back()->with('message-danger', 'Something went wrong. Please try again');
                 }
-            }
-            else
-            {
+            } else {
                 if ($results) {
                     $patientData = ErpPatient::where('patient_id', '=', $document->patient_id)->first();
 
@@ -525,9 +525,6 @@ class ErpPatientController extends Controller
                     return redirect()->back()->with('message-danger', 'Something went wrong. Please try again');
                 }
             }
-
-
-
         }
     }
 
@@ -760,7 +757,6 @@ class ErpPatientController extends Controller
         if (isset($result)) {
             echo $result->type_code;
         }
-
     }
 
     public function doc_preview($id)

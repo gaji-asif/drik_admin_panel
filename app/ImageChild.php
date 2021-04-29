@@ -12,7 +12,8 @@ class ImageChild extends Model
 
     protected $guarded = [];
 
-    public function author() {
+    public function imageAuthor()
+    {
         return $this->belongsTo('App\User', 'user_id', 'id');
     }
 }

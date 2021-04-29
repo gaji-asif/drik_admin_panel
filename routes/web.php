@@ -11,11 +11,36 @@
 |
 */
 
-Auth::routes();
+Route::get('/', 'GalleryController@index')->name('index');
+Route::get('index', 'GalleryController@index')->name('index');
 
-Route::get('/home', 'GalleryController@index');
+Route::group(['prefix' => 'admin'], function() {
+    Route::auth();
+});
 
-Route::group(['middleware' => ['revalidate','auth']], function(){
+// Auth::routes();
+Route::post('drik-logout', 'Auth\LoginController@logout')->name('drik-logout');
+Route::get('user-logout', 'UserController@logout')->name('user-logout');
+
+Route::middleware(['guest'])->group(function () {
+    Route::get('user-login', 'UserController@login')->name('user-login');
+    Route::post('user-registration', 'UserController@registration')->name('user-registration');
+    Route::post('make-login', 'UserController@make_login')->name('make-login');
+});
+
+
+// Route::get('home', 'GalleryController@index')->name('home');
+
+Route::get('filter/{category}','FilterController@index')->name('filter');
+Route::post('filter','FilterController@filterImage');
+
+Route::post('add_to_cart', 'CartController@addItem');
+Route::post('remove_from_cart', 'CartController@removeItem');
+Route::get('get_cart', 'CartController@getCart');
+Route::get('checkout', 'CheckoutController@index')->name('checkout');
+
+
+Route::group(['middleware' => ['revalidate','auth', 'contributor']], function(){
 // Route::group(['middleware' => 'revalidate'], function(){
 	//Route::get('/home', 'HomeController@index');
 	Route::get('dashboard', 'HomeController@index');
@@ -135,7 +160,8 @@ Route::put('doc-type/update/{id}', 'ErpDocumentListController@updateDoc');
 Route::get('add_bulk', 'BulkImportController@addBulk');
 Route::Post('bulk_import', 'BulkImportController@storeBulk');
 
-
+// getting sub categories
+Route::post('get_sub_categories', 'HomeController@get_sub_categories');
 
 //image upload routes
 
@@ -148,4 +174,24 @@ Route::post('upload_image', 'ImageController@upload_image');
 Route::get('image_list', 'ImageController@imageList');
 Route::get('get_all_images', 'ImageController@getAllImages');
 Route::post('delete_image', 'ImageController@deleteImage');
+Route::post('delete_bulk_image', 'ImageController@deleteBulkImage');
+Route::post('update_image/{id}', 'ImageController@updateImage');
+Route::get('image_details/{id}', 'ImageController@imageDetails');
+
+
+Route::resource('category', 'CategoriesController');
+Route::get('delete-category/{id}', 'CategoriesController@deleteCategory');
+
+//Contributor list
+Route::get('contributors', 'ContributorController@index');
+Route::get('contributor_list', 'ContributorController@getContributors');
+Route::post('approve_contributor', 'ContributorController@approveContributor');
 });
+
+// Route::get('your-dashboard', 'ErpPatientController@index');
+Route::get('your-dashboard', ['as' => 'your-dashboard', 'uses' => 'CustomerController@index']);
+Route::get('customer-profile', ['as' => 'customer-profile', 'uses' => 'CustomerController@profile']);
+Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 'CustomerController@edit_profile']);
+Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
+
+Route::get('search', ['as' => 'search-image', 'uses' => 'ImageController@searchImage']);

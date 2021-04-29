@@ -52,6 +52,14 @@
 				</a>
 			</li>
 
+            <li class="document  pcoded-trigger">
+                <a href="{{url('contributors')}}" class="waves-effect waves-dark">
+                    <span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
+                    <span class="pcoded-mtext">Contributors</span>
+                    <span class="pcoded-mcaret"></span>
+                </a>
+            </li>
+
 
 
 {{--			<li class="queue pcoded-trigger">--}}
@@ -89,6 +97,12 @@
 						<a href="{{url('user')}}" class="waves-effect waves-dark">
 							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
 							<span class="pcoded-mtext">Users List</span>
+						</a>
+					</li>
+					<li class="user">
+						<a href="{{route('category.index')}}" class="waves-effect waves-dark">
+							<span class="pcoded-micon"><i class="icon-pie-chart"></i></span>
+							<span class="pcoded-mtext">Category List</span>
 						</a>
 					</li>
 {{--					@endcan--}}

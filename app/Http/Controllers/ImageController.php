@@ -2,75 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\ImageChild;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Svg\Tag\Image;
 
 class ImageController extends Controller {
     public function get_image_metas(Request $request) {
         $image = $request->file("image");
-
-        $metas = $this->read_metas($image);
-
+        $metas = ImageHelper::read_metas($image);
         return response()->json(['data' => $metas], 200);
     }
 
-    public function read_metas($image) {
-        try {
-            $metas = exif_read_data($image);
-        } catch (\Throwable $e) {
-            try{
-                $metas = getimagesize($image);
-            } catch (\Throwable $e){
-                $metas = $e->getMessage();
-            }
+    public function create_thumbnail($image, $name, $width, $height){
 
-        }
-
-        $metas = $this->convert_from_latin1_to_utf8_recursively($metas);
-        return $metas;
-    }
-
-    public function convert_from_latin1_to_utf8_recursively($dat)
-    {
-        if (is_string($dat)) {
-            return utf8_encode($dat);
-        } elseif (is_array($dat)) {
-            $ret = [];
-            foreach ($dat as $i => $d) $ret[ $i ] = self::convert_from_latin1_to_utf8_recursively($d);
-
-            return $ret;
-        } elseif (is_object($dat)) {
-            foreach ($dat as $i => $d) $dat->$i = self::convert_from_latin1_to_utf8_recursively($d);
-
-            return $dat;
+        if($height < $width) {
+            $size = $height;
+            $x = floor(($width - $size)/2);
+            $y = 0;
         } else {
-            return $dat;
-        }
-    }
-
-    public function create_thumbnail($image, $name){
-        $metas = $this->read_metas($image);
-        if(isset($metas["COMPUTED"])) {
-            $computed = $metas["COMPUTED"];
-            $height = $computed["Height"];
-            $width = $computed["Width"];
-        } else {
-            $height = $metas[1];
-            $width = $metas[0];
+            $size = $width;
+            $y = floor(($height - $size)/2);
+            $x = 0;
         }
 
-        $size = $height < $width ? $height : $width;
-
-        $name = $this->resize_image($image, $size, $size, $name, false);
+        $name = ImageHelper::cropImage($image, $x, $y, $size, $size, $name, "images/uploaded_images/thumbnails");
 
         return config('app.url').'/public/images/uploaded_images/thumbnails/'.$name;
     }
 
     public function upload_image(Request $request) {
+        ini_set("memory_limit",-1);
         $validator = Validator::make($request->all(), [
             'image' => 'required',
             'height' => 'required',
@@ -83,80 +51,72 @@ class ImageController extends Controller {
         $contributor = $request["contributor"];
         $masterId = $request["masterId"];
         try{
+            $width = $request["width"];
+            $height = $request["height"];
+            $medium_width = floor($width*0.8);
+            $medium_height = floor($height*0.8);
+            $small_width = floor($width*0.5);
+            $small_height = floor($height*0.5);
             $name = time().$image->getClientOriginalName();
             $destinaionPath = public_path("images/uploaded_images");
             $image->move($destinaionPath, $name);
-            $thumbnail_url = $this->create_thumbnail($destinaionPath.'/'.$name, $name);
+            $imagePath = $destinaionPath.'/'.$name;
+
+            if($request["metas"]) {
+                $metas = json_decode($request["metas"]);
+                ImageHelper::addMetaToImage($imagePath, $metas);
+            }
+
+            $thumbnail_url = $this->create_thumbnail($imagePath, $name, $request['width'], $request['height']);
+            $medium_url = ImageHelper::resize_image($imagePath, $medium_width, $medium_height, $name, "images/uploaded_images/medium");
+            $medium_url = config('app.url')."/public/images/uploaded_images/medium/".$medium_url;
+            $small_url = ImageHelper::resize_image($imagePath, $small_width, $small_height, $name, "images/uploaded_images/small");
+            $small_url = config('app.url')."/public/images/uploaded_images/small/".$small_url;
             // db saving
             $image_url = config('app.url').'/public/images/uploaded_images/'.$name;
 
-            $userId = Auth::user()->id;
-
             if(!$masterId) {
                 $masterImage = DB::table('all_images_masters')->insertGetId([
-                    'user_id' => $userId
+                    'user_id' => $contributor
                 ]);
             } else {
                 $masterImage = $masterId;
             }
 
-
-            DB::table("all_images_childs")->insertGetId([
+            ImageChild::create([
                 'master_id' => $masterImage,
                 'image_name' => $name,
-                'user_id' => $userId,
+                'user_id' => $contributor,
                 'height' => $request['height'],
                 'width' => $request['width'],
+                'author' => isset($metas->Author) ? $metas->Author : "",
+                'country' => isset($metas->Country) ? $metas->Country : "",
+                'city' => isset($metas->City) ? $metas->City : "",
+                'state' => isset($metas->State) ? $metas->State : "",
+                'postal_code' => isset($metas->PostalCode) ? $metas->PostalCode : "",
+                'phone' => isset($metas->Phone) ? $metas->Phone : "",
+                'email' => isset($metas->Email) ? $metas->Email : "",
+                'caption' => isset($metas->Caption) ? $metas->Caption : "",
+                'website' => isset($metas->Website) ? $metas->Website : "",
+                'headline' => isset($metas->Headline) ? $metas->Headline : "",
+                'title' => isset($metas->Title) ? $metas->Title : "",
+                'copy_right' => isset($metas->Copyright) ? $metas->Copyright : "",
+                'keywords' => isset($metas->Keywords) ? $metas->Keywords : "",
+                'category'=>$request["category"],
+                'sub_category'=> isset($request["subCategory"]) ? $request["subCategory"] : null,
+                'orientation' => isset($request["orientation"]) ? $request["orientation"] : null,
+                'no_people' => isset($request["people"]) ? $request["people"] : null,
+                'people_composition' => isset($request["composition"]) ? $request["composition"] : null,
                 'image_main_url' => $image_url,
+                'medium_url' => $medium_url,
+                'small_url' => $small_url,
                 'thumbnail_url' => $thumbnail_url
             ]);
+
         } catch (\Throwable $e) {
             return response()->json(["data" => $masterId, "errors" => $e->getMessage()], 500);
         }
         return response()->json(['data' => $masterImage], 200);
-    }
-
-    public function resize_image($file, $w, $h, $name, $keepRatio=true) {
-        list($width, $height) = getimagesize($file);
-        $what = getimagesize($file);
-        if($keepRatio) {
-            $r = $width / $height;
-            if ($w/$h > $r) {
-                $newwidth = $h*$r;
-                $newheight = $h;
-            } else {
-                $newheight = $w/$r;
-                $newwidth = $w;
-            }
-        } else {
-            $newheight = $h;
-            $newwidth = $w;
-        }
-
-
-        $extension = "png";
-
-        switch(strtolower($what['mime']))
-        {
-            case 'image/png':
-                $src = imagecreatefrompng($file);
-                break;
-            case 'image/jpeg':
-                $src = imagecreatefromjpeg($file);
-                $extension = "jpeg";
-                break;
-            case 'image/gif':
-                $src = imagecreatefromgif($file);
-                $extension = "gif";
-                break;
-            default: die();
-        };
-        $dst = imagecreatetruecolor($newwidth, $newheight);
-        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-        $fileNameNoExtension = preg_replace("/\.[^.]+$/", "", $name);
-        $destination = public_path("images/uploaded_images/thumbnails/".$fileNameNoExtension.".".$extension);
-        imagejpeg($dst, $destination);
-        return $fileNameNoExtension.".".$extension;
     }
 
     public function imageList() {
@@ -173,5 +133,68 @@ class ImageController extends Controller {
         $image = ImageChild::find($imageId);
         $deleted = $image->delete();
         return response()->json(['data' => $deleted]);
+    }
+
+    public function deleteBulkImage(Request $request)
+    {
+        $imageIds = json_decode($request["imageIds"]);
+        ImageChild::whereIn('id', $imageIds)->delete();
+
+        return response()->json(['status' => 200], 200);
+    }
+
+    public function imageDetails($id) {
+        $image = ImageChild::find($id);
+        return response()->json(['data'=> $image], 200);
+    }
+
+    public function updateImage(Request $request, $id) {
+        $image = ImageChild::find($id);
+        $imageName = $image->image_name;
+        ImageHelper::addMetaToImage(public_path("images/uploaded_images/${imageName}"), [
+            'Author' => $request->author
+        ]);
+        $image = $image->update([
+            'author'=>$request->author,
+            'phone'=>$request->phone,
+            'country'=>$request->country,
+            'email'=>$request->email,
+            'city'=>$request->city,
+            'state'=>$request->state,
+            'title'=>$request->title,
+            'caption'=>$request->caption,
+            'website'=>$request->website,
+            'headline'=>$request->headline,
+            'keywords'=>$request->keywords,
+            'copy_right'=>$request->copy_right,
+            'postal_code'=>$request->postal_code
+
+        ]);
+        return response()->json(['data'=>$image], 200);
+    }
+
+    public function searchImage(Request $request)
+    {
+        $search = $request->input('search_key');
+
+        $searchKeyWords = explode(" ", $search);
+
+        $searchKeyWords = array_filter($searchKeyWords, function($elm) {
+            return strlen($elm) > 2;
+        });
+
+        foreach ($searchKeyWords as $value){
+            if(!isset($searchQuery)) {
+                $searchQuery = ImageChild::where('keywords', 'like', '%' . $value . '%');
+            } else {
+                $searchQuery = $searchQuery->orWhere('keywords', 'like', '%' . $value . '%');
+            }
+        };
+
+        $images = $searchQuery->paginate(20);
+
+        $categories = Category::all();
+        $photographers = User::where('user_type', 1)->get();
+        return view('filter', compact('images', 'categories', 'photographers'));
     }
 }

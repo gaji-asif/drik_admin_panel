@@ -18175,3 +18175,8 @@ span.value {
 	margin: 0 auto;
 	padding: 12px;
 }
+
+
+.loader_global{
+	display: none;
+}

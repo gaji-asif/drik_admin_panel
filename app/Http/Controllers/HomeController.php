@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use Illuminate\Http\Request;
 use App\ErpPatient;
 use App\ActivityLog;
@@ -66,5 +67,11 @@ class HomeController extends Controller
      public function webIndex() {
             return "dadfad";
      }
+
+    public function get_sub_categories(Request $request) {
+        $categoryId = $request->categoryId;
+        $categories = Category::where('parent_category_id', $categoryId)->get();
+        return response()->json(["subCategories"=>$categories], 200);
+    }
 
 }

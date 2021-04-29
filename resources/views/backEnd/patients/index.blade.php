@@ -36,7 +36,6 @@
 </div>
 @endif
 
-
 <div class="card">
     <div id="Contributor_dashboard">
         <div class="container-fluid">
@@ -45,30 +44,26 @@
                     <div class="step mb-3 shadow-sm">
                         <form id="msform">
                             <!-- fieldsets -->
-                             <div class="form-group row">
+                            <div class="form-group row">
                                 <div class="col-lg-1"></div>
                                 <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select contributor: </label>
                                 <div class="col-lg-3">
                                     <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">
-                                    <option value="">Select contributor</option>
-                                    @if(isset($contributors))
+                                        <option value="">Select contributor</option>
+                                        @if(isset($contributors))
                                         @foreach($contributors as $contributor)
-                                           
-                                           
-                                            <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
-                                       
-                                          
+                                        <option value="{{ $contributor->id }}">{{$contributor->name}}</option>
                                         @endforeach
-                                    @endif
+                                        @endif
                                     </select>
-                                   
+
                                 </div>
                             </div>
                             <fieldset>
                                 <div class="step-box">
                                     <div class="form-row justify-content-center">
                                         <div class="col-md-10">
-                                            <div class="form-row">
+                                            <div class="form-row-container">
                                                 <div class="col-sm-12">
                                                     <div class="imgUp">
                                                         <div class="row align-items-center">
@@ -80,18 +75,48 @@
                                                             </div>
 
                                                             <div class="col-md-8">
+                                                                <div class="row loader_global">
+                                                                    <img style="margin: 0 auto; margin-bottom: 10px;" src="{{asset('public/images/loading.gif')}}" width="10%">
+                                                                </div>
                                                                 <div class="card shadow-sm">
                                                                     <div class="card-body iptc_metadata">
                                                                         <div class="form-row">
                                                                             <div class="col-md-12 text-left">
                                                                                 <h6>IPTC Metadata</h6>
                                                                             </div>
-                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                            <div class="col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center category-select-group">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info1 mb-0">Category</label>
+                                                                                </div>
+                                                                                <div class="form-group col-sm-9 col-md-10 col-lg-9">
+                                                                                    <select style="border: 1px solid #3434" required class="col-sm-12 main-category form-control" name="category" id="category">
+                                                                                        @if(isset($categories))
+                                                                                        @foreach($categories as $category)
+                                                                                        <option value="{{ $category->id }}">{{$category->cat_name}}</option>
+                                                                                        @endforeach
+
+                                                                                        @endif
+                                                                                    </select>
+                                                                                    <div class="invalid-feedback">
+                                                                                        Category is required
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center sub-category-select-group">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info1 mb-0">Sub category</label>
+                                                                                </div>
+                                                                                <div class="form-group col-sm-9 col-md-10 col-lg-9">
+                                                                                    <select style="border: 1px solid #3434" class="form-control col-sm-12 sub-category form-select sub-category" name="sub-category" id="sub-category">
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center height-input-group">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
                                                                                     <label for="info1 mb-0">Height</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Info-1">
+                                                                                    <input type="text" class="form-control mb-0 image-height" placeholder="Info-1">
                                                                                     <div class="invalid-feedback">
                                                                                         Height is required
                                                                                     </div>
@@ -103,7 +128,7 @@
                                                                                     <label for="info2 mb-0">Width</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Info-2">
+                                                                                    <input type="text" class="form-control mb-0 image-width" placeholder="Info-2">
                                                                                     <div class="invalid-feedback">
                                                                                         Width is required
                                                                                     </div>
@@ -112,46 +137,149 @@
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info3 mb-0">Info-3</label>
+                                                                                    <label for="artist mb-0">Author</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info3" placeholder="Info-3">
+                                                                                    <input type="text" class="form-control mb-0 image-author" placeholder="Author">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info4 mb-0">Info-4</label>
+                                                                                    <label for="info4 mb-0">Country</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info4" placeholder="Info-4">
+                                                                                    <input type="text" class="form-control mb-0 image-country" placeholder="Country">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info5 mb-0">Info-5</label>
+                                                                                    <label for="info5 mb-0">City</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info5" placeholder="Info-5">
+                                                                                    <input type="text" class="form-control mb-0 image-city" placeholder="City">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info6 mb-0">Info-6</label>
+                                                                                    <label for="info7 mb-0">State</label>
                                                                                 </div>
-                                                                                <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info6" placeholder="Info-6">
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-state" placeholder="State">
                                                                                 </div>
                                                                             </div>
 
                                                                             <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                                                                 <div class="col-sm-3 col-md-2 col-lg-3">
-                                                                                    <label for="info7 mb-0">Info-7</label>
+                                                                                    <label for="info7 mb-0">Postal code</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-postal-code" placeholder="Postal code">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info6 mb-0">Caption</label>
                                                                                 </div>
                                                                                 <div class="col-sm-9 col-md-10 col-lg-9">
-                                                                                    <input type="text" class="form-control mb-0" id="info7" placeholder="Info-7">
+                                                                                    <input type="text" class="form-control mb-0 image-caption" placeholder="Caption">
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Copyright</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Email</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-email" placeholder="Email">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Phone</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-phone" placeholder="Phone">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Website</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-website" placeholder="Website">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Headline</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-headline" placeholder="Headline">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Title</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input type="text" class="form-control mb-0 image-title" placeholder="Title">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
+                                                                                <div class="col-sm-3 col-md-2 col-lg-3">
+                                                                                    <label for="info7 mb-0">Creation date</label>
+                                                                                </div>
+                                                                                <div class="col-sm-12 col-md-9 col-lg-9">
+                                                                                    <input id="creation-date" class="creation-date form-control" type="text" class="form-control">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">
+                                                                                <label>Keywords</label>
+                                                                                <input type="text" class="form-control tags-input" id="tags" value="" />
+                                                                            </div>
+                                                                            <div class="col-12 col-md-12 search-filter-panel">
+                                                                                <h4>Search Filter Panel</h4>
+                                                                                <div class="row">
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-orientation">
+                                                                                            <option disabled selected value="">Image orientation</option>
+                                                                                            <option disabled value="">Select orientation</option>
+                                                                                            <option value="vertical">Vertical</option>
+                                                                                            <option value="horizontal">Horizontal</option>
+                                                                                            <option value="square">Square</option>
+                                                                                            <option value="panaromic">Panaromic</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-people">
+                                                                                            <option disabled selected value="">No of people</option>
+                                                                                            <option value="no_people">No people</option>
+                                                                                            <option value="1_person">1 person</option>
+                                                                                            <option value="2_person">2 people</option>
+                                                                                            <option value="group">Group of people</option>
+                                                                                        </select>
+                                                                                    </div>
+                                                                                    <div class="col-1 col-sm-1 col-md-4">
+                                                                                        <select class="js-example-basic-single col-sm-12 image-composition">
+                                                                                            <option disabled selected value="">People composition</option>
+                                                                                            <option value="head_shot">Head shot</option>
+                                                                                            <option value="waist_up">Waist up</option>
+                                                                                            <option value="full_length">Full length</option>
+                                                                                            <option value="3_quarter">3 quarter</option>
+                                                                                        </select>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -162,30 +290,43 @@
                                                     </div>
                                                 </div>
 
+{{--                                                <div class="col-lg-12">--}}
+{{--                                                   <div class="form-group row">--}}
+{{--                                                    <div class="col-lg-1"></div>--}}
+{{--                                                    <label for="role_id" class="col-lg-2 col-form-label text-md-right">Select Oreientation: </label>--}}
+{{--                                                    <div class="col-lg-3">--}}
+{{--                                                        <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="contributor">--}}
+{{--                                                            <option value="">Select Oreientation</option>--}}
+{{--                                                            <option value="Vertical">Vertical</option>--}}
+{{--                                                            <option value="Horizontal">Horizontal</option>--}}
+{{--                                                            <option value="Square">Square</option>--}}
+{{--                                                            <option value="Panaromic">Panaromic</option>--}}
+{{--                                                            --}}
+{{--                                                        </select>--}}
 
-                                                <div class="col-sm-12">
-                                                    <span class="btn btn-sm theme-btn imgAdd">Add More</span>
-                                                </div>
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
 
 
-
-                                            </div><!-- row -->
-
-
-                                        </div>
+                                            <div class="col-sm-12">
+                                                <span class="btn btn-sm theme-btn imgAdd">Add More</span>
+                                            </div>
+                                        </div><!-- row -->
                                     </div>
                                 </div>
+                            </div>
 
-                                <input id="image_upload_btn" type="button" class="finish action-button" value="Upload" />
-{{--                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />--}}
-{{--                                <input type="button" name="finish" class="finish action-button" value="Finish" />--}}
-                            </fieldset>
-                        </form>
-                    </div>
+                            <input id="image_upload_btn" type="button" class="finish action-button" value="Upload" />
+                            {{--                                <input type="button" name="previous" class="previous action-button-previous" value="Previous" />--}}
+                            {{--                                <input type="button" name="finish" class="finish action-button" value="Finish" />--}}
+                        </fieldset>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <script src={{asset("public/js/imageHandler.js")}}></script>
+</div>
+<script src={{asset("public/js/imageHandler.js")}}></script>
 </div>
 @endSection
