@@ -36,21 +36,17 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Image</th>
+                                <th>Items</th>
                                 <th>Price</th>
                                 <th>Add to Card</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($favorites as $value)
                             <tr>
-                                <td>{{ $value->image_name }}</td>
-                                <td><img width="60" src="{{ asset($value->small_url) }}" class="img-thumbnail" alt="No Image Found"></td>
-                                <td>{{ $value->small_price }}</td>
+                                <td><img src="cinqueterre.jpg" class="img-thumbnail" alt="No Image Found"></td>
+                                <td>৳ 850</td>
                                 <td><button type="button" class="btn btn-info btn-sm">+<i class="fa fa-shopping-cart"></i></button></td>
                             </tr>
-                            @endforeach
                         </tbody>
                     </table>
                 </div>

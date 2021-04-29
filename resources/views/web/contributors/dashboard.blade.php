@@ -1,12 +1,12 @@
 @include('web.partials.header')
 
-<div class="row col-md-10 offset-md-1" style="min-height: 450px; background-color: #eff0f4;">
+<div class="row col-md-10 offset-md-1" style="min-height: 450px; background-color: #eff0f4; padding-top: 10px; padding-bottom: 5px;">
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
                 <p>
                     <span>
-                        <img width="40" class="rounded-circle" src="{{ asset(Session::get('users_img')) }}" class="img-radius" alt="">
+                        <img width="40" class="rounded-circle" src="{{ asset($user->upload_img) }}" class="img-radius" alt="">
                     </span>
                     <span>{{ Auth::user()->name }}</span>
                 </p>
@@ -32,7 +32,7 @@
         <div class="card">
             <div class="col-lg-12">
                 <div class="container">
-                    <div class="row">
+                    <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                         <div class="col-xl-3 col-md-6">
                             <div class="card">
                                 <div class="card-block" style="padding: 32px; text-align: center;">
@@ -41,7 +41,7 @@
                                             <div class="col-auto" style="text-align: center;">
                                             </div>
                                             <div class="col-auto">
-                                                <h6 class="text-muted m-b-10">Total Order</h6>
+                                                <h6 class="text-muted m-b-10">Total Uploads</h6>
                                                 <h2 class="m-b-0">50</h2>
                                             </div>
                                         </div>
@@ -57,7 +57,7 @@
                                         <div class="row align-items-center m-l-0">
                                             <div class="col-auto" style="text-align: center;"></div>
                                             <div class="col-auto">
-                                                <h6 class="text-muted m-b-10">Total Delivered</h6>
+                                                <h6 class="text-muted m-b-10">Pending Images</h6>
                                                 <h2 class="m-b-0">45</h2>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                             <div class="col-auto" style="text-align: center;">
                                             </div>
                                             <div class="col-auto">
-                                                <h6 class="text-muted m-b-10">Total Pending</h6>
+                                                <h6 class="text-muted m-b-10">Approved Images</h6>
                                                 <h2 class="m-b-0">3</h2>
                                             </div>
                                         </div>
@@ -102,7 +102,7 @@
                     </div>
 
 
-                    <h3>Recent Orders</h3>
+<!--                    <h3>Recent Orders</h3>
                     <div class="table-responsive">          
                         <table class="table">
                             <thead>
@@ -124,7 +124,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
