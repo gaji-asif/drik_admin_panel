@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(){
             } else {
                 lastForm.classList.remove("was-validated");
                 let newForm = createNewImageForm();
-                console.log(newForm);
+                newForm.classList.add('dynamic-imgUp');
                 document.querySelector(".form-rows").append(newForm);
 
                 newForm.querySelector('.tags-input').setAttribute("id", `tags${newForm.dataset.index}`);
