@@ -89,6 +89,8 @@ class ImageController extends Controller {
                 'user_id' => $contributor,
                 'height' => $request['height'],
                 'width' => $request['width'],
+                "specific_people" => $request['specificPeople'],
+                'location' => $request['location'],
                 'author' => isset($metas->Author) ? $metas->Author : "",
                 'country' => isset($metas->Country) ? $metas->Country : "",
                 'city' => isset($metas->City) ? $metas->City : "",
@@ -167,7 +169,12 @@ class ImageController extends Controller {
             'headline'=>$request->headline,
             'keywords'=>$request->keywords,
             'copy_right'=>$request->copy_right,
-            'postal_code'=>$request->postal_code
+            'postal_code'=>$request->postal_code,
+            'orientation' => $request->orientation,
+            'no_people' => $request->no_people,
+            'people_composition' => $request->people_composition,
+            'specific_people' => $request->specific_people,
+            'location' => $request->location
 
         ]);
         return response()->json(['data'=>$image], 200);

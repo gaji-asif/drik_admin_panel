@@ -1,6 +1,8 @@
 let imageTable = null;
 let heightInput, widthInput, authorInput, countryInput, cityInput, stateInput, copyRightInput,
-    postalCodeInput, titleInput, websiteInput, phoneInput, emailInput, headlineInput, captionInput, tagInput, editingImageId;
+    postalCodeInput, titleInput, websiteInput, phoneInput, emailInput,
+    headlineInput, captionInput, tagInput, editingImageId, orientationInput, noPeopleInput, peopleCompositionInput,
+    specificPeopleInput, locationInput;
 document.addEventListener("DOMContentLoaded", function() {
     let buttonPanel = document.querySelector('.dt-buttons');
 
@@ -19,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
     headlineInput = document.querySelector(".image-headline");
     captionInput = document.querySelector(".image-caption");
     tagInput = document.querySelector('.tags-input');
+    orientationInput = document.querySelector('.orientation');
+    noPeopleInput = document.querySelector('.no_people');
+    peopleCompositionInput = document.querySelector('.people_composition');
+    specificPeopleInput = document.querySelector('.specific_people');
+    locationInput = document.querySelector('.location');
 
     if(buttonPanel) {
         buttonPanel.classList.add('d-none');
@@ -108,9 +115,13 @@ function editImage(imageId) {
                         method: 'GET'
                     }).then(res => res.json())
                         .then(res => {
+                            console.log("here");
                             let imageDetails = res.data;
                             let keywords = imageDetails["keywords"] || [];
-                            let {author, height, width, caption, city, copy_right, country, email, headline, phone, postal_code, state, title, website} = imageDetails;
+                            let {author, height, width, caption, city,
+                                copy_right, country, email, headline, phone,
+                                postal_code, state, title, website,
+                                orientation, no_people, people_composition, specific_people, location} = imageDetails;
                             heightInput.value = height;
                             widthInput.value = width;
                             authorInput.value = author;
@@ -126,6 +137,20 @@ function editImage(imageId) {
                             headlineInput.value = headline;
                             captionInput.value = caption;
                             $("#tags").tokenfield('setTokens', keywords);
+                            if(orientation){
+                                orientationInput.value = orientation;
+                            }
+                            if(no_people) {
+                                noPeopleInput.value = no_people;
+                            }
+                            if(people_composition) {
+                                peopleCompositionInput.value = people_composition;
+                            }
+
+                            specificPeopleInput.value = specific_people;
+
+                            locationInput.value = location;
+
                         });
                 }
                 $('#image-edit-modal').modal({show:true});
@@ -147,7 +172,12 @@ function updateImage() {
          email: emailInput.value,
          caption: captionInput.value,
          headline: headlineInput.value,
-         keywords: $("#tags").tokenfield('getTokensList')
+         keywords: $("#tags").tokenfield('getTokensList'),
+         orientation: orientationInput.value,
+         no_people: noPeopleInput.value,
+         people_composition: peopleCompositionInput.value,
+         specific_people: specificPeopleInput.value,
+         location: locationInput.value
      };
 
      let formData = new FormData();
