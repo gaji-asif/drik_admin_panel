@@ -254,9 +254,47 @@ const dynamicImageForm = $($.parseHTML('<div class="row dynamic-imgUp">\n' +
     '                                               </div>\n' +
     '                                           </div>'));
 
+let dynamicFormCount = 1;
+
 function createNewImageForm(){
-    let formElement = dynamicImageForm[0];
-    let categorySelect = document.querySelector(".main-category");
-    formElement.querySelector(".main-category").innerHTML = categorySelect.innerHTML;
-    return formElement;
+    // let formElement = dynamicImageForm[0];
+    // let categorySelect = document.querySelector(".main-category");
+    // formElement.querySelector(".main-category").innerHTML = categorySelect.innerHTML;
+    // return formElement;
+
+    let newForm = document.querySelector(".individual-image-form").cloneNode(true);
+
+    newForm.querySelector(".imagePreview").setAttribute("style", "");
+
+    [...newForm.querySelectorAll('input')].forEach(function(input) {
+        input.value = "";
+    });
+
+    [...newForm.querySelectorAll('select')].forEach(select => {
+        select.value = null;
+    });
+
+    [...newForm.querySelectorAll(["span.select2"])].forEach(span => span.remove());
+
+    let tagInput = $($.parseHTML('<div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
+        '                                                                                        <label>Keywords</label>\n' +
+        '                                                                                        <input type="text" class="form-control tags-input" value="" />\n' +
+        '                                                                                    </div>'));
+
+    tagInput = tagInput[0];
+
+    newForm.querySelector('.tags-input-container ').replaceWith(tagInput);
+
+    let newDatepicker = newForm.querySelector('.hasDatepicker');
+
+    newDatepicker.classList.remove('hasDatepicker');
+
+    newDatepicker.removeAttribute("id");
+
+    newForm.dataset.index = dynamicFormCount;
+
+    dynamicFormCount++;
+
+
+    return newForm;
 }
