@@ -126,7 +126,7 @@ class ImageController extends Controller {
     }
 
     public function image_list_all() {
-        $images = ImageChild::all();
+        $images = ImageChild::where('id', '>', 1)->paginate(5);
         return view('backEnd.images.index', compact('images'));
     }
 

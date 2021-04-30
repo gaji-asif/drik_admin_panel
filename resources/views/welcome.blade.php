@@ -3,7 +3,7 @@
     <div class="gallery-2">
         <div class="container-fluid">
             <div class="form-row">
-                <div class="col-md-12 p-0 grid-image">
+                <!-- <div class="col-md-12 p-0 grid-image">
                     <div class="ads-banner-img">
                         <div class="img">
                             <img class="w-100" src="{{asset('public/images/img-16.jpg')}}" alt="">
@@ -19,7 +19,7 @@
                             <div class="corner-bottom"></div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 @foreach($images as $image)
                     <div class="col-xs-6 col-sm-6 col-md-3 col-xl-3 p-0 grid-image">
                         <div class="img">
