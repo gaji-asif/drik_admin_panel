@@ -3,6 +3,10 @@ let imageFile = null;
 let masterId = null;
 let lastForm = null;
 let formCount = 1;
+// $(document).on('focus',".creation-date", function(){
+//     console.log(this);
+//     $(this).datepicker();
+// });
 document.addEventListener("DOMContentLoaded", function(){
     let imageSubmitBtn = document.getElementById("image_upload_btn");
 
@@ -43,24 +47,27 @@ document.addEventListener("DOMContentLoaded", function(){
             } else {
                 lastForm.classList.remove("was-validated");
                 let newForm = createNewImageForm();
+                console.log(newForm);
                 document.querySelector(".form-rows").append(newForm);
+
+                newForm.querySelector('.tags-input').setAttribute("id", `tags${newForm.dataset.index}`);
 
                 $('.js-example-basic-single').select2();
 
-                let heightInput = newForm.querySelector(".height-input-group");
-                let categorySelect = lastForm.querySelector(".category-select-group");
-                let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
-                let newCategorySelect = categorySelect.cloneNode(true);
-                let newSubCategorySelect = subCategorySelect.cloneNode(true);
-                newSubCategorySelect.querySelector("select").innerHTML = "";
-                heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
-                heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
-
-                newCategorySelect.addEventListener("change",getSubCategories);
+                // let heightInput = newForm.querySelector(".height-input-group");
+                // let categorySelect = lastForm.querySelector(".category-select-group");
+                // let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
+                // let newCategorySelect = categorySelect.cloneNode(true);
+                // let newSubCategorySelect = subCategorySelect.cloneNode(true);
+                // newSubCategorySelect.querySelector("select").innerHTML = "";
+                // heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
+                // heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
+                //
+                // newCategorySelect.addEventListener("change",getSubCategories);
 
                 imageFile = null;
                 $(`.tags-input`).tokenfield();
-                $(`#creation-date-${formCount}`).datepicker();
+                $('.creation-date').datepicker();
                 formCount++;
             }
 
@@ -199,11 +206,13 @@ function readImageMetaData(image, imageForm) {
 }
 
 function addImageToList() {
-    let imageForms = [...document.querySelectorAll(".imgUp")];
+    let imageForms = [...document.querySelectorAll(".individual-image-form")];
     lastForm = imageForms[imageForms.length-1];
     let tagInputId = "tags";
     if(lastForm.dataset.index) {
         tagInputId = `tags${lastForm.dataset.index}`;
+
+        console.log(tagInputId);
     }
 
     let imageFile = lastForm.querySelector(".uploadFile").files[0];
