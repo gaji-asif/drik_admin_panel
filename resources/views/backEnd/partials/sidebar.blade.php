@@ -52,6 +52,14 @@
 				</a>
 			</li>
 
+			<li class="document  pcoded-trigger">
+				<a href="{{url('image_list_all')}}" class="waves-effect waves-dark">
+					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
+					<span class="pcoded-mtext">Content Management</span>
+					<span class="pcoded-mcaret"></span>
+				</a>
+			</li>
+
             <li class="document  pcoded-trigger">
                 <a href="{{url('contributors')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>

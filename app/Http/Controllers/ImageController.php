@@ -123,6 +123,11 @@ class ImageController extends Controller {
         return view('backEnd.patients.image_list');
     }
 
+    public function image_list_all() {
+        $images = ImageChild::all();
+        return view('backEnd.images.index', compact('images'));
+    }
+
     public function getAllImages() {
         $images = ImageChild::all();
         return response()->json($images);

@@ -179,6 +179,9 @@ Route::post('update_image/{id}', 'ImageController@updateImage');
 Route::get('image_details/{id}', 'ImageController@imageDetails');
 
 
+Route::get('image_list_all', 'ImageController@image_list_all');
+
+
 Route::resource('category', 'CategoriesController');
 Route::get('delete-category/{id}', 'CategoriesController@deleteCategory');
 
