@@ -44,18 +44,26 @@
 			</li>
 {{--			@endcanany--}}
 
-			<li class="document  pcoded-trigger">
+			<!-- <li class="document  pcoded-trigger">
 				<a href="{{url('image_list')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
 					<span class="pcoded-mtext">All images</span>
 					<span class="pcoded-mcaret"></span>
 				</a>
-			</li>
+			</li> -->
 
 			<li class="document  pcoded-trigger">
 				<a href="{{url('image_list_all')}}" class="waves-effect waves-dark">
 					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
 					<span class="pcoded-mtext">Content Management</span>
+					<span class="pcoded-mcaret"></span>
+				</a>
+			</li>
+
+			<li class="document  pcoded-trigger">
+				<a href="#" class="waves-effect waves-dark">
+					<span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
+					<span class="pcoded-mtext">All Pending Images</span>
 					<span class="pcoded-mcaret"></span>
 				</a>
 			</li>
