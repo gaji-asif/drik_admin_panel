@@ -1,6 +1,8 @@
 let imageTable = null;
 let heightInput, widthInput, authorInput, countryInput, cityInput, stateInput, copyRightInput,
-    postalCodeInput, titleInput, websiteInput, phoneInput, emailInput, headlineInput, captionInput, tagInput, editingImageId;
+    postalCodeInput, titleInput, websiteInput, phoneInput, emailInput,
+    headlineInput, captionInput, tagInput, editingImageId, orientationInput, noPeopleInput, peopleCompositionInput,
+    specificPeopleInput, locationInput;
 document.addEventListener("DOMContentLoaded", function() {
     let buttonPanel = document.querySelector('.dt-buttons');
 
@@ -19,6 +21,11 @@ document.addEventListener("DOMContentLoaded", function() {
     headlineInput = document.querySelector(".image-headline");
     captionInput = document.querySelector(".image-caption");
     tagInput = document.querySelector('.tags-input');
+    orientationInput = document.querySelector('.orientation');
+    noPeopleInput = document.querySelector('.no_people');
+    peopleCompositionInput = document.querySelector('.people_composition');
+    specificPeopleInput = document.querySelector('.specific_people');
+    locationInput = document.querySelector('.location');
 
     if(buttonPanel) {
         buttonPanel.classList.add('d-none');
@@ -32,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function() {
         'columnDefs': [{
             'targets': 0,
             'searchable': false,
-          
+
             'className': 'dt-body-center',
             'render': function (data, type, full, meta){
-                return '<input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '">';
+                return '<input type="checkbox" name="id" value="' + $('<div/>').text(data).html() + '">';
             }
          }],
         "buttons": [],
@@ -61,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     $('#tags').tokenfield();
     $("#update_image_btn").on('click', updateImage);
+    $("#btn-bulk-delete").on('click', bulkDelete);
 });
 
 function deleteAnImage(imageId) {
@@ -107,9 +115,13 @@ function editImage(imageId) {
                         method: 'GET'
                     }).then(res => res.json())
                         .then(res => {
+                            console.log("here");
                             let imageDetails = res.data;
                             let keywords = imageDetails["keywords"] || [];
-                            let {author, height, width, caption, city, copy_right, country, email, headline, phone, postal_code, state, title, website} = imageDetails;
+                            let {author, height, width, caption, city,
+                                copy_right, country, email, headline, phone,
+                                postal_code, state, title, website,
+                                orientation, no_people, people_composition, specific_people, location} = imageDetails;
                             heightInput.value = height;
                             widthInput.value = width;
                             authorInput.value = author;
@@ -125,6 +137,20 @@ function editImage(imageId) {
                             headlineInput.value = headline;
                             captionInput.value = caption;
                             $("#tags").tokenfield('setTokens', keywords);
+                            if(orientation){
+                                orientationInput.value = orientation;
+                            }
+                            if(no_people) {
+                                noPeopleInput.value = no_people;
+                            }
+                            if(people_composition) {
+                                peopleCompositionInput.value = people_composition;
+                            }
+
+                            specificPeopleInput.value = specific_people;
+
+                            locationInput.value = location;
+
                         });
                 }
                 $('#image-edit-modal').modal({show:true});
@@ -146,7 +172,12 @@ function updateImage() {
          email: emailInput.value,
          caption: captionInput.value,
          headline: headlineInput.value,
-         keywords: $("#tags").tokenfield('getTokensList')
+         keywords: $("#tags").tokenfield('getTokensList'),
+         orientation: orientationInput.value,
+         no_people: noPeopleInput.value,
+         people_composition: peopleCompositionInput.value,
+         specific_people: specificPeopleInput.value,
+         location: locationInput.value
      };
 
      let formData = new FormData();
@@ -168,6 +199,30 @@ function updateImage() {
 
 
 }
+
+function bulkDelete(){
+    let selectedImageIds = [];
+    $("input:checkbox[name=id]:checked").each(function(){
+        selectedImageIds.push($(this).val());
+    });
+
+    let formData = new FormData();
+    formData.append('imageIds', JSON.stringify(selectedImageIds));
+
+    fetch(`${baseUrl}/delete_bulk_image`, {
+        method: 'POST',
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr('content')
+        },
+        body: formData
+    })
+        .then(res => res.json())
+        .then(res => {
+            swal("Image deleted successfully");
+            imageTable.ajax.reload();
+        });
+}
+
 $(document).ready(function () {
     $('#example-select-all').on('click', function(){
         // Get all rows with search applied
@@ -175,7 +230,7 @@ $(document).ready(function () {
         // Check/uncheck checkboxes for all rows in the table
         $('input[type="checkbox"]', rows).prop('checked', this.checked);
      });
-  
+
      // Handle click on checkbox to set state of "Select all" control
      $('#image-table tbody').on('change', 'input[type="checkbox"]', function(){
         // If checkbox is not checked
@@ -184,15 +239,15 @@ $(document).ready(function () {
            // If "Select all" control is checked and has 'indeterminate' property
            if(el && el.checked && ('indeterminate' in el)){
               el.indeterminate = true;
-             
+
            }
         }
      });
-  
+
      // Handle form submission event
      $('.get-all-selected').on('click', function(e){
         var form = $('.new_form');
-  
+
         // Iterate over all checkboxes in the table
         imageTable.$('input[type="checkbox"]').each(function(){
            // If checkbox doesn't exist in DOM

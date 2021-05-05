@@ -17,11 +17,20 @@
 
 <body>
 <!-- Preloader -->
+
+
 <div class="d-lg-flex half">
+
     <div class="bg order-1 order-md-2" style="background-image: url('{{ asset('public/images/img-9.jpg') }}')"></div>
 
     <div class="contents order-2 order-md-1">
+        <div class="row">
+    <div class="top_layer text-center mb-2 mt-2">
+        <img width="50%" src="{{asset('public/images/Drik images logo.png')}}">
+    </div>
+</div>
         <div class="container">
+
             <div class="row align-items-center justify-content-center">
                 <div class="col-md-10">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -61,12 +70,12 @@
                                 <button type="submit" class="btn btn-block btn-primary text-white">Log In</button>
 
 
-                                <span class="d-block text-center my-4 text-muted">&mdash;&mdash;&mdash;&mdash;&mdash; OR SIGN IN WITH &mdash;&mdash;&mdash;&mdash;&mdash;</span>
+                               <!--  <span class="d-block text-center my-4 text-muted">&mdash;&mdash;&mdash;&mdash;&mdash; OR SIGN IN WITH &mdash;&mdash;&mdash;&mdash;&mdash;</span>
 
                                 <div class="social-login">
                                     <a href="#" class="facebook btn d-flex justify-content-center align-items-center"> <span class="icon-facebook mr-3"></span> Login with Facebook </a>
                                     <a href="#" class="google btn d-flex justify-content-center align-items-center"> <span class="icon-google mr-3"></span> Login with Google </a>
-                                </div>
+                                </div> -->
                             </form>
                         </div>
 
@@ -108,7 +117,7 @@
 
                                 <div class="form-group last mb-3">
                                     <label for="company_name">Company name (optional)</label>
-                                    <input type="text" class="form-control" id="company_name" />
+                                    <input name="company_name" type="text" class="form-control" id="company_name" />
                                 </div>
 
                                 <div class="form-group last mb-3">

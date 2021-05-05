@@ -25,9 +25,10 @@
                     <div class="dt-responsive table-responsive">
                         {{ Form::open(['class' => 'new_form', 'files' => true, 'url' => 'edit_image_info','method' => 'POST', 'enctype' => 'multipart/form-data']) }}
                         <div class="text-right">
+                            <button type="button" class="btn btn-danger" id="btn-bulk-delete"  data-toggle="modal">Bulk Delete</button>
                             <button type="button" class="btn btn-success get-all-selected"  data-toggle="modal" data-target="#edit-image-info">Bulk Edit</button>
                         </div>
-                        
+
                         <table id="image-table" class="table table-striped table-bordered nowrap">
                             <thead>
                             <tr>
@@ -58,10 +59,10 @@
                                                 <div class="card-body iptc_metadata">
                                                     <div class="form-row">
                                                         <div class="form-group col-sm-12 ">
-                                                           
+
                                                                 <label for="info2 mb-0">Contributor</label>
-                                                           
-                                                           
+
+
                                                                 <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="contributor" id="info2">
                                                                     <option value="">Select Contributor</option>
                                                                     @if(isset($contributors))
@@ -70,13 +71,13 @@
                                                                         @endforeach
                                                                     @endif
                                                                     </select>
-                                                            
+
                                                         </div>
                                                         <div class="form-group col-sm-12 ">
-                                                           
+
                                                             <label for="info1 mb-0">Category</label>
-                                                       
-                                                       
+
+
                                                             <select class="js-example-basic-single col-sm-12 {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="category" id="info1">
                                                                 <option value="">Select Category</option>
                                                                 @if(isset($categories))
@@ -85,11 +86,11 @@
                                                                     @endforeach
                                                                 @endif
                                                                 </select>
-                            
-                                                        
+
+
                                                     </div>
-                                               
-                                                        
+
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,6 +262,44 @@
                                         <div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">
                                             <label>Keywords</label>
                                             <input type="text" class="form-control tags-input" id="tags" value="" />
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label style="float: left;" for="role_id" class=" col-form-label">Select Oreientation: </label>
+                                            <select class="form-control col-sm-12 orientation {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="orientation">
+                                                <option value="">Select Oreientation</option>
+                                                <option value="Vertical">Vertical</option>
+                                                <option value="Horizontal">Horizontal</option>
+                                                <option value="Square">Square</option>
+                                                <option value="Panaromic">Panaromic</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label  style="float: left;" for="role_id" class=" col-form-label">No of people: </label>
+                                            <select class="form-control col-sm-12 no_people {{ $errors->has('no_people') ? ' is-invalid' : '' }}" name="no_people">
+                                                <option value="">Select No</option>
+                                                <option value="1">1 person</option>
+                                                <option value="2">2 person</option>
+                                                <option value="3">3 person</option>
+                                                <option value="0">Group of people</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label  style="float: left;" for="role_id" class=" col-form-label">Select Composition: </label>
+                                            <select class="form-control col-sm-12 people_composition {{ $errors->has('people_composition') ? ' is-invalid' : '' }}" name="people_composition">
+                                                <option value="">Select Composition</option>
+                                                <option value="Head Shot">Head Shot</option>
+                                                <option value="Waist Up">Waist Up</option>
+                                                <option value="Full Length">Full Length</option>
+                                                <option value="Three Quarter">Three Quarter</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <label style="float: left">Specific People: </label>
+                                            <input type="text" class="form-control specific_people" name="specific_people" value="" />
+                                        </div>
+                                        <div class="form-group col-lg-4">
+                                            <label style="float: left">Location: </label>
+                                            <input name="location" type="text" class="form-control location" value="" />
                                         </div>
                                     </div>
                                 </div>

@@ -3,12 +3,17 @@ let imageFile = null;
 let masterId = null;
 let lastForm = null;
 let formCount = 1;
+// $(document).on('focus',".creation-date", function(){
+//     console.log(this);
+//     $(this).datepicker();
+// });
 document.addEventListener("DOMContentLoaded", function(){
     let imageSubmitBtn = document.getElementById("image_upload_btn");
 
+    $(".js-example-basic-single-1").select2();
+
     $(function() {
         $(document).on("change",".uploadFile", function(){
-            console.log("File uploaded");
             var uploadFile = $(this);
             var files = !!this.files ? this.files : [];
             if (!files.length || !window.FileReader) return;
@@ -20,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function(){
                 imageFile = files[0];
                 reader.onloadend = function(){ // set image data as background of div
                     //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
-                    let imageForm = uploadFile.closest(".imgUp");
+                    let imageForm = uploadFile.closest(".row");
                     imageForm.find('.imagePreview').css("background-image", "url("+this.result+")");
                     readImageMetaData(files[0], imageForm);
                 }
@@ -29,108 +34,44 @@ document.addEventListener("DOMContentLoaded", function(){
         });
 
         $(".imgAdd").click(function(){
+            let contributor = document.getElementById("contributor");
+            contributor = contributor.value;
+            if(!contributor) {
+                swal("Select a contributor");
+                return;
+            }
             let imageAdded = addImageToList();
             if(!imageAdded) {
                 imageFormValidationError();
 
             } else {
-                $(this).closest(".row").find('.imgAdd').before('<div class="imgUp dynamic-imgUp" data-index="'+formCount+'" id="imgUp">' +
-                    '<div class="row align-items-center"><div class="col-md-4">' +
-                    '<div class="imagePreview"></div>' +
-                    '<label class="btn btn-primary theme-btn">Upload Your Image<input type="file" class="uploadFile img" value="Upload Photo"></label>' +
-                    '<i class="fa fa-times del"></i></div><div class="col-md-8"><div class="card shadow-sm"><' +
-                    'div class="card-body iptc_metadata"><div class="form-row"><div class="col-md-12 text-left">' +
-                    '<h6>IPTC Metadata</h6></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center height-input-group">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info1 mb-0">Height</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-height" id="info1" placeholder="Height">' +
-                    '<div class="invalid-feedback">Height is required</div>'+
-                    '</div>' +
-                    '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info2 mb-0">Width</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-width" id="info2" placeholder="Image width">' +
-                    '<div class="invalid-feedback">Width is required</div>'+
-                    '</div>' +
-                    '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3">' +
-                    '<label for="info3 mb-0">Author</label>' +
-                    '</div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-author" id="info3" placeholder="Author"></div>' +
-                    '</div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info4 mb-0">Country</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-country" placeholder="Country">' +
-                    '</div></div><div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">City</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-city" placeholder="City"></div></div>' +
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                        '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">State</label></div>' +
-                        '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                            '<input type="text" class="form-control mb-0 image-state" placeholder="State"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Postal code</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-postal-code" placeholder="Postal code"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info6 mb-0">Caption</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9"><input type="text" class="form-control mb-0 image-caption" placeholder="Caption"></div></div>' +
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Copyright</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-copyright" placeholder="Copyright"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Email</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-email" placeholder="Phone"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Phone</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-phone" placeholder="Phone"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Website</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-website" placeholder="Website"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Headline</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-headline" placeholder="Headline"></div></div>'+
-                    '<div class="col-sm-12 col-md-12 col-lg-6 form-group text-left form-row align-items-center">' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3"><label for="info5 mb-0">Title</label></div>' +
-                    '<div class="col-sm-9 col-md-10 col-lg-9">' +
-                    '<input type="text" class="form-control mb-0 image-title" placeholder="Title"></div></div>'+
-                    '<div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">\n' +
-                    '<div class="col-sm-3 col-md-2 col-lg-3">\n' +
-                    '<label for="info7 mb-0">Creation date</label>\n' +
-                    '</div>\n' +
-                    '<div class="col-sm-12 col-md-9 col-lg-9">\n' +
-                    '<input id="creation-date-'+formCount+'" type="text" class="form-control creation-date">\n' +
-                    '</div>\n' +
-                    '</div>'+
-                    '<div class="form-group col-sm-12 col-md-12 col-lg-12 text-left form-row align-items-center">\n' +
-                    '<label>Keywords</label>' +
-                    '<input type="text" class="form-control tags-input" id="tags'+formCount+'" value="" />' +
-                    '</div></div></div></div></div></div></div>');
                 lastForm.classList.remove("was-validated");
-                let newForm = $(`div[data-index="${formCount}"]`)[0];
-                let heightInput = newForm.querySelector(".height-input-group");
-                let categorySelect = lastForm.querySelector(".category-select-group");
-                let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
-                let newCategorySelect = categorySelect.cloneNode(true);
-                let newSubCategorySelect = subCategorySelect.cloneNode(true);
-                newSubCategorySelect.querySelector("select").innerHTML = "";
-                heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
-                heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
+                let newForm = createNewImageForm();
+                newForm.classList.add('dynamic-imgUp');
+                document.querySelector(".form-rows").append(newForm);
 
-                newCategorySelect.addEventListener("change",getSubCategories);
+                newForm.querySelector('.tags-input').setAttribute("id", `tags${newForm.dataset.index}`);
+
+                $('.js-example-basic-single').select2();
+
+                // let heightInput = newForm.querySelector(".height-input-group");
+                // let categorySelect = lastForm.querySelector(".category-select-group");
+                // let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
+                // let newCategorySelect = categorySelect.cloneNode(true);
+                // let newSubCategorySelect = subCategorySelect.cloneNode(true);
+                // newSubCategorySelect.querySelector("select").innerHTML = "";
+                // heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
+                // heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
+                //
+                // newCategorySelect.addEventListener("change",getSubCategories);
 
                 imageFile = null;
-                $(`#tags${formCount}`).tokenfield();
-                $(`#creation-date-${formCount}`).datepicker();
+                $(`.tags-input`).tokenfield();
+                $('.creation-date').datepicker();
                 formCount++;
             }
+
+            console.log(images);
 
         });
 
@@ -146,6 +87,12 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     imageSubmitBtn.addEventListener("click", function() {
+        let contributor = document.getElementById("contributor");
+        contributor = contributor.value;
+        if(!contributor) {
+            swal("Select a contributor");
+            return;
+        }
         masterId = null;
         if(!addImageToList()) {
             imageFormValidationError();
@@ -259,11 +206,13 @@ function readImageMetaData(image, imageForm) {
 }
 
 function addImageToList() {
-    let imageForms = [...document.querySelectorAll(".imgUp")];
+    let imageForms = [...document.querySelectorAll(".individual-image-form")];
     lastForm = imageForms[imageForms.length-1];
     let tagInputId = "tags";
     if(lastForm.dataset.index) {
         tagInputId = `tags${lastForm.dataset.index}`;
+
+        console.log(tagInputId);
     }
 
     let imageFile = lastForm.querySelector(".uploadFile").files[0];
@@ -288,12 +237,22 @@ function addImageToList() {
     let category = lastForm.querySelector(".main-category").value;
     let subCategory = lastForm.querySelector(".sub-category").value;
     let keywords = $(`#${tagInputId}`).tokenfield('getTokensList');
+    let orientation = lastForm.querySelector(".orientation").value;
+    let people = lastForm.querySelector(".no_people").value;
+    let composition = lastForm.querySelector(".people_composition").value;
+    let specificPeople = lastForm.querySelector(".specific_people").value;
+    let location = lastForm.querySelector(".location").value;
     let metas = {};
 
     imageObj.height = height;
     imageObj.width = width;
     imageObj.category = category;
     imageObj.subCategory = subCategory;
+    imageObj.orientation = orientation;
+    imageObj.people = people;
+    imageObj.composition = composition;
+    imageObj.specificPeople = specificPeople;
+    imageObj.location = location;
     metas.Author = author || "";
     metas.Country = country || "";
     metas.City = city || "";
@@ -315,14 +274,16 @@ function addImageToList() {
     } else {
         return false;
     }
-
-    images.push(imageObj);
 }
 
 function uploadImage(event) {
-    showLoader();
     let contributor = document.getElementById("contributor");
     contributor = contributor.value;
+    if(!contributor) {
+        swal("Select a contributor");
+        return;
+    }
+    showCustomLoader();
     let imageObj = images.pop();
     if(!imageObj) {
         swal({
@@ -337,7 +298,7 @@ function uploadImage(event) {
             input.value = '';
         });
         $(".token").remove();
-        removeLoader();
+        removeCustomLoader();
         return ;
     }
 
@@ -349,6 +310,11 @@ function uploadImage(event) {
     formData.append("category", imageObj.category || "");
     formData.append("subCategory", imageObj.subCategory || "");
     formData.append("contributor", contributor);
+    formData.append("specificPeople", imageObj.specificPeople);
+    formData.append("location", imageObj.location);
+    formData.append("orientation", imageObj.orientation);
+    formData.append("people", imageObj.people);
+    formData.append("composition", imageObj.composition);
     formData.append("metas", JSON.stringify(imageObj.metas));
     if(masterId) {
         formData.append("masterId", masterId);

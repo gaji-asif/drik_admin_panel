@@ -133,10 +133,12 @@
                         <h1>Bring the World’s Best Visual Content to Your Work</h1>
                         <h5>Over 1.9 million+ high quality stock images shared by our talented community.</h5>
                     </div>
-                    <div class="form-group search_form">
-                        <input type="text" class="form-control" id="" placeholder="Search images, vectors and videos">
-                        <button type="submit" class="btn search_submit_button"><i class="fas fa-search"></i></button>
-                    </div>
+                    <form method="GET" action="{{route('search-image')}}">
+                        <div class="form-group search_form">
+                            <input name="search_key" type="text" class="form-control" id="" placeholder="Search images, vectors and videos">
+                            <button type="submit" class="btn search_submit_button"><i class="fas fa-search"></i></button>
+                        </div>
+                    </form>
                     <small id="" class="form-text text-muted">You can search whatever you want.</small>
                 </div>
             </div>

@@ -1,8 +1,12 @@
 let sorting = 'asc';
 let time = null;
+let orientation = null;
+let people = null;
+let composition = null;
 let photographer = null;
 let $grid = null;
 let pagination = null;
+console.log("laoded");
 document.addEventListener("DOMContentLoaded", function(){
     $('.grid').imagesLoaded( function() {
         $grid = $('.grid').masonry({
@@ -11,6 +15,9 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     $("#sort-menu").on('click', sortImages);
     $("#time-menu").on('click', filterByTime);
+    $("#orientation-menu").on('click', filterByOrientation);
+    $("#people-menu").on('click', filterByPeople);
+    $("#people-composition").on('click', filterByPeopleComposition);
     $("#photographer-menu").on('click', filterByPhotographer);
 
     pagination = document.querySelector(".pagination");
@@ -37,6 +44,33 @@ function filterByTime(event) {
     let target = event.target;
     let selectedItem = target.closest("li");
     time = selectedItem.dataset.value;
+
+    filterImages();
+}
+
+function filterByOrientation(event)
+{
+    let target = event.target;
+    let selectedItem = target.closest("li");
+    orientation = selectedItem.dataset.value;
+
+    filterImages();
+}
+
+function filterByPeople(event)
+{
+    let target = event.target;
+    let selectedItem = target.closest("li");
+    people = selectedItem.dataset.value;
+
+    filterImages();
+}
+
+function filterByPeopleComposition(event)
+{
+    let target = event.target;
+    let selectedItem = target.closest("li");
+    composition = selectedItem.dataset.value;
 
     filterImages();
 }
@@ -74,11 +108,26 @@ function filterImages(pageNumber=1, refreshPagination = false) {
     if(time) {
         formData.append('time', time);
     }
+    if(orientation)
+    {
+        formData.append('orientation', orientation);
+    }
+    if(people)
+    {
+        formData.append('people', people);
+    }
+    if(composition)
+    {
+        formData.append('composition', composition);
+    }
     if(pageNumber) {
         formData.append('page', pageNumber);
     }
     if(photographer) {
         formData.append('photographer', photographer);
+    }
+    if(orientation) {
+
     }
     fetch(baseUrl+"/filter", {
         method: 'POST',

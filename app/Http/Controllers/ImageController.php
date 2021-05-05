@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Helpers\ImageHelper;
 use App\Http\Controllers\Controller;
 use App\ImageChild;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -87,6 +89,8 @@ class ImageController extends Controller {
                 'user_id' => $contributor,
                 'height' => $request['height'],
                 'width' => $request['width'],
+                "specific_people" => $request['specificPeople'],
+                'location' => $request['location'],
                 'author' => isset($metas->Author) ? $metas->Author : "",
                 'country' => isset($metas->Country) ? $metas->Country : "",
                 'city' => isset($metas->City) ? $metas->City : "",
@@ -102,6 +106,9 @@ class ImageController extends Controller {
                 'keywords' => isset($metas->Keywords) ? $metas->Keywords : "",
                 'category'=>$request["category"],
                 'sub_category'=> isset($request["subCategory"]) ? $request["subCategory"] : null,
+                'orientation' => isset($request["orientation"]) ? $request["orientation"] : null,
+                'no_people' => isset($request["people"]) ? $request["people"] : null,
+                'people_composition' => isset($request["composition"]) ? $request["composition"] : null,
                 'image_main_url' => $image_url,
                 'medium_url' => $medium_url,
                 'small_url' => $small_url,
@@ -118,6 +125,11 @@ class ImageController extends Controller {
         return view('backEnd.patients.image_list');
     }
 
+    public function image_list_all() {
+        $images = ImageChild::where('id', '>', 1)->paginate(5);
+        return view('backEnd.images.index', compact('images'));
+    }
+
     public function getAllImages() {
         $images = ImageChild::all();
         return response()->json($images);
@@ -128,6 +140,14 @@ class ImageController extends Controller {
         $image = ImageChild::find($imageId);
         $deleted = $image->delete();
         return response()->json(['data' => $deleted]);
+    }
+
+    public function deleteBulkImage(Request $request)
+    {
+        $imageIds = json_decode($request["imageIds"]);
+        ImageChild::whereIn('id', $imageIds)->delete();
+
+        return response()->json(['status' => 200], 200);
     }
 
     public function imageDetails($id) {
@@ -154,9 +174,39 @@ class ImageController extends Controller {
             'headline'=>$request->headline,
             'keywords'=>$request->keywords,
             'copy_right'=>$request->copy_right,
-            'postal_code'=>$request->postal_code
+            'postal_code'=>$request->postal_code,
+            'orientation' => $request->orientation,
+            'no_people' => $request->no_people,
+            'people_composition' => $request->people_composition,
+            'specific_people' => $request->specific_people,
+            'location' => $request->location
 
         ]);
         return response()->json(['data'=>$image], 200);
+    }
+
+    public function searchImage(Request $request)
+    {
+        $search = $request->input('search_key');
+
+        $searchKeyWords = explode(" ", $search);
+
+        $searchKeyWords = array_filter($searchKeyWords, function($elm) {
+            return strlen($elm) > 2;
+        });
+
+        foreach ($searchKeyWords as $value){
+            if(!isset($searchQuery)) {
+                $searchQuery = ImageChild::where('keywords', 'like', '%' . $value . '%');
+            } else {
+                $searchQuery = $searchQuery->orWhere('keywords', 'like', '%' . $value . '%');
+            }
+        };
+
+        $images = $searchQuery->paginate(20);
+
+        $categories = Category::all();
+        $photographers = User::where('user_type', 1)->get();
+        return view('filter', compact('images', 'categories', 'photographers'));
     }
 }

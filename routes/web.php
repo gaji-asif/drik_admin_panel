@@ -174,10 +174,27 @@ Route::post('upload_image', 'ImageController@upload_image');
 Route::get('image_list', 'ImageController@imageList');
 Route::get('get_all_images', 'ImageController@getAllImages');
 Route::post('delete_image', 'ImageController@deleteImage');
+Route::post('delete_bulk_image', 'ImageController@deleteBulkImage');
 Route::post('update_image/{id}', 'ImageController@updateImage');
 Route::get('image_details/{id}', 'ImageController@imageDetails');
 
 
+Route::get('image_list_all', 'ImageController@image_list_all');
+
+
 Route::resource('category', 'CategoriesController');
 Route::get('delete-category/{id}', 'CategoriesController@deleteCategory');
+
+//Contributor list
+Route::get('contributors', 'ContributorController@index');
+Route::get('contributor_list', 'ContributorController@getContributors');
+Route::post('approve_contributor', 'ContributorController@approveContributor');
 });
+
+// Route::get('your-dashboard', 'ErpPatientController@index');
+Route::get('your-dashboard', ['as' => 'your-dashboard', 'uses' => 'CustomerController@index']);
+Route::get('customer-profile', ['as' => 'customer-profile', 'uses' => 'CustomerController@profile']);
+Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 'CustomerController@edit_profile']);
+Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
+
+Route::get('search', ['as' => 'search-image', 'uses' => 'ImageController@searchImage']);
