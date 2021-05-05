@@ -126,7 +126,7 @@ class ImageController extends Controller {
     }
 
     public function image_list_all() {
-        $images = ImageChild::where('id', '>', 1)->paginate(5);
+        $images = ImageChild::where('id', '>', 1)->paginate(10);
         return view('backEnd.images.index', compact('images'));
     }
 
@@ -208,5 +208,29 @@ class ImageController extends Controller {
         $categories = Category::all();
         $photographers = User::where('user_type', 1)->get();
         return view('filter', compact('images', 'categories', 'photographers'));
+    }
+
+    public function searchImageData(Request $request){
+        $search = $request->input('search_key');
+
+        $searchKeyWords = explode(" ", $search);
+
+        $searchKeyWords = array_filter($searchKeyWords, function($elm) {
+            return strlen($elm) > 2;
+        });
+
+        foreach ($searchKeyWords as $value){
+            if(!isset($searchQuery)) {
+                $searchQuery = ImageChild::where('keywords', 'like', '%' . $value . '%');
+            } else {
+                $searchQuery = $searchQuery->orWhere('keywords', 'like', '%' . $value . '%');
+            }
+        };
+
+        $images = $searchQuery->paginate(10);
+
+        $categories = Category::all();
+        $photographers = User::where('user_type', 1)->get();
+        return view('backEnd.images.index', compact('images', 'categories', 'photographers'));
     }
 }

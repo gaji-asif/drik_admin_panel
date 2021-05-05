@@ -198,3 +198,5 @@ Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 
 Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
 
 Route::get('search', ['as' => 'search-image', 'uses' => 'ImageController@searchImage']);
+
+Route::get('search_image_data', ['as' => 'search_image_data', 'uses' => 'ImageController@searchImageData']);
