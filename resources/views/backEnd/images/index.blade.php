@@ -36,7 +36,7 @@
 <div class="card">
     <div class="card-header">
         <div class="row">
-            <div class="col-lg-3" style="font-size: 21px; font-weight: bold;">All Upload Images</div>
+            <div class="col-lg-3" style="font-size: 21px; font-weight: bold;">All Upload Images ({{count($images)}})</div>
             <div class="col-lg-9" style="float: right;">
                 <div class="row">
                     <div class="col-lg-2"></div>
@@ -93,10 +93,10 @@
             <div class="card-body">
                 <h5 class="card-title">id#{{$image->id}}</h5>
                 <p class="card-text">{{$image->title}}</p>
-                <button onclick="deleteAnImage(5)" type="button" class="btn btn-success action-icon"><i class="fa fa-check"></i></button>
-                <button onclick="deleteAnImage(5)" type="button" class="btn btn-success action-icon"><i class="fa fa-edit"></i></button>
+                <button  type="button" class="btn btn-success action-icon"><i class="fa fa-check"></i></button>
+                <button onclick="editImage(<?php echo $image->id?>)" type="button" class="btn btn-success action-icon"><i class="fa fa-edit"></i></button>
                 <button onclick="deleteAnImage(5)" type="button" class="btn btn-danger action-icon"><i class="fa fa-trash-o"></i></button>
-                <button onclick="deleteAnImage(5)" type="button" class="btn btn-warning action-icon"><i class=" fa fa-certificate"></i></button>
+              <!--   <button onclick="deleteAnImage(5)" type="button" class="btn btn-warning action-icon"><i class=" fa fa-certificate"></i></button> -->
 
             </div>
         </div>
@@ -125,12 +125,12 @@
             </div>
             <div class="modal-body">
                 <div class="col-md-12">
-                    <div class="card shadow-sm">
+                    <div class="shadow-sm">
                         <div class="card-body iptc_metadata">
                             <div class="form-row">
-                                <div class="col-md-12 text-left">
+                                <!-- <div class="col-md-12 text-left">
                                     <h6>IPTC Metadata</h6>
-                                </div>
+                                </div> -->
                                 <div class="form-group col-sm-12 col-md-12 col-lg-6 text-left form-row align-items-center">
                                     <div class="col-sm-3 col-md-2 col-lg-3">
                                         <label for="info1 mb-0">Height</label>

@@ -193,10 +193,27 @@ Route::post('approve_contributor', 'ContributorController@approveContributor');
 
 // Route::get('your-dashboard', 'ErpPatientController@index');
 Route::get('your-dashboard', ['as' => 'your-dashboard', 'uses' => 'CustomerController@index']);
+Route::get('purchased-list', ['as' => 'purchased-list', 'uses' => 'CustomerController@getPurchasedInfo']);
 Route::get('customer-profile', ['as' => 'customer-profile', 'uses' => 'CustomerController@profile']);
 Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 'CustomerController@edit_profile']);
 Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
+<<<<<<< HEAD
 Route::get('contributor-upload', ['as' => 'contributor-upload', 'uses' => 'CustomerController@upload']);
+=======
+Route::get('promocode', ['as' => 'promocode', 'uses' => 'CustomerController@promocode']);
+//Email
+Route::get('send-mail', function () {
+   
+    $details = [
+        'title' => 'Mail from ItSolutionStuff.com',
+        'body' => 'This is for testing email using smtp'
+    ];
+   
+   $xx = \Mail::to('nurullah.engg@gmail.com')->send(new \App\Mail\SendEmail($details));
+   dd($xx);
+    dd("Email is Sent.");
+});
+>>>>>>> c2246f63b194248de386288d440d68dfb44a57f8
 
 Route::get('search', ['as' => 'search-image', 'uses' => 'ImageController@searchImage']);
 

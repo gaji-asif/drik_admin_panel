@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd70d4a83997c141665a90405bedd3d68abafdc8a',
+    'reference' => 'b77818ccbbee888486b0db3c1bf264278cfb0aed',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -451,7 +451,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd70d4a83997c141665a90405bedd3d68abafdc8a',
+      'reference' => 'b77818ccbbee888486b0db3c1bf264278cfb0aed',
     ),
     'laravel/nexmo-notification-channel' => 
     array (
@@ -928,8 +928,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 
@@ -1402,6 +1402,15 @@
       array (
       ),
       'reference' => 'a05bd7319ed808fcc3125212e37d30ccbe0d2b8b',
+    ),
+    'yajra/laravel-datatables-oracle' => 
+    array (
+      'pretty_version' => 'v8.13.7',
+      'version' => '8.13.7.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '17b50e3ee91ceb5b1cc6e596c366718af4ff45cc',
     ),
     'zendframework/zend-diactoros' => 
     array (

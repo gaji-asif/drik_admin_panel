@@ -14,7 +14,7 @@ use App\Category;
 use App\User;
 use Illuminate\Support\Facades\Hash;
 use Session;
-
+use DataTables;
 
 class CustomerController extends Controller {
     public function index() {
@@ -27,6 +27,33 @@ class CustomerController extends Controller {
             return view('web.customers.dashboard', compact('images', 'categories', 'user'));
         }
     }
+
+    public function getPurchasedInfo(Request $request)
+    {
+        $user = Auth::user();
+        $data = DB::table('purchase_histories')
+                ->leftjoin('all_images_childs', 'all_images_childs.id', '=', 'purchase_histories.image_id')
+                ->select('purchase_histories.*', 'all_images_childs.image_name', 'all_images_childs.small_url', 'all_images_childs.small_price')
+                ->where('purchase_histories.user_id', $user->id)
+                ->get();
+        return Datatables::of($data)
+            ->addIndexColumn()
+            ->addColumn('status', function($data) {
+                if ($data->payment_status == 1) {
+                    $status = '<label class="label label-success">Complete</label>';
+                } else {
+                    $status = '<label class="label label-warning">Pending</label>';
+                }
+                return $status;
+            })
+            ->addColumn('action', function($row){
+                $actionBtn = '<a href="javascript:void(0)" class="btn btn-success btn-sm">Download</a>';
+                return $actionBtn;
+            })
+            ->rawColumns(['action', 'status'])
+            ->make(true);
+    }
+
 
     public function profile(){
         $categories = Category::all();
@@ -90,5 +117,45 @@ class CustomerController extends Controller {
         $categories = Category::all();
         return view('web.contributors.upload', compact('categories', 'user'));
     }
+    
 
+    public function promocode() {
+        $categories = Category::all();
+        $images = ImageChild::all();
+        $user = Auth::user();
+        $promocode = DB::table('promocodes')->get();
+        return view('web.customers.promocode', compact('images', 'categories', 'user', 'promocode'));
+    }
+
+//    public function send_email(Request $request)
+//    {
+//        $request->validate([
+//            'receiver_id' => 'required',
+//            'msg' => 'required'
+//        ]);
+//
+//        $users_details = User::where('id', '=', $request->receiver_id)->first();
+//
+//        $email = new ErpSendDoc();
+//
+//        $email->receiver_id = $request->receiver_id;
+//        $email->sender_id = Auth::user()->id;
+//        $email->doc_id = $id;
+//        $email->msg = $request->msg;
+//        $result = $email->save();
+//
+//        if ($result) {
+//            $mailData = array(
+//                'email' => $users_details->email,
+//                'receiver_id' => $request->receiver_id,
+//            );
+//            $mailSent = Mail::to($users_details->email)
+//                ->send(new SendEmailToUser($mailData));
+//            if ($mailSent) {
+//                return redirect('preview_doc/' . $id)->with('message-success', 'Document has been send successfully');
+//            } else {
+//                return redirect('preview_doc/' . $id)->with('message-success', 'Document has been send successfully');
+//            }
+//        }
+//    }
 }
