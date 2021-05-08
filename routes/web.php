@@ -196,6 +196,7 @@ Route::get('your-dashboard', ['as' => 'your-dashboard', 'uses' => 'CustomerContr
 Route::get('customer-profile', ['as' => 'customer-profile', 'uses' => 'CustomerController@profile']);
 Route::put('customer-edit-profile', ['as' => 'customer-edit-profile', 'uses' => 'CustomerController@edit_profile']);
 Route::get('wishlist', ['as' => 'wishlist', 'uses' => 'CustomerController@wishlist']);
+Route::get('contributor-upload', ['as' => 'contributor-upload', 'uses' => 'CustomerController@upload']);
 
 Route::get('search', ['as' => 'search-image', 'uses' => 'ImageController@searchImage']);
 

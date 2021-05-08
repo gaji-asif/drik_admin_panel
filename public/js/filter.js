@@ -6,8 +6,10 @@ let composition = null;
 let photographer = null;
 let $grid = null;
 let pagination = null;
-console.log("laoded");
+let searchKey = null
 document.addEventListener("DOMContentLoaded", function(){
+    let searchParams = new URLSearchParams(window.location.search);
+    searchKey = searchParams.get("search_key");
     $('.grid').imagesLoaded( function() {
         $grid = $('.grid').masonry({
             itemSelector: '.grid-item'
@@ -18,7 +20,8 @@ document.addEventListener("DOMContentLoaded", function(){
     $("#orientation-menu").on('click', filterByOrientation);
     $("#people-menu").on('click', filterByPeople);
     $("#people-composition").on('click', filterByPeopleComposition);
-    $("#photographer-menu").on('click', filterByPhotographer);
+    // $("#photographer-menu").on('click', filterByPhotographer);
+    $("#photographer-form").on('submit', filterByPhotographer);
 
     pagination = document.querySelector(".pagination");
 
@@ -34,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function(){
 function sortImages(event) {
     let selectedItem = event.target.closest('li');
     if(selectedItem) {
+        makeOptionActive(selectedItem);
         sorting = selectedItem.dataset.value;
     }
     filterImages();
@@ -43,6 +47,7 @@ function sortImages(event) {
 function filterByTime(event) {
     let target = event.target;
     let selectedItem = target.closest("li");
+    makeOptionActive(selectedItem);
     time = selectedItem.dataset.value;
 
     filterImages();
@@ -52,8 +57,8 @@ function filterByOrientation(event)
 {
     let target = event.target;
     let selectedItem = target.closest("li");
+    makeOptionActive(selectedItem);
     orientation = selectedItem.dataset.value;
-
     filterImages();
 }
 
@@ -61,6 +66,7 @@ function filterByPeople(event)
 {
     let target = event.target;
     let selectedItem = target.closest("li");
+    makeOptionActive(selectedItem);
     people = selectedItem.dataset.value;
 
     filterImages();
@@ -70,16 +76,15 @@ function filterByPeopleComposition(event)
 {
     let target = event.target;
     let selectedItem = target.closest("li");
+    makeOptionActive(selectedItem);
     composition = selectedItem.dataset.value;
-
     filterImages();
 }
 
 function filterByPhotographer(event) {
-    let target = event.target;
-    let selectedItem = target.closest("li");
-    photographer=  selectedItem.dataset.value;
-
+    event.preventDefault();
+    let form = event.currentTarget;
+    photographer = form.querySelector("#photographer_name").value;
     filterImages();
 }
 
@@ -102,6 +107,7 @@ function reCreatePagination(last_page) {
 
 function filterImages(pageNumber=1, refreshPagination = false) {
     let formData = new FormData();
+    formData.append("search_key", searchKey);
     if(sorting) {
         formData.append('sorting', sorting);
     }
@@ -168,5 +174,15 @@ function changePage(e) {
     previouslyActive.classList.remove('active');
     listItem.classList.add('active');
 
+}
+
+function makeOptionActive(option)
+{
+    let list = option.closest('ul');
+    let alreadyActive = list.querySelector('.active');
+    if(alreadyActive) {
+        alreadyActive.classList.remove('active');
+    }
+    option.classList.add('active');
 }
 

@@ -8,9 +8,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" type="image/x-icon" href="images/logo.png" />
     <script src="{{asset('public/js/drik_js/jquery.min.js')}}"></script>
-    <script src="{{asset('public/js/imagesLoaded.js')}}"></script>
     <script src="{{asset('public/js/drik_js/masonry.pkgd.min.js')}}"></script>
-    <script src="{{asset('public/js/common.js')}}"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/bootstrap/css/bootstrap.min.css')}}">
+
+    <link rel="stylesheet" type="text/css" href="{{asset('public/assets/css/style.css')}}">
+
+    <link rel="stylesheet" href="{{asset('public/css/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/css/bootstrap-tokenfield.min.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tokenfield/0.12.0/bootstrap-tokenfield.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/bootstrap-multiselect/css/bootstrap-multiselect.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('public/bower_components/multiselect/css/multi-select.css')}}">
+    <link rel="stylesheet" href="{{asset('public/css/bootstrap-tagsinput.css')}}">
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +37,8 @@
     <link rel="stylesheet" href="{{asset('public/css/drik/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/drik/css/responsive.css')}}">
     <link rel="stylesheet" href="{{asset('public/css/drik/css/sidebar.css')}}">
+    <script src="{{asset('public/js/imagesLoaded.js')}}"></script>
+    <script src="{{asset('public/js/common.js')}}"></script>
 </head>
 
 <body>

@@ -3,14 +3,17 @@ let imageFile = null;
 let masterId = null;
 let lastForm = null;
 let formCount = 1;
-// $(document).on('focus',".creation-date", function(){
-//     console.log(this);
-//     $(this).datepicker();
-// });
+let contributor = null;
+$(document).on('focus',".creation-date", function(){
+    $(this).datepicker();
+});
 document.addEventListener("DOMContentLoaded", function(){
+    let contributorIdField = document.getElementById("contributor-id");
+    contributor = contributorIdField ? contributorIdField.value : null;
+
     let imageSubmitBtn = document.getElementById("image_upload_btn");
 
-    $(".js-example-basic-single-1").select2();
+    // $(".js-example-basic-single-1").select2();
 
     $(function() {
         $(document).on("change",".uploadFile", function(){
@@ -34,12 +37,8 @@ document.addEventListener("DOMContentLoaded", function(){
         });
 
         $(".imgAdd").click(function(){
-            let contributor = document.getElementById("contributor");
-            contributor = contributor.value;
-            if(!contributor) {
-                swal("Select a contributor");
-                return;
-            }
+            if(!checkForContributor()) return;
+
             let imageAdded = addImageToList();
             if(!imageAdded) {
                 imageFormValidationError();
@@ -53,17 +52,6 @@ document.addEventListener("DOMContentLoaded", function(){
                 newForm.querySelector('.tags-input').setAttribute("id", `tags${newForm.dataset.index}`);
 
                 $('.js-example-basic-single').select2();
-
-                // let heightInput = newForm.querySelector(".height-input-group");
-                // let categorySelect = lastForm.querySelector(".category-select-group");
-                // let subCategorySelect = lastForm.querySelector(".sub-category-select-group");
-                // let newCategorySelect = categorySelect.cloneNode(true);
-                // let newSubCategorySelect = subCategorySelect.cloneNode(true);
-                // newSubCategorySelect.querySelector("select").innerHTML = "";
-                // heightInput.parentNode.insertBefore(newCategorySelect, heightInput);
-                // heightInput.parentNode.insertBefore(newSubCategorySelect, heightInput);
-                //
-                // newCategorySelect.addEventListener("change",getSubCategories);
 
                 imageFile = null;
                 $(`.tags-input`).tokenfield();
@@ -87,12 +75,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
     imageSubmitBtn.addEventListener("click", function() {
-        let contributor = document.getElementById("contributor");
-        contributor = contributor.value;
-        if(!contributor) {
-            swal("Select a contributor");
-            return;
-        }
+        if(!contributor) return ;
         masterId = null;
         if(!addImageToList()) {
             imageFormValidationError();
@@ -277,12 +260,7 @@ function addImageToList() {
 }
 
 function uploadImage(event) {
-    let contributor = document.getElementById("contributor");
-    contributor = contributor.value;
-    if(!contributor) {
-        swal("Select a contributor");
-        return;
-    }
+    if(!checkForContributor()) return;
     showCustomLoader();
     let imageObj = images.pop();
     if(!imageObj) {
@@ -336,4 +314,20 @@ function saveImage(formData) {
             uploadImage();
 
         })
+}
+
+
+function checkForContributor()
+{
+    if(contributor) return true;
+    else if(!contributor) {
+        let contributorSelect = document.getElementById("contributor");
+        contributor = contributorSelect.value;
+        if(!contributor) {
+            swal("Select a contributor");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

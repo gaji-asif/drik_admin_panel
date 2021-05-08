@@ -45,7 +45,7 @@ class UserController extends Controller {
     public function make_login(Request $request)
     {
         $user = User::where('email', $request["email"])->first();
-        if(Hash::check($request["password"], $user->password) && $user->active_status === 1){
+        if($user && Hash::check($request["password"], $user->password) && $user->active_status === 1){
             Auth::login($user);
             return redirect()->route('your-dashboard');
         } else {

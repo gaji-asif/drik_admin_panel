@@ -273,30 +273,17 @@
 
                                                                         <div class="row">
                                                                             <div class="form-group col-lg-4">
-
                                                                                 <label style="float: left;" for="role_id" class=" col-form-label">Select Oreientation: </label>
-
                                                                                 <select class="js-example-basic-single col-sm-12 orientation {{ $errors->has('role_id') ? ' is-invalid' : '' }}" name="orientation">
                                                                                     <option value="">Select Oreientation</option>
                                                                                     <option value="Vertical">Vertical</option>
                                                                                     <option value="Horizontal">Horizontal</option>
                                                                                     <option value="Square">Square</option>
                                                                                     <option value="Panaromic">Panaromic</option>
-
                                                                                 </select>
-
-
-
                                                                             </div>
-
-
-
-
-
                                                                             <div class="form-group col-lg-4">
-
                                                                                 <label  style="float: left;" for="role_id" class=" col-form-label">No of people: </label>
-
                                                                                 <select class="js-example-basic-single col-sm-12 no_people {{ $errors->has('no_people') ? ' is-invalid' : '' }}" name="no_people">
                                                                                     <option value="">Select No</option>
                                                                                     <option value="1">1 person</option>
@@ -304,26 +291,16 @@
                                                                                     <option value="3">3 person</option>
                                                                                     <option value="0">Group of people</option>
                                                                                 </select>
-
-
-
                                                                             </div>
-
                                                                             <div class="form-group col-lg-4">
-
                                                                                 <label  style="float: left;" for="role_id" class=" col-form-label">Select Composition: </label>
-
                                                                                 <select class="js-example-basic-single col-sm-12 people_composition {{ $errors->has('people_composition') ? ' is-invalid' : '' }}" name="people_composition">
                                                                                     <option value="">Select Composition</option>
                                                                                     <option value="Head Shot">Head Shot</option>
                                                                                     <option value="Waist Up">Waist Up</option>
                                                                                     <option value="Full Length">Full Length</option>
                                                                                     <option value="Three Quarter">Three Quarter</option>
-
                                                                                 </select>
-
-
-
                                                                             </div>
                                                                         </div>
 

@@ -21,6 +21,9 @@
                    <li class="nav-item">
                        <a class="nav-link" href="{{ ('wishlist') }}">My Wishlist</a>
                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('contributor-upload') }}">Upload Image</a>
+                    </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{{ ('user-logout') }}">Log Out</a>
                    </li>
@@ -103,7 +106,7 @@
 
 
 <!--                    <h3>Recent Orders</h3>
-                    <div class="table-responsive">          
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>

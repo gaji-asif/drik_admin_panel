@@ -197,11 +197,17 @@
                             </span>
                     </a>
                     <ul class="treeview-menu" id="photographer-menu">
-                        @foreach($photographers as $photographer)
-                            <li data-value="{{$photographer->id}}">
-                                <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;{{$photographer->name}}</a>
-                            </li>
-                        @endforeach
+{{--                        @foreach($photographers as $photographer)--}}
+{{--                            <li data-value="{{$photographer->id}}">--}}
+{{--                                <a href="#"><i class="fas fa-circle-notch"></i>&nbsp;&nbsp;{{$photographer->name}}</a>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+                        <form action="" id="photographer-form">
+                            <div class="form-group">
+                                <input autocomplete="off" type="text" id="photographer_name" class="form-control" placeholder="Photographer">
+                            </div>
+                            <button type="submit" class="btn btn-success btn-sm">Search</button>
+                        </form>
                     </ul>
                 </li>
 

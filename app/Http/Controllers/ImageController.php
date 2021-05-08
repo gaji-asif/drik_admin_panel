@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Helpers\ImageHelper;
+use App\Helpers\SearchImage;
 use App\Http\Controllers\Controller;
 use App\ImageChild;
 use App\User;
@@ -211,23 +212,9 @@ class ImageController extends Controller {
     }
 
     public function searchImageData(Request $request){
-        $search = $request->input('search_key');
+        $searchImage = new SearchImage();
 
-        $searchKeyWords = explode(" ", $search);
-
-        $searchKeyWords = array_filter($searchKeyWords, function($elm) {
-            return strlen($elm) > 2;
-        });
-
-        foreach ($searchKeyWords as $value){
-            if(!isset($searchQuery)) {
-                $searchQuery = ImageChild::where('keywords', 'like', '%' . $value . '%');
-            } else {
-                $searchQuery = $searchQuery->orWhere('keywords', 'like', '%' . $value . '%');
-            }
-        };
-
-        $images = $searchQuery->paginate(10);
+        $images = $searchImage->searchImage($request);
 
         $categories = Category::all();
         $photographers = User::where('user_type', 1)->get();

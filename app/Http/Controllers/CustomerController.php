@@ -27,7 +27,7 @@ class CustomerController extends Controller {
             return view('web.customers.dashboard', compact('images', 'categories', 'user'));
         }
     }
-    
+
     public function profile(){
         $categories = Category::all();
         $images = ImageChild::all();
@@ -36,7 +36,7 @@ class CustomerController extends Controller {
 
         return view('web.customers.profile',compact('images', 'categories', 'user'));
     }
-    
+
     public function edit_profile(Request $request){
 
         $id = Auth::user()->id;
@@ -83,5 +83,12 @@ class CustomerController extends Controller {
                     ->get();
         return view('web.customers.wishlist', compact('images', 'categories', 'user', 'favorites'));
     }
-   
+
+    public function upload()
+    {
+        $user = Auth::user();
+        $categories = Category::all();
+        return view('web.contributors.upload', compact('categories', 'user'));
+    }
+
 }

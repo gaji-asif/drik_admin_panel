@@ -33,7 +33,7 @@
             <div class="col-lg-12">
                 <div class="container">
                     <h3>Total Purchased</h3>
-                    <div class="table-responsive">          
+                    <div class="table-responsive">
                         <table class="table">
                             <thead>
                                 <tr>
