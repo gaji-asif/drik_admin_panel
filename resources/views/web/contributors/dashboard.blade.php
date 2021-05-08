@@ -1,6 +1,6 @@
 @include('web.partials.header')
 
-<div class="row col-md-10 offset-md-1" style="min-height: 450px; background-color: #eff0f4; padding-top: 10px; padding-bottom: 5px;">
+<div class="row col-md-12" style="min-height: 450px; background-color: #eff0f4; padding-top: 20px; padding-bottom: 5px;">
     <div class="col-sm-3">
         <div class="card">
             <div class="card-body">
@@ -21,6 +21,9 @@
                    <li class="nav-item">
                        <a class="nav-link" href="{{ ('wishlist') }}">My Wishlist</a>
                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ ('promocode') }}">Promo Code</a>
+                    </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{{ ('user-logout') }}">Log Out</a>
                    </li>
