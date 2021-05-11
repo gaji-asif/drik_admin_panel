@@ -52,7 +52,7 @@
 				                <label for="cat_name" class="col-md-4 col-form-label text-md-right">Name</label>
 
 				                <div class="col-md-6">
-				                    <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="@if(isset($editData)){{$editData->name}} @else {{ old('first_name') }} @endif" autocomplete="off" >
+				                    <input id="first_name" type="text" class="form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" name="first_name" value="@if(isset($editData)){{$editData->name}} @else {{ old('first_name') }} @endif" autocomplete="off" required="required">
 
 				                    @if ($errors->has('first_name'))
 				                        <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
 				                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
 				                <div class="col-md-6">
-				                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="@if(isset($editData)){{$editData->email}} @else {{ old('email') }} @endif" autocomplete="off">
+				                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="@if(isset($editData)){{$editData->email}} @else {{ old('email') }} @endif" autocomplete="off" required="required">
 
 				                    @if ($errors->has('email'))
 				                        <span class="invalid-feedback" role="alert">
