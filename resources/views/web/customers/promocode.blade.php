@@ -34,7 +34,7 @@
     <div class="col-sm-9">
         <div class="card">
             <div class="container">
-                <h3>My Promo Code</h3>
+                <h3 class="mt-4 mb-4">My Promo Code</h3>
                 <div class="table-responsive">          
                     <table id="example" class="table table-striped table-bordered" style="width:100%">
                         <thead>

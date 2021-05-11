@@ -22,11 +22,11 @@
                        <a class="nav-link" href="{{ ('wishlist') }}">My Wishlist</a>
                    </li>
                     <li class="nav-item">
-<<<<<<< HEAD
+
                         <a class="nav-link" href="{{ ('contributor-upload') }}">Upload Image</a>
-=======
+
                         <a class="nav-link" href="{{ ('promocode') }}">Promo Code</a>
->>>>>>> c2246f63b194248de386288d440d68dfb44a57f8
+
                     </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{{ ('user-logout') }}">Log Out</a>
@@ -37,7 +37,7 @@
     </div>
     <div class="col-sm-9">
         <div class="card">
-            <div class="col-lg-12">
+            <div class="col-lg-12 mt-4">
                 <div class="container">
                     <div class="row" style="padding-top: 10px; padding-bottom: 10px;">
                         <div class="col-xl-3 col-md-6">
@@ -81,7 +81,7 @@
                                             <div class="col-auto" style="text-align: center;">
                                             </div>
                                             <div class="col-auto">
-                                                <h6 class="text-muted m-b-10">Approved Images</h6>
+                                                <h6 class="text-muted m-b-10">Approved</h6>
                                                 <h2 class="m-b-0">3</h2>
                                             </div>
                                         </div>

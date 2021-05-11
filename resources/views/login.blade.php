@@ -50,11 +50,11 @@
                             <form action="{{route('make-login')}}" method="post">
                                 <div class="form-group first">
                                     <label for="username">Username</label>
-                                    <input type="email" class="form-control" name="email" id="username" />
+                                    <input type="email" class="form-control" name="email" id="username" required="required" />
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
-                                    <input type="password" name="password" class="form-control" id="password" />
+                                    <input type="password" name="password" class="form-control" id="password" required="required" />
                                 </div>
 
                                 <div class="d-flex mb-5 align-items-center">
@@ -92,7 +92,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group first">
                                             <label for="user_first_name">First Name</label>
-                                            <input name="first_name" type="text" class="form-control" id="user_first_name" />
+                                            <input name="first_name" type="text" class="form-control" id="user_first_name" required="required" />
                                         </div>
                                     </div>
 
@@ -107,7 +107,7 @@
 
                                 <div class="form-group last">
                                     <label for="user_type">User Type</label>
-                                    <select name="user_type" class="form-control" id="user_type">
+                                    <select name="user_type" class="form-control" id="user_type" required="required">
                                         <option></option>
                                         <option value="2">Client</option>
                                         <option value="1">Contributor</option>
@@ -117,7 +117,7 @@
 
                                 <div class="form-group last mb-3">
                                     <label for="company_name">Company name (optional)</label>
-                                    <input name="company_name" type="text" class="form-control" id="company_name" />
+                                    <input name="company_name" type="text" class="form-control" id="company_name" required="required" />
                                 </div>
 
                                 <div class="form-group last mb-3">
@@ -130,12 +130,12 @@
                                 </div>
                                 <div class="form-group last mb-3">
                                     <label for="password">Password</label>
-                                    <input name="password" type="password" class="form-control" id="password" />
+                                    <input name="password" type="password" class="form-control" id="password" required="required" />
                                 </div>
 
                                 <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                                <button type="submit" class="btn btn-block btn-primary text-white">Log In</button>
+                                <button type="submit" class="btn btn-block btn-primary text-white">Register</button>
 
                             </form>
                         </div>

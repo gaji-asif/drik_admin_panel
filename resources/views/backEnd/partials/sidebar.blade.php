@@ -69,7 +69,7 @@
 			</li>
 
             <li class="document  pcoded-trigger">
-                <a href="{{url('contributors')}}" class="waves-effect waves-dark">
+                <a href="{{url('contributor')}}" class="waves-effect waves-dark">
                     <span class="pcoded-micon"><i class="ti-agenda"></i><b>a</b></span>
                     <span class="pcoded-mtext">Contributors</span>
                     <span class="pcoded-mcaret"></span>

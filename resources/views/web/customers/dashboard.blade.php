@@ -35,15 +35,15 @@
         <div class="card">
             <div class="col-lg-12">
                 <div class="container">
-                    <h3>Total Purchased</h3>
-<<<<<<< HEAD
+                    <h3 class="mt-4 mb-4">Total Purchased</h3>
+
                     <div class="table-responsive">
                         <table class="table">
-=======
+
                     <div class="table-responsive">          
 <!--                        <table id="example" class="table table-striped table-bordered" style="width:100%">-->
                         <table id="example" class="table table-bordered yajra-datatable">
->>>>>>> c2246f63b194248de386288d440d68dfb44a57f8
+
                             <thead>
                                 <tr>
                                     <th>SL</th>
@@ -65,8 +65,7 @@
 </div>
 
 @include('web.partials.footer')
-<<<<<<< HEAD
-=======
+
 <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
 <!--<script>
@@ -99,4 +98,4 @@
     });
   });
 </script>
->>>>>>> c2246f63b194248de386288d440d68dfb44a57f8
+
