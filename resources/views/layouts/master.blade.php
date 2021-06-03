@@ -125,21 +125,30 @@
 
 @if(!isset($page))
     <!-- Hero section start -->
-    <div class="hero">
+    <div class="hero  @if(isset($photographers)) height_custom @endif">
+        <style type="text/css">
+            .height_custom{
+                height: 150px !important;
+            }
+        </style>
         <div class="container">
             <div class="row justify-content-center align-items-center">
                 <div class="col-sm-12 col-md-9 col-lg-6 search">
+                    @if(isset($home))
                     <div class="hero-text">
                         <h1>Bring the World’s Best Visual Content to Your Work</h1>
                         <h5>Over 1.9 million+ high quality stock images shared by our talented community.</h5>
                     </div>
+                    @endif
                     <form method="GET" action="{{route('search-image')}}">
                         <div class="form-group search_form">
                             <input name="search_key" type="text" class="form-control" id="" placeholder="Search images, vectors and videos">
                             <button type="submit" class="btn search_submit_button"><i class="fas fa-search"></i></button>
                         </div>
                     </form>
+                    @if(isset($home))
                     <small id="" class="form-text text-muted">You can search whatever you want.</small>
+                    @endif
                 </div>
             </div>
         </div>

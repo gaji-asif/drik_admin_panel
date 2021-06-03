@@ -10,6 +10,7 @@ class GalleryController extends Controller {
         $categories = Category::all();
         $images = ImageChild::all();
         $user = Auth::user();
-        return view('welcome', compact('images', 'categories', 'user'));
+        $home = 'home';
+        return view('welcome', compact('images', 'categories', 'user', 'home'));
     }
 }
