@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost/drik";
+const baseUrl = "http://152.67.9.4/drik_new";
 const csrf = $('meta[name="csrf-token"]').attr('content');
 
 const preLoader = $("\t<div class=\"theme-loader\">\n" +
